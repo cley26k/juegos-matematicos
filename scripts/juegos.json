@@ -1,0 +1,39 @@
+[
+  {
+    "id": "sudoku-academy",
+    "titulo": "Sudoku Academy",
+    "tema": "Lógica y razonamiento deductivo",
+    "nivel": "Secundaria en adelante",
+    "resumen": "Entrenador de técnicas de sudoku al estilo de una app de idiomas: lecciones animadas, práctica ilimitada verificada por un motor lógico, sudokus completos, contrarreloj y una liga semanal en línea.",
+    "matematicas": ["Deducción y eliminación de casos", "26 técnicas: de los singles a cadenas y coloreado", "Razonamiento con conjuntos de candidatos"],
+    "gamificacion": ["Ruta de unidades desbloqueables", "XP, niveles, racha y gemas", "Misiones diarias y logros", "Contrarreloj con vidas", "Liga semanal con ascensos", "Retroalimentación y pistas graduadas"],
+    "codigo": "https://github.com/cley26k/sudoku-academy"
+  },
+  {
+    "id": "laberinto-radian",
+    "titulo": "El Laberinto del Radián",
+    "tema": "Ángulos y radianes",
+    "nivel": "Secundaria / bachillerato",
+    "resumen": "Aventura de exploración con niebla: hay que conseguir la llave con un minijuego de parejas y superar seis desafíos sobre radianes para escapar. Incluye un modo difícil con antorchas y tiempo límite.",
+    "matematicas": ["Definición de radián", "Conversión entre grados y radianes", "Ángulos notables: recto, llano, vuelta completa"],
+    "gamificacion": ["Narrativa con escenas", "Exploración con niebla", "Memoria (parejas)", "Vidas y cronómetro", "Récord del laberinto", "Modo desbloqueable"]
+  },
+  {
+    "id": "coco-conjuntos",
+    "titulo": "Coco Conjuntos",
+    "tema": "Conjuntos numéricos",
+    "nivel": "Primaria alta / secundaria",
+    "resumen": "Juego de fusión: al juntar dos personajes iguales nace el siguiente conjunto numérico (ℕ → ℤ → ℚ → ℝ → ℂ). Las preguntas de trivia cargan energía para usar poderes, y las monedas compran fondos y accesorios.",
+    "matematicas": ["ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ", "Clasificar números en su conjunto", "Racionales e irracionales con ejemplos"],
+    "gamificacion": ["Mecánica de fusión", "Trivia que da energía", "Poderes", "Monedas y tiendita", "Personajes coleccionables", "Récord personal"]
+  },
+  {
+    "id": "portero-algebraico",
+    "titulo": "Portero Algebraico · UMBRAL",
+    "tema": "Estructuras algebraicas",
+    "nivel": "Bachillerato / universidad",
+    "resumen": "Simulador 3D en primera persona: eres el portero de un club y cada cliente trae un carnet con una operación sobre un conjunto. Decides si cumple la propiedad del mundo (cerradura, grupo…). Seis mundos, de ℕ a matrices y permutaciones.",
+    "matematicas": ["Operaciones binarias y cerradura", "Grupos sobre ℤ, ℚ y ℤₙ", "Matrices y permutaciones (S₃)"],
+    "gamificacion": ["Mundos 3D con historia en cómic", "Personajes con diálogo", "Decisión con consecuencia inmediata", "Explicación con contraejemplo", "Estrellas por mundo", "Mundos desbloqueables"]
+  }
+]

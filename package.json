@@ -1,0 +1,20 @@
+{
+  "name": "juegos-matematicos",
+  "version": "1.0.0",
+  "description": "Juegos para enseñar matemáticas hechos con Claude",
+  "scripts": {
+    "serve": "http-server . -p 5190 -c-1",
+    "grabar": "node scripts/grabar.cjs",
+    "galeria": "node scripts/galeria.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "http-server": "^14.1.1",
+    "playwright": "^1.49.1"
+  },
+  "private": true
+}

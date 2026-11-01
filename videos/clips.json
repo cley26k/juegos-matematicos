@@ -1,0 +1,166 @@
+{
+  "laberinto-radian": {
+    "titulo": "El Laberinto del Radián",
+    "clips": {
+      "inicio": {
+        "titulo": "Portada e historia",
+        "mecanica": "Narrativa: el reto se presenta como una aventura",
+        "vp": "d",
+        "segundos": 10
+      },
+      "pregunta": {
+        "titulo": "Desafío correcto",
+        "mecanica": "Evaluación: cada pregunta acertada abre el camino",
+        "vp": "d",
+        "segundos": 6
+      },
+      "error": {
+        "titulo": "Respuesta incorrecta",
+        "mecanica": "Retroalimentación: el error cuesta una vida y muestra la respuesta correcta",
+        "vp": "d",
+        "segundos": 6
+      },
+      "exploracion": {
+        "titulo": "Explorar con niebla",
+        "mecanica": "Exploración: solo se ve lo cercano; hay que orientarse",
+        "vp": "d",
+        "segundos": 5
+      },
+      "parejas": {
+        "titulo": "Minijuego de parejas",
+        "mecanica": "Memoria: emparejar conceptos para conseguir la llave",
+        "vp": "d",
+        "segundos": 16
+      }
+    }
+  },
+  "coco-conjuntos": {
+    "titulo": "Coco Conjuntos",
+    "clips": {
+      "fusion": {
+        "titulo": "Junta y crece",
+        "mecanica": "Juego de fusión: dos números iguales forman el siguiente conjunto (ℕ → ℤ → ℚ → ℝ → ℂ)",
+        "vp": "d",
+        "segundos": 14
+      },
+      "fusion-movil": {
+        "titulo": "Junta y crece (móvil)",
+        "mecanica": "La misma mecánica en el teléfono: apuntar y soltar con el dedo",
+        "vp": "m",
+        "segundos": 14
+      },
+      "trivia": {
+        "titulo": "Trivia de conjuntos",
+        "mecanica": "Pregunta conceptual: acertar carga energía para los poderes",
+        "vp": "d",
+        "segundos": 6
+      },
+      "poder": {
+        "titulo": "Usar un poder",
+        "mecanica": "Recompensa: la energía ganada pensando se gasta para despejar el tablero",
+        "vp": "d",
+        "segundos": 6
+      },
+      "aprender": {
+        "titulo": "Aprender: la familia de conjuntos",
+        "mecanica": "Contenido: cada personaje es un conjunto numérico con ejemplos",
+        "vp": "d",
+        "segundos": 11
+      },
+      "tiendita": {
+        "titulo": "Tiendita",
+        "mecanica": "Economía: las monedas ganadas compran fondos y accesorios",
+        "vp": "d",
+        "segundos": 7
+      }
+    }
+  },
+  "portero-algebraico": {
+    "titulo": "Portero Algebraico · UMBRAL",
+    "clips": {
+      "historia": {
+        "titulo": "Mundos e historia",
+        "mecanica": "Narrativa: cada mundo es una propiedad algebraica contada como un cómic",
+        "vp": "d",
+        "segundos": 13
+      },
+      "carnet": {
+        "titulo": "Revisar el carnet",
+        "mecanica": "Exploración 3D: cada cliente trae una operación sobre un conjunto",
+        "vp": "d",
+        "segundos": 10
+      },
+      "decision-correcta": {
+        "titulo": "Decidir bien",
+        "mecanica": "¿La operación es cerrada / forma grupo? Acertar muestra el porqué",
+        "vp": "d",
+        "segundos": 9
+      },
+      "decision-incorrecta": {
+        "titulo": "Equivocarse",
+        "mecanica": "Retroalimentación: el error se explica con un contraejemplo",
+        "vp": "d",
+        "segundos": 10
+      },
+      "reporte": {
+        "titulo": "Cierre del turno",
+        "mecanica": "Evaluación: estrellas y repaso de cada decisión al final del mundo",
+        "vp": "d",
+        "segundos": 12
+      }
+    }
+  },
+  "sudoku-academy": {
+    "titulo": "Sudoku Academy",
+    "clips": {
+      "ruta": {
+        "titulo": "Ruta de aprendizaje",
+        "mecanica": "Progresión: unidades, lecciones desbloqueables, racha y misiones diarias",
+        "vp": "m",
+        "segundos": 9
+      },
+      "leccion-concepto": {
+        "titulo": "Lección animada",
+        "mecanica": "Explicación visual paso a paso de una técnica (X-Wing)",
+        "vp": "d",
+        "segundos": 16
+      },
+      "acierto": {
+        "titulo": "Deducir y acertar",
+        "mecanica": "Práctica: colocar el número correcto da XP y una celebración",
+        "vp": "d",
+        "segundos": 6
+      },
+      "error-pista": {
+        "titulo": "Error y pista",
+        "mecanica": "Retroalimentación: el tutor explica el error y ofrece pistas graduadas",
+        "vp": "d",
+        "segundos": 11
+      },
+      "eliminar": {
+        "titulo": "Tachar candidatos",
+        "mecanica": "Técnicas avanzadas: eliminar candidatos con un patrón (bloqueo caja-línea)",
+        "vp": "d",
+        "segundos": 7
+      },
+      "sudoku": {
+        "titulo": "Sudoku completo",
+        "mecanica": "Juego libre: notas, pistas que se aplican y cronómetro",
+        "vp": "d",
+        "segundos": 15
+      },
+      "contrarreloj": {
+        "titulo": "Contrarreloj",
+        "mecanica": "Reto con tiempo y vidas: 3 minutos para resolver todo lo posible",
+        "vp": "d",
+        "segundos": 14
+      },
+      "subida-nivel": {
+        "titulo": "Subir de nivel",
+        "mecanica": "Recompensa: celebración al subir de nivel, con gemas",
+        "vp": "m",
+        "segundos": 6
+      }
+    }
+  }
+}
