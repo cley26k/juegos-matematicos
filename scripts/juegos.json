@@ -5,8 +5,19 @@
     "tema": "Lógica y razonamiento deductivo",
     "nivel": "Secundaria en adelante",
     "resumen": "Entrenador de técnicas de sudoku al estilo de una app de idiomas: lecciones animadas, práctica ilimitada verificada por un motor lógico, sudokus completos, contrarreloj y una liga semanal en línea.",
-    "matematicas": ["Deducción y eliminación de casos", "26 técnicas: de los singles a cadenas y coloreado", "Razonamiento con conjuntos de candidatos"],
-    "gamificacion": ["Ruta de unidades desbloqueables", "XP, niveles, racha y gemas", "Misiones diarias y logros", "Contrarreloj con vidas", "Liga semanal con ascensos", "Retroalimentación y pistas graduadas"],
+    "matematicas": [
+      "Deducción y eliminación de casos",
+      "26 técnicas: de los singles a cadenas y coloreado",
+      "Razonamiento con conjuntos de candidatos"
+    ],
+    "gamificacion": [
+      "Ruta de unidades desbloqueables",
+      "XP, niveles, racha y gemas",
+      "Misiones diarias y logros",
+      "Contrarreloj con vidas",
+      "Liga semanal con ascensos",
+      "Retroalimentación y pistas graduadas"
+    ],
     "codigo": "https://github.com/cley26k/sudoku-academy"
   },
   {
@@ -15,8 +26,19 @@
     "tema": "Ángulos y radianes",
     "nivel": "Secundaria / bachillerato",
     "resumen": "Aventura de exploración con niebla: hay que conseguir la llave con un minijuego de parejas y superar seis desafíos sobre radianes para escapar. Incluye un modo difícil con antorchas y tiempo límite.",
-    "matematicas": ["Definición de radián", "Conversión entre grados y radianes", "Ángulos notables: recto, llano, vuelta completa"],
-    "gamificacion": ["Narrativa con escenas", "Exploración con niebla", "Memoria (parejas)", "Vidas y cronómetro", "Récord del laberinto", "Modo desbloqueable"]
+    "matematicas": [
+      "Definición de radián",
+      "Conversión entre grados y radianes",
+      "Ángulos notables: recto, llano, vuelta completa"
+    ],
+    "gamificacion": [
+      "Narrativa con escenas",
+      "Exploración con niebla",
+      "Memoria (parejas)",
+      "Vidas y cronómetro",
+      "Récord del laberinto",
+      "Modo desbloqueable"
+    ]
   },
   {
     "id": "coco-conjuntos",
@@ -24,8 +46,19 @@
     "tema": "Conjuntos numéricos",
     "nivel": "Primaria alta / secundaria",
     "resumen": "Juego de fusión: al juntar dos personajes iguales nace el siguiente conjunto numérico (ℕ → ℤ → ℚ → ℝ → ℂ). Las preguntas de trivia cargan energía para usar poderes, y las monedas compran fondos y accesorios.",
-    "matematicas": ["ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ", "Clasificar números en su conjunto", "Racionales e irracionales con ejemplos"],
-    "gamificacion": ["Mecánica de fusión", "Trivia que da energía", "Poderes", "Monedas y tiendita", "Personajes coleccionables", "Récord personal"]
+    "matematicas": [
+      "ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ",
+      "Clasificar números en su conjunto",
+      "Racionales e irracionales con ejemplos"
+    ],
+    "gamificacion": [
+      "Mecánica de fusión",
+      "Trivia que da energía",
+      "Poderes",
+      "Monedas y tiendita",
+      "Personajes coleccionables",
+      "Récord personal"
+    ]
   },
   {
     "id": "portero-algebraico",
@@ -33,7 +66,122 @@
     "tema": "Estructuras algebraicas",
     "nivel": "Bachillerato / universidad",
     "resumen": "Simulador 3D en primera persona: eres el portero de un club y cada cliente trae un carnet con una operación sobre un conjunto. Decides si cumple la propiedad del mundo (cerradura, grupo…). Seis mundos, de ℕ a matrices y permutaciones.",
-    "matematicas": ["Operaciones binarias y cerradura", "Grupos sobre ℤ, ℚ y ℤₙ", "Matrices y permutaciones (S₃)"],
-    "gamificacion": ["Mundos 3D con historia en cómic", "Personajes con diálogo", "Decisión con consecuencia inmediata", "Explicación con contraejemplo", "Estrellas por mundo", "Mundos desbloqueables"]
+    "matematicas": [
+      "Operaciones binarias y cerradura",
+      "Grupos sobre ℤ, ℚ y ℤₙ",
+      "Matrices y permutaciones (S₃)"
+    ],
+    "gamificacion": [
+      "Mundos 3D con historia en cómic",
+      "Personajes con diálogo",
+      "Decisión con consecuencia inmediata",
+      "Explicación con contraejemplo",
+      "Estrellas por mundo",
+      "Mundos desbloqueables"
+    ]
+  },
+  {
+    "id": "algebra-engine",
+    "titulo": "The Algebra Engine",
+    "tema": "Homomorfismos de grupos",
+    "nivel": "Universidad",
+    "resumen": "Campaña de puzles en una fábrica nocturna: eres el técnico que repara ocho máquinas que traducen entre grupos. Cada máquina se prueba experimentando (palancas, garras, probadores) y el juego reconoce el tipo de homomorfismo y da contraejemplos concretos.",
+    "matematicas": [
+      "Homomorfismos entre grupos cíclicos",
+      "Núcleo, inyectividad y sobreyectividad",
+      "Isomorfismos y contraejemplos"
+    ],
+    "gamificacion": [
+      "Cómic por máquina",
+      "Puzles experimentales",
+      "Pistas graduadas en tres niveles",
+      "Veredicto con contraejemplo",
+      "Mapa de máquinas reparadas",
+      "Progreso guardado"
+    ],
+    "codigo": "https://github.com/cley26k/algebra-engine"
+  },
+  {
+    "id": "residuo",
+    "titulo": "RESIDUO: El Valle de Doce",
+    "tema": "Aritmética modular",
+    "nivel": "Secundaria / bachillerato",
+    "resumen": "Aventura 3D de mundo abierto: al norte del arco la materia obedece a la aritmética de doce. Imre explora el valle, habla con sus habitantes y resuelve cinco misiones con sumas que dan la vuelta, piedras sin inverso y fracciones que no existen.",
+    "matematicas": [
+      "Restos al dividir entre 12 (ℤ/12)",
+      "Suma y producto modulares",
+      "Inversos y divisores de cero"
+    ],
+    "gamificacion": [
+      "Mundo 3D explorable",
+      "Personajes y misiones",
+      "Descubrir la regla jugando",
+      "Cuaderno de observaciones",
+      "Sellos y semillas coleccionables",
+      "Música que cambia por zona"
+    ]
+  },
+  {
+    "id": "mathrally",
+    "titulo": "MathRally · Misión Élara",
+    "tema": "Funciones",
+    "nivel": "Secundaria",
+    "resumen": "Rally por equipos en el centro escolar: cada estación física tiene un código QR que abre desafíos sobre funciones. El Dr. Leo Estrella guía la misión y el docente sigue el progreso de cada equipo en tiempo real.",
+    "matematicas": [
+      "Relación y función",
+      "Dominio, rango y diagrama sagital",
+      "Simplificar y evaluar funciones"
+    ],
+    "gamificacion": [
+      "Narrativa espacial",
+      "Estaciones físicas con QR",
+      "Trabajo en equipo",
+      "Puntos e intentos limitados",
+      "Pistas",
+      "Panel del docente en vivo"
+    ],
+    "codigo": "https://github.com/cley26k/Rally"
+  },
+  {
+    "id": "puente-de-cristal",
+    "titulo": "Puente de Cristal",
+    "tema": "Inecuaciones y porcentajes",
+    "nivel": "Secundaria",
+    "resumen": "Trivia 3D tensa: para cruzar el puente hay que saltar al cristal de la respuesta correcta. El modo aventura trae 30 niveles sobre sueldos, comisiones e inecuaciones; el modo libre puede generar preguntas con IA.",
+    "matematicas": [
+      "Porcentajes",
+      "Planteamiento de inecuaciones",
+      "Comparar ofertas con inecuaciones"
+    ],
+    "gamificacion": [
+      "Salto con consecuencia inmediata",
+      "Vidas y racha multiplicadora",
+      "30 niveles de aventura",
+      "Monedas, niveles y tienda",
+      "Multijugador",
+      "Editor de niveles"
+    ],
+    "hecho": "Google AI Studio"
+  },
+  {
+    "id": "pizza-fraccionaria",
+    "titulo": "Pizza Fraccionaria",
+    "tema": "Fracciones propias",
+    "nivel": "Primaria",
+    "resumen": "El Profe Nelson enseña fracciones con pizzas y sabor dominicano. En el laboratorio se corta la pizza y se comen pedazos para ver la fracción; en el modo desafío se identifican numerador y denominador para ganar puntos y desbloquear niveles.",
+    "matematicas": [
+      "Numerador y denominador",
+      "Fracción como parte de un todo",
+      "Partes iguales"
+    ],
+    "gamificacion": [
+      "Personaje guía",
+      "Manipulación directa",
+      "Puntos y estrellas",
+      "Niveles desbloqueables",
+      "Récord",
+      "Confeti y sonidos"
+    ],
+    "hecho": "Google AI Studio"
   }
 ]

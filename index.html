@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Juegos matemáticos</title>
-<meta name="description" content="Juegos para enseñar matemáticas creados con Claude, con clips de prueba de cada mecánica.">
+<meta name="description" content="Juegos para enseñar matemáticas creados con IA, con clips de prueba de cada mecánica.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
 <style>
@@ -52,9 +52,9 @@ footer { margin-top: 40px; color: var(--ink-2); font-size: .9rem; }
 <main>
   <section class="hero">
     <h1>Juegos para aprender matemáticas</h1>
-    <p>Colección de juegos creados con Claude para estudiar el potencial de la gamificación digital en la enseñanza de las matemáticas. Cada juego se puede jugar en el navegador y cada mecánica tiene un clip de prueba grabado automáticamente.</p>
-    <div class="stats"><div><b>4</b><span>juegos</span></div><div><b>24</b><span>clips de prueba</span></div><div><b>24</b><span>elementos de gamificación</span></div></div>
-    <nav class="toc" aria-label="Juegos"><a href="#sudoku-academy">Sudoku Academy</a><a href="#laberinto-radian">El Laberinto del Radián</a><a href="#coco-conjuntos">Coco Conjuntos</a><a href="#portero-algebraico">Portero Algebraico · UMBRAL</a></nav>
+    <p>Colección de juegos creados con IA (Claude y Google AI Studio) para estudiar el potencial de la gamificación digital en la enseñanza de las matemáticas. Cada juego se puede jugar en el navegador y cada mecánica tiene un clip de prueba grabado automáticamente.</p>
+    <div class="stats"><div><b>9</b><span>juegos</span></div><div><b>39</b><span>clips de prueba</span></div><div><b>54</b><span>elementos de gamificación</span></div></div>
+    <nav class="toc" aria-label="Juegos"><a href="#sudoku-academy">Sudoku Academy</a><a href="#laberinto-radian">El Laberinto del Radián</a><a href="#coco-conjuntos">Coco Conjuntos</a><a href="#portero-algebraico">Portero Algebraico · UMBRAL</a><a href="#algebra-engine">The Algebra Engine</a><a href="#residuo">RESIDUO: El Valle de Doce</a><a href="#mathrally">MathRally · Misión Élara</a><a href="#puente-de-cristal">Puente de Cristal</a><a href="#pizza-fraccionaria">Pizza Fraccionaria</a></nav>
   </section>
 
   <section class="game" id="sudoku-academy" style="--hue:262">
@@ -233,6 +233,171 @@ footer { margin-top: 40px; color: var(--ink-2); font-size: .9rem; }
       <figure class="clip">
         <video src="videos/portero-algebraico/reporte.mp4" poster="videos/portero-algebraico/reporte.jpg" preload="none" muted loop playsinline controls></video>
         <figcaption><b>Cierre del turno</b><span>Evaluación: estrellas y repaso de cada decisión al final del mundo</span><small>12 s · <a href="videos/portero-algebraico/reporte.mp4" download>MP4</a></small></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="game" id="algebra-engine" style="--hue:262">
+    <header class="game-head">
+      <div>
+        <p class="eyebrow">Homomorfismos de grupos · Universidad</p>
+        <h2>The Algebra Engine</h2>
+        <p class="lead">Campaña de puzles en una fábrica nocturna: eres el técnico que repara ocho máquinas que traducen entre grupos. Cada máquina se prueba experimentando (palancas, garras, probadores) y el juego reconoce el tipo de homomorfismo y da contraejemplos concretos.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="juegos/algebra-engine/">Jugar</a>
+        <a class="btn" href="https://github.com/cley26k/algebra-engine">Código</a>
+      </div>
+    </header>
+    <div class="facts">
+      <div><h3>Matemáticas</h3><ul><li>Homomorfismos entre grupos cíclicos</li><li>Núcleo, inyectividad y sobreyectividad</li><li>Isomorfismos y contraejemplos</li></ul></div>
+      <div><h3>Gamificación</h3><ul class="tags"><li>Cómic por máquina</li><li>Puzles experimentales</li><li>Pistas graduadas en tres niveles</li><li>Veredicto con contraejemplo</li><li>Mapa de máquinas reparadas</li><li>Progreso guardado</li></ul></div>
+    </div>
+    <div class="clips">
+      
+      <figure class="clip">
+        <video src="videos/algebra-engine/comic.mp4" poster="videos/algebra-engine/comic.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Portada y cómic</b><span>Narrativa: el técnico del turno de noche llega a la fábrica de estructuras</span><small>12 s · <a href="videos/algebra-engine/comic.mp4" download>MP4</a></small></figcaption>
+      </figure>
+      <figure class="clip">
+        <video src="videos/algebra-engine/garra.mp4" poster="videos/algebra-engine/garra.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Taller de inspección</b><span>Experimentar: la palanca prueba la máquina ×2 y la lupa muestra por qué no es inyectiva</span><small>12 s · <a href="videos/algebra-engine/garra.mp4" download>MP4</a></small></figcaption>
+      </figure>
+      <figure class="clip">
+        <video src="videos/algebra-engine/clasificacion.mp4" poster="videos/algebra-engine/clasificacion.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Planta de clasificación</b><span>Contraejemplo: el probador encuentra el par que rompe la operación</span><small>14 s · <a href="videos/algebra-engine/clasificacion.mp4" download>MP4</a></small></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="game" id="residuo" style="--hue:28">
+    <header class="game-head">
+      <div>
+        <p class="eyebrow">Aritmética modular · Secundaria / bachillerato</p>
+        <h2>RESIDUO: El Valle de Doce</h2>
+        <p class="lead">Aventura 3D de mundo abierto: al norte del arco la materia obedece a la aritmética de doce. Imre explora el valle, habla con sus habitantes y resuelve cinco misiones con sumas que dan la vuelta, piedras sin inverso y fracciones que no existen.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="juegos/residuo/">Jugar</a>
+        
+      </div>
+    </header>
+    <div class="facts">
+      <div><h3>Matemáticas</h3><ul><li>Restos al dividir entre 12 (ℤ/12)</li><li>Suma y producto modulares</li><li>Inversos y divisores de cero</li></ul></div>
+      <div><h3>Gamificación</h3><ul class="tags"><li>Mundo 3D explorable</li><li>Personajes y misiones</li><li>Descubrir la regla jugando</li><li>Cuaderno de observaciones</li><li>Sellos y semillas coleccionables</li><li>Música que cambia por zona</li></ul></div>
+    </div>
+    <div class="clips">
+      
+      <figure class="clip">
+        <video src="videos/residuo/mira.mp4" poster="videos/residuo/mira.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Llegada al valle</b><span>Narrativa: Mira explica que al norte del arco todo llega como su resto entre 12</span><small>15 s · <a href="videos/residuo/mira.mp4" download>MP4</a></small></figcaption>
+      </figure>
+      <figure class="clip">
+        <video src="videos/residuo/umbral.mp4" poster="videos/residuo/umbral.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Cruzar el umbral</b><span>Descubrir la regla: al cruzar, 25 → 1 y 36 se vuelve limo (múltiplo de 12)</span><small>9 s · <a href="videos/residuo/umbral.mp4" download>MP4</a></small></figcaption>
+      </figure>
+      <figure class="clip">
+        <video src="videos/residuo/molino.mp4" poster="videos/residuo/molino.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>La rueda del molino</b><span>Suma modular: 9 ⊕ 1 = 10 y 10 ⊕ 2 = 0, la rueda vuelve al reposo</span><small>14 s · <a href="videos/residuo/molino.mp4" download>MP4</a></small></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="game" id="mathrally" style="--hue:160">
+    <header class="game-head">
+      <div>
+        <p class="eyebrow">Funciones · Secundaria</p>
+        <h2>MathRally · Misión Élara</h2>
+        <p class="lead">Rally por equipos en el centro escolar: cada estación física tiene un código QR que abre desafíos sobre funciones. El Dr. Leo Estrella guía la misión y el docente sigue el progreso de cada equipo en tiempo real.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="juegos/mathrally/">Jugar</a>
+        <a class="btn" href="https://github.com/cley26k/Rally">Código</a>
+      </div>
+    </header>
+    <div class="facts">
+      <div><h3>Matemáticas</h3><ul><li>Relación y función</li><li>Dominio, rango y diagrama sagital</li><li>Simplificar y evaluar funciones</li></ul></div>
+      <div><h3>Gamificación</h3><ul class="tags"><li>Narrativa espacial</li><li>Estaciones físicas con QR</li><li>Trabajo en equipo</li><li>Puntos e intentos limitados</li><li>Pistas</li><li>Panel del docente en vivo</li></ul></div>
+    </div>
+    <div class="clips">
+      
+      <figure class="clip phone">
+        <video src="videos/mathrally/mision.mp4" poster="videos/mathrally/mision.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Unirse a la misión</b><span>Narrativa y trabajo en equipo: el Dr. Leo encarga la misión y el mapa marca la estación activa</span><small>12 s · <a href="videos/mathrally/mision.mp4" download>MP4</a></small></figcaption>
+      </figure>
+      <figure class="clip phone">
+        <video src="videos/mathrally/estacion.mp4" poster="videos/mathrally/estacion.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Desafío en una estación</b><span>Estaciones físicas con QR: cada acierto suma puntos al equipo</span><small>16 s · <a href="videos/mathrally/estacion.mp4" download>MP4</a></small></figcaption>
+      </figure>
+      <figure class="clip phone">
+        <video src="videos/mathrally/pista.mp4" poster="videos/mathrally/pista.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Pista y segundo intento</b><span>Retroalimentación: el error resta un intento y la pista orienta sin dar la respuesta</span><small>12 s · <a href="videos/mathrally/pista.mp4" download>MP4</a></small></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="game" id="puente-de-cristal" style="--hue:330">
+    <header class="game-head">
+      <div>
+        <p class="eyebrow">Inecuaciones y porcentajes · Secundaria · hecho con Google AI Studio</p>
+        <h2>Puente de Cristal</h2>
+        <p class="lead">Trivia 3D tensa: para cruzar el puente hay que saltar al cristal de la respuesta correcta. El modo aventura trae 30 niveles sobre sueldos, comisiones e inecuaciones; el modo libre puede generar preguntas con IA.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="juegos/puente-de-cristal/">Jugar</a>
+        
+      </div>
+    </header>
+    <div class="facts">
+      <div><h3>Matemáticas</h3><ul><li>Porcentajes</li><li>Planteamiento de inecuaciones</li><li>Comparar ofertas con inecuaciones</li></ul></div>
+      <div><h3>Gamificación</h3><ul class="tags"><li>Salto con consecuencia inmediata</li><li>Vidas y racha multiplicadora</li><li>30 niveles de aventura</li><li>Monedas, niveles y tienda</li><li>Multijugador</li><li>Editor de niveles</li></ul></div>
+    </div>
+    <div class="clips">
+      
+      <figure class="clip">
+        <video src="videos/puente-de-cristal/menu.mp4" poster="videos/puente-de-cristal/menu.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Menú y modo aventura</b><span>Progresión: 30 niveles en tres semanas de contenido (inecuaciones y porcentajes)</span><small>8 s · <a href="videos/puente-de-cristal/menu.mp4" download>MP4</a></small></figcaption>
+      </figure>
+      <figure class="clip">
+        <video src="videos/puente-de-cristal/cruzar.mp4" poster="videos/puente-de-cristal/cruzar.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Cruzar el puente</b><span>Cada respuesta es un salto: el cristal correcto aguanta y la racha multiplica</span><small>14 s · <a href="videos/puente-de-cristal/cruzar.mp4" download>MP4</a></small></figcaption>
+      </figure>
+      <figure class="clip">
+        <video src="videos/puente-de-cristal/caida.mp4" poster="videos/puente-de-cristal/caida.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Cristal equivocado</b><span>Consecuencia inmediata: la respuesta incorrecta rompe el cristal y cuesta una vida</span><small>8 s · <a href="videos/puente-de-cristal/caida.mp4" download>MP4</a></small></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="game" id="pizza-fraccionaria" style="--hue:262">
+    <header class="game-head">
+      <div>
+        <p class="eyebrow">Fracciones propias · Primaria · hecho con Google AI Studio</p>
+        <h2>Pizza Fraccionaria</h2>
+        <p class="lead">El Profe Nelson enseña fracciones con pizzas y sabor dominicano. En el laboratorio se corta la pizza y se comen pedazos para ver la fracción; en el modo desafío se identifican numerador y denominador para ganar puntos y desbloquear niveles.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="juegos/pizza-fraccionaria/">Jugar</a>
+        
+      </div>
+    </header>
+    <div class="facts">
+      <div><h3>Matemáticas</h3><ul><li>Numerador y denominador</li><li>Fracción como parte de un todo</li><li>Partes iguales</li></ul></div>
+      <div><h3>Gamificación</h3><ul class="tags"><li>Personaje guía</li><li>Manipulación directa</li><li>Puntos y estrellas</li><li>Niveles desbloqueables</li><li>Récord</li><li>Confeti y sonidos</li></ul></div>
+    </div>
+    <div class="clips">
+      
+      <figure class="clip">
+        <video src="videos/pizza-fraccionaria/laboratorio.mp4" poster="videos/pizza-fraccionaria/laboratorio.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Laboratorio de pizza</b><span>Manipulación: cortar la pizza y comerse pedazos construye la fracción</span><small>12 s · <a href="videos/pizza-fraccionaria/laboratorio.mp4" download>MP4</a></small></figcaption>
+      </figure>
+      <figure class="clip">
+        <video src="videos/pizza-fraccionaria/desafio.mp4" poster="videos/pizza-fraccionaria/desafio.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Desafío del Profe Nelson</b><span>Evaluación con personaje: identificar numerador y denominador suma puntos y estrellas</span><small>11 s · <a href="videos/pizza-fraccionaria/desafio.mp4" download>MP4</a></small></figcaption>
+      </figure>
+      <figure class="clip">
+        <video src="videos/pizza-fraccionaria/error.mp4" poster="videos/pizza-fraccionaria/error.jpg" preload="none" muted loop playsinline controls></video>
+        <figcaption><b>Respuesta incorrecta</b><span>Retroalimentación: el profe muestra la respuesta correcta y anima a seguir</span><small>6 s · <a href="videos/pizza-fraccionaria/error.mp4" download>MP4</a></small></figcaption>
       </figure>
     </div>
   </section>

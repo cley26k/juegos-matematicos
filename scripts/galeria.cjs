@@ -13,7 +13,7 @@ const cards = games.map((g, i) => {
   <section class="game" id="${g.id}" style="--hue:${[262, 28, 160, 330][i % 4]}">
     <header class="game-head">
       <div>
-        <p class="eyebrow">${esc(g.tema)} · ${esc(g.nivel)}</p>
+        <p class="eyebrow">${esc(g.tema)} · ${esc(g.nivel)}${g.hecho ? ` · hecho con ${esc(g.hecho)}` : ""}</p>
         <h2>${esc(g.titulo)}</h2>
         <p class="lead">${esc(g.resumen)}</p>
       </div>
@@ -42,7 +42,7 @@ const html = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Juegos matemáticos</title>
-<meta name="description" content="Juegos para enseñar matemáticas creados con Claude, con clips de prueba de cada mecánica.">
+<meta name="description" content="Juegos para enseñar matemáticas creados con IA, con clips de prueba de cada mecánica.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
 <style>
@@ -90,7 +90,7 @@ footer { margin-top: 40px; color: var(--ink-2); font-size: .9rem; }
 <main>
   <section class="hero">
     <h1>Juegos para aprender matemáticas</h1>
-    <p>Colección de juegos creados con Claude para estudiar el potencial de la gamificación digital en la enseñanza de las matemáticas. Cada juego se puede jugar en el navegador y cada mecánica tiene un clip de prueba grabado automáticamente.</p>
+    <p>Colección de juegos creados con IA (Claude y Google AI Studio) para estudiar el potencial de la gamificación digital en la enseñanza de las matemáticas. Cada juego se puede jugar en el navegador y cada mecánica tiene un clip de prueba grabado automáticamente.</p>
     <div class="stats"><div><b>${games.length}</b><span>juegos</span></div><div><b>${total}</b><span>clips de prueba</span></div><div><b>${new Set(games.flatMap(g => g.gamificacion)).size}</b><span>elementos de gamificación</span></div></div>
     <nav class="toc" aria-label="Juegos">${games.map(g => `<a href="#${g.id}">${esc(g.titulo)}</a>`).join('')}</nav>
   </section>
@@ -109,7 +109,7 @@ fs.writeFileSync(path.join(ROOT, 'index.html'), html);
 
 const readme = `# Juegos para aprender matemáticas
 
-Colección de juegos educativos creados con Claude, junto con clips de prueba de cada mecánica, para una presentación sobre los resultados y la capacidad de la gamificación digital en la enseñanza de las matemáticas.
+Colección de juegos educativos creados con IA (Claude y Google AI Studio), junto con clips de prueba de cada mecánica, para una presentación sobre los resultados y la capacidad de la gamificación digital en la enseñanza de las matemáticas.
 
 **Galería:** https://cley26k.github.io/juegos-matematicos/
 
@@ -123,7 +123,7 @@ ${g.resumen}
 
 - **Matemáticas:** ${g.matematicas.join('; ')}.
 - **Gamificación:** ${g.gamificacion.join('; ')}.
-${g.codigo ? `- **Código fuente:** ${g.codigo}\n` : ''}
+${g.hecho ? `- **Hecho con:** ${g.hecho}.\n` : ''}${g.codigo ? `- **Código fuente:** ${g.codigo}\n` : ''}
 | Clip | Mecánica | Duración |
 |---|---|---|
 ${Object.entries(clips[g.id]?.clips ?? {}).map(([id, c]) => `| [${c.titulo}](videos/${g.id}/${id}.mp4) | ${c.mecanica} | ${c.segundos} s |`).join('\n')}

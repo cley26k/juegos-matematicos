@@ -162,5 +162,120 @@
         "segundos": 6
       }
     }
+  },
+  "pizza-fraccionaria": {
+    "titulo": "Pizza Fraccionaria",
+    "clips": {
+      "laboratorio": {
+        "titulo": "Laboratorio de pizza",
+        "mecanica": "Manipulación: cortar la pizza y comerse pedazos construye la fracción",
+        "vp": "d",
+        "segundos": 12
+      },
+      "desafio": {
+        "titulo": "Desafío del Profe Nelson",
+        "mecanica": "Evaluación con personaje: identificar numerador y denominador suma puntos y estrellas",
+        "vp": "d",
+        "segundos": 11
+      },
+      "error": {
+        "titulo": "Respuesta incorrecta",
+        "mecanica": "Retroalimentación: el profe muestra la respuesta correcta y anima a seguir",
+        "vp": "d",
+        "segundos": 6
+      }
+    }
+  },
+  "puente-de-cristal": {
+    "titulo": "Puente de Cristal",
+    "clips": {
+      "menu": {
+        "titulo": "Menú y modo aventura",
+        "mecanica": "Progresión: 30 niveles en tres semanas de contenido (inecuaciones y porcentajes)",
+        "vp": "d",
+        "segundos": 8
+      },
+      "cruzar": {
+        "titulo": "Cruzar el puente",
+        "mecanica": "Cada respuesta es un salto: el cristal correcto aguanta y la racha multiplica",
+        "vp": "d",
+        "segundos": 14
+      },
+      "caida": {
+        "titulo": "Cristal equivocado",
+        "mecanica": "Consecuencia inmediata: la respuesta incorrecta rompe el cristal y cuesta una vida",
+        "vp": "d",
+        "segundos": 8
+      }
+    }
+  },
+  "mathrally": {
+    "titulo": "MathRally · Misión Élara",
+    "clips": {
+      "mision": {
+        "titulo": "Unirse a la misión",
+        "mecanica": "Narrativa y trabajo en equipo: el Dr. Leo encarga la misión y el mapa marca la estación activa",
+        "vp": "m",
+        "segundos": 12
+      },
+      "estacion": {
+        "titulo": "Desafío en una estación",
+        "mecanica": "Estaciones físicas con QR: cada acierto suma puntos al equipo",
+        "vp": "m",
+        "segundos": 16
+      },
+      "pista": {
+        "titulo": "Pista y segundo intento",
+        "mecanica": "Retroalimentación: el error resta un intento y la pista orienta sin dar la respuesta",
+        "vp": "m",
+        "segundos": 12
+      }
+    }
+  },
+  "algebra-engine": {
+    "titulo": "The Algebra Engine",
+    "clips": {
+      "comic": {
+        "titulo": "Portada y cómic",
+        "mecanica": "Narrativa: el técnico del turno de noche llega a la fábrica de estructuras",
+        "vp": "d",
+        "segundos": 12
+      },
+      "garra": {
+        "titulo": "Taller de inspección",
+        "mecanica": "Experimentar: la palanca prueba la máquina ×2 y la lupa muestra por qué no es inyectiva",
+        "vp": "d",
+        "segundos": 12
+      },
+      "clasificacion": {
+        "titulo": "Planta de clasificación",
+        "mecanica": "Contraejemplo: el probador encuentra el par que rompe la operación",
+        "vp": "d",
+        "segundos": 14
+      }
+    }
+  },
+  "residuo": {
+    "titulo": "RESIDUO: El Valle de Doce",
+    "clips": {
+      "mira": {
+        "titulo": "Llegada al valle",
+        "mecanica": "Narrativa: Mira explica que al norte del arco todo llega como su resto entre 12",
+        "vp": "d",
+        "segundos": 15
+      },
+      "umbral": {
+        "titulo": "Cruzar el umbral",
+        "mecanica": "Descubrir la regla: al cruzar, 25 → 1 y 36 se vuelve limo (múltiplo de 12)",
+        "vp": "d",
+        "segundos": 9
+      },
+      "molino": {
+        "titulo": "La rueda del molino",
+        "mecanica": "Suma modular: 9 ⊕ 1 = 10 y 10 ⊕ 2 = 0, la rueda vuelve al reposo",
+        "vp": "d",
+        "segundos": 14
+      }
+    }
   }
 }

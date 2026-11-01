@@ -22,7 +22,7 @@ function videoSeconds(file) {
 const GAMES = fs.readdirSync(path.join(__dirname, 'clips')).filter(f => f.endsWith('.cjs')).map(f => f.replace('.cjs', ''));
 
 (async () => {
-  const browser = await chromium.launch({ channel: 'chrome', args: ['--autoplay-policy=no-user-gesture-required'] });
+  const browser = await chromium.launch({ channel: 'chrome', args: ['--autoplay-policy=no-user-gesture-required', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   const index = fs.existsSync(path.join(OUT, 'clips.json')) ? JSON.parse(fs.readFileSync(path.join(OUT, 'clips.json'), 'utf8')) : {};
   for (const game of GAMES) {
     if (onlyGame && game !== onlyGame) continue;
@@ -33,6 +33,10 @@ const GAMES = fs.readdirSync(path.join(__dirname, 'clips')).filter(f => f.endsWi
       fs.mkdirSync(TMP, { recursive: true });
       const ctx = await browser.newContext({ viewport: vp, deviceScaleFactor: 1, serviceWorkers: 'block', recordVideo: { dir: TMP, size: vp }, ...(def.context || {}) });
       if (def.init) await ctx.addInitScript(def.init);
+      // Los juegos con base de datos en línea no deben escribir datos de prueba durante la grabación.
+      for (const pat of def.bloquear || []) await ctx.route(pat, r => r.abort());
+      // Algunos juegos guardan su estado en un cierre: se expone solo en la copia que se graba.
+      if (def.parche) await ctx.route(def.parche.url, async r => { const res = await r.fetch(); r.fulfill({ response: res, body: def.parche.fn(await res.text()) }); });
       const pg = await ctx.newPage();
       const t0 = Date.now();
       let start = 0, end = 0;

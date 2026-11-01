@@ -1,6 +1,6 @@
 # Juegos para aprender matemáticas
 
-Colección de juegos educativos creados con Claude, junto con clips de prueba de cada mecánica, para una presentación sobre los resultados y la capacidad de la gamificación digital en la enseñanza de las matemáticas.
+Colección de juegos educativos creados con IA (Claude y Google AI Studio), junto con clips de prueba de cada mecánica, para una presentación sobre los resultados y la capacidad de la gamificación digital en la enseñanza de las matemáticas.
 
 **Galería:** https://cley26k.github.io/juegos-matematicos/
 
@@ -10,6 +10,11 @@ Colección de juegos educativos creados con Claude, junto con clips de prueba de
 | [El Laberinto del Radián](juegos/laberinto-radian/) | Ángulos y radianes | Secundaria / bachillerato | 5 |
 | [Coco Conjuntos](juegos/coco-conjuntos/) | Conjuntos numéricos | Primaria alta / secundaria | 6 |
 | [Portero Algebraico · UMBRAL](juegos/portero-algebraico/) | Estructuras algebraicas | Bachillerato / universidad | 5 |
+| [The Algebra Engine](juegos/algebra-engine/) | Homomorfismos de grupos | Universidad | 3 |
+| [RESIDUO: El Valle de Doce](juegos/residuo/) | Aritmética modular | Secundaria / bachillerato | 3 |
+| [MathRally · Misión Élara](juegos/mathrally/) | Funciones | Secundaria | 3 |
+| [Puente de Cristal](juegos/puente-de-cristal/) | Inecuaciones y porcentajes | Secundaria | 3 |
+| [Pizza Fraccionaria](juegos/pizza-fraccionaria/) | Fracciones propias | Primaria | 3 |
 
 ## Sudoku Academy
 
@@ -75,6 +80,75 @@ Simulador 3D en primera persona: eres el portero de un club y cada cliente trae 
 | [Decidir bien](videos/portero-algebraico/decision-correcta.mp4) | ¿La operación es cerrada / forma grupo? Acertar muestra el porqué | 9 s |
 | [Equivocarse](videos/portero-algebraico/decision-incorrecta.mp4) | Retroalimentación: el error se explica con un contraejemplo | 10 s |
 | [Cierre del turno](videos/portero-algebraico/reporte.mp4) | Evaluación: estrellas y repaso de cada decisión al final del mundo | 12 s |
+
+## The Algebra Engine
+
+Campaña de puzles en una fábrica nocturna: eres el técnico que repara ocho máquinas que traducen entre grupos. Cada máquina se prueba experimentando (palancas, garras, probadores) y el juego reconoce el tipo de homomorfismo y da contraejemplos concretos.
+
+- **Matemáticas:** Homomorfismos entre grupos cíclicos; Núcleo, inyectividad y sobreyectividad; Isomorfismos y contraejemplos.
+- **Gamificación:** Cómic por máquina; Puzles experimentales; Pistas graduadas en tres niveles; Veredicto con contraejemplo; Mapa de máquinas reparadas; Progreso guardado.
+- **Código fuente:** https://github.com/cley26k/algebra-engine
+
+| Clip | Mecánica | Duración |
+|---|---|---|
+| [Portada y cómic](videos/algebra-engine/comic.mp4) | Narrativa: el técnico del turno de noche llega a la fábrica de estructuras | 12 s |
+| [Taller de inspección](videos/algebra-engine/garra.mp4) | Experimentar: la palanca prueba la máquina ×2 y la lupa muestra por qué no es inyectiva | 12 s |
+| [Planta de clasificación](videos/algebra-engine/clasificacion.mp4) | Contraejemplo: el probador encuentra el par que rompe la operación | 14 s |
+
+## RESIDUO: El Valle de Doce
+
+Aventura 3D de mundo abierto: al norte del arco la materia obedece a la aritmética de doce. Imre explora el valle, habla con sus habitantes y resuelve cinco misiones con sumas que dan la vuelta, piedras sin inverso y fracciones que no existen.
+
+- **Matemáticas:** Restos al dividir entre 12 (ℤ/12); Suma y producto modulares; Inversos y divisores de cero.
+- **Gamificación:** Mundo 3D explorable; Personajes y misiones; Descubrir la regla jugando; Cuaderno de observaciones; Sellos y semillas coleccionables; Música que cambia por zona.
+
+| Clip | Mecánica | Duración |
+|---|---|---|
+| [Llegada al valle](videos/residuo/mira.mp4) | Narrativa: Mira explica que al norte del arco todo llega como su resto entre 12 | 15 s |
+| [Cruzar el umbral](videos/residuo/umbral.mp4) | Descubrir la regla: al cruzar, 25 → 1 y 36 se vuelve limo (múltiplo de 12) | 9 s |
+| [La rueda del molino](videos/residuo/molino.mp4) | Suma modular: 9 ⊕ 1 = 10 y 10 ⊕ 2 = 0, la rueda vuelve al reposo | 14 s |
+
+## MathRally · Misión Élara
+
+Rally por equipos en el centro escolar: cada estación física tiene un código QR que abre desafíos sobre funciones. El Dr. Leo Estrella guía la misión y el docente sigue el progreso de cada equipo en tiempo real.
+
+- **Matemáticas:** Relación y función; Dominio, rango y diagrama sagital; Simplificar y evaluar funciones.
+- **Gamificación:** Narrativa espacial; Estaciones físicas con QR; Trabajo en equipo; Puntos e intentos limitados; Pistas; Panel del docente en vivo.
+- **Código fuente:** https://github.com/cley26k/Rally
+
+| Clip | Mecánica | Duración |
+|---|---|---|
+| [Unirse a la misión](videos/mathrally/mision.mp4) | Narrativa y trabajo en equipo: el Dr. Leo encarga la misión y el mapa marca la estación activa | 12 s |
+| [Desafío en una estación](videos/mathrally/estacion.mp4) | Estaciones físicas con QR: cada acierto suma puntos al equipo | 16 s |
+| [Pista y segundo intento](videos/mathrally/pista.mp4) | Retroalimentación: el error resta un intento y la pista orienta sin dar la respuesta | 12 s |
+
+## Puente de Cristal
+
+Trivia 3D tensa: para cruzar el puente hay que saltar al cristal de la respuesta correcta. El modo aventura trae 30 niveles sobre sueldos, comisiones e inecuaciones; el modo libre puede generar preguntas con IA.
+
+- **Matemáticas:** Porcentajes; Planteamiento de inecuaciones; Comparar ofertas con inecuaciones.
+- **Gamificación:** Salto con consecuencia inmediata; Vidas y racha multiplicadora; 30 niveles de aventura; Monedas, niveles y tienda; Multijugador; Editor de niveles.
+- **Hecho con:** Google AI Studio.
+
+| Clip | Mecánica | Duración |
+|---|---|---|
+| [Menú y modo aventura](videos/puente-de-cristal/menu.mp4) | Progresión: 30 niveles en tres semanas de contenido (inecuaciones y porcentajes) | 8 s |
+| [Cruzar el puente](videos/puente-de-cristal/cruzar.mp4) | Cada respuesta es un salto: el cristal correcto aguanta y la racha multiplica | 14 s |
+| [Cristal equivocado](videos/puente-de-cristal/caida.mp4) | Consecuencia inmediata: la respuesta incorrecta rompe el cristal y cuesta una vida | 8 s |
+
+## Pizza Fraccionaria
+
+El Profe Nelson enseña fracciones con pizzas y sabor dominicano. En el laboratorio se corta la pizza y se comen pedazos para ver la fracción; en el modo desafío se identifican numerador y denominador para ganar puntos y desbloquear niveles.
+
+- **Matemáticas:** Numerador y denominador; Fracción como parte de un todo; Partes iguales.
+- **Gamificación:** Personaje guía; Manipulación directa; Puntos y estrellas; Niveles desbloqueables; Récord; Confeti y sonidos.
+- **Hecho con:** Google AI Studio.
+
+| Clip | Mecánica | Duración |
+|---|---|---|
+| [Laboratorio de pizza](videos/pizza-fraccionaria/laboratorio.mp4) | Manipulación: cortar la pizza y comerse pedazos construye la fracción | 12 s |
+| [Desafío del Profe Nelson](videos/pizza-fraccionaria/desafio.mp4) | Evaluación con personaje: identificar numerador y denominador suma puntos y estrellas | 11 s |
+| [Respuesta incorrecta](videos/pizza-fraccionaria/error.mp4) | Retroalimentación: el profe muestra la respuesta correcta y anima a seguir | 6 s |
 
 ## Estructura
 
