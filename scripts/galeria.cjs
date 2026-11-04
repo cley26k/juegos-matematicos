@@ -28,7 +28,7 @@ const capitulos = historia.map((cap, i) => {
           <div class="portal-acciones"><a class="boton fuerte" href="juegos/${g.id}/">Jugar</a><a class="boton ver-ficha" href="#ficha-${g.id}">Ficha y clips</a></div>
         </aside>` : '';
   return `
-    <section class="cap" id="cap-${cap.id}" data-id="${cap.id}" style="--largo:${cap.largo || 340}vh">
+    <section class="cap" id="cap-${cap.id}" data-id="${cap.id}" style="--largo:${cap.largo || 440}vh">
       <h2>${g ? `Mundo ${i}: ${esc(g.titulo)}` : esc(cap.nombre)}</h2>
       <div class="cap-pegado">
         ${textos}${portal}

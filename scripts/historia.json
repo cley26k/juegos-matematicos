@@ -1,8 +1,8 @@
 [
   {
-    "id": "prologo", "largo": 500, "nombre": "Prólogo",
+    "id": "prologo", "largo": 660, "nombre": "Prólogo",
     "textos": [
-      { "de": 0.015, "a": 0.13, "pos": "abajo", "tipo": "lema", "t": "Una historia que se cuenta bajando." },
+      { "de": 0, "a": 0.13, "pos": "abajo", "tipo": "lema", "t": "Una historia que se cuenta bajando." },
       { "de": 0.25, "a": 0.355, "pos": "arriba", "tipo": "narra", "t": "En Villa Recta, todos los números valían algo." },
       { "de": 0.36, "a": 0.465, "pos": "arriba", "tipo": "narra", "t": "El 9 mandaba. El 7 traía suerte. El 1 siempre iba primero." },
       { "de": 0.48, "a": 0.565, "pos": "arriba", "tipo": "voz", "t": "¿Y yo? Me llamo Cero." },
@@ -87,7 +87,7 @@
     ]
   },
   {
-    "id": "final", "largo": 460, "nombre": "Final",
+    "id": "final", "largo": 560, "nombre": "Final",
     "textos": [
       { "de": 0.04, "a": 0.2, "pos": "arriba", "tipo": "narra", "t": "Volvió a Villa Recta. Seguía valiendo lo mismo." },
       { "de": 0.22, "a": 0.38, "pos": "arriba", "tipo": "narra", "t": "Entonces, el 1 le hizo sitio a su lado." },

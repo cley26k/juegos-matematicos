@@ -34,6 +34,51 @@
     }
   }
 
+  K.camino = trazo;
+  // Mechones de pelo: bordes curvos entre puntas. El tercer valor del punto es la curvatura del borde siguiente.
+  K.mechones = (c, pts, relleno, lw = 5, tinta = TINTA) => {
+    let cx = 0, cy = 0; pts.forEach(p => { cx += p[0]; cy += p[1]; }); cx /= pts.length; cy /= pts.length;
+    const P = pts.map(p => [p[0] + J(), p[1] + J(), p[2] === undefined ? 0.15 : p[2]]);
+    c.beginPath(); c.moveTo(P[0][0], P[0][1]);
+    P.forEach((p, i) => {
+      const q = P[(i + 1) % P.length], mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2;
+      c.quadraticCurveTo(mx + (cx - mx) * p[2], my + (cy - my) * p[2], q[0], q[1]);
+    });
+    c.closePath();
+    if (relleno) { c.fillStyle = relleno; c.fill(); }
+    if (lw) { c.lineWidth = lw; c.strokeStyle = tinta; c.lineJoin = c.lineCap = 'round'; c.stroke(); }
+  };
+
+  // Capas ya dibujadas: lo que no cambia se pinta una vez y luego solo se copia.
+  // Es lo que más alivia el rendimiento: un fondo completo cuesta decenas de veces más que copiarlo.
+  const capas = new Map();
+  K.escPx = 1;
+  K.limpiarCapas = () => capas.clear();
+  K.capa = (c, clave, r, fn, dx = 0, dy = 0) => {
+    const e = K.escPx, k = clave + '|' + e;
+    let o = capas.get(k);
+    if (!o) {
+      o = document.createElement('canvas');
+      o.width = Math.max(1, Math.ceil(r[2] * e)); o.height = Math.max(1, Math.ceil(r[3] * e));
+      const x = o.getContext('2d');
+      x.scale(e, e); x.translate(-r[0], -r[1]);
+      const n0 = n, s0 = semilla, a0 = amp; K.boil(3, 0.8);
+      fn(x);
+      n = n0; semilla = s0; amp = a0;
+      capas.set(k, o);
+    }
+    c.drawImage(o, r[0] + dx, r[1] + dy, r[2], r[3]);
+  };
+  // Capa que ocupa toda la pantalla, en las mismas coordenadas que la escena.
+  K.plano = (c, st, clave, fn) => K.capa(c, clave + st.hw.toFixed(0), [-st.hw - 4, -544, st.hw * 2 + 8, 1088], fn);
+  // Texto ya dibujado, para no repetir fuentes y contornos en cada fotograma.
+  K.txt = (c, ch, x, y, tam, color, fuente = '"Dela Gothic One", Impact, sans-serif') => {
+    const a = tam * 1.5;
+    K.capa(c, 't' + ch + tam.toFixed(1) + color, [-a, -a, a * 2, a * 2], z => {
+      z.font = `${tam}px ${fuente}`; z.textAlign = 'center'; z.textBaseline = 'middle'; z.fillStyle = color; z.fillText(ch, 0, 0);
+    }, x, y);
+  };
+
   // Forma suave con relleno y contorno de tinta.
   K.forma = (c, pts, relleno, lw = 5, cerrado = true, tinta = TINTA) => {
     c.beginPath(); trazo(c, pts, cerrado);
@@ -80,16 +125,28 @@
     camino(); c.lineWidth = lw; c.strokeStyle = TINTA; c.lineJoin = 'round'; c.stroke();
   };
 
-  K.vert = (c, st, stops) => {
+  const degradado = (c, st, stops) => {
     const g = c.createLinearGradient(0, -540, 0, 540);
     stops.forEach((s, i) => g.addColorStop(i / (stops.length - 1), s));
     c.fillStyle = g; c.fillRect(-st.hw - 4, -544, st.hw * 2 + 8, 1088);
   };
+  K.vert = (c, st, stops, vivo) => (vivo ? degradado(c, st, stops) : K.plano(c, st, 'cielo' + stops.join(), z => degradado(z, st, stops)));
+  // Resplandor: un degradado pequeño que se copia a escala.
+  const brillos = {};
   K.radial = (c, x, y, r, a, b) => {
-    const g = c.createRadialGradient(x, y, 0, x, y, r);
-    g.addColorStop(0, a); g.addColorStop(1, b);
-    c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2);
+    const k = a + b;
+    if (!brillos[k]) {
+      const o = document.createElement('canvas'); o.width = o.height = 128;
+      const z = o.getContext('2d'), g = z.createRadialGradient(64, 64, 0, 64, 64, 64);
+      g.addColorStop(0, a); g.addColorStop(1, b); z.fillStyle = g; z.fillRect(0, 0, 128, 128);
+      brillos[k] = o;
+    }
+    c.drawImage(brillos[k], x - r, y - r, r * 2, r * 2);
   };
+  // Trama de puntos en una zona fija, ya dibujada.
+  K.rellenoTrama = (c, color, paso, radio, x, y, w, h) => K.capa(c, ['tr', color, paso, radio, x.toFixed(0), y.toFixed(0), w.toFixed(0), h.toFixed(0)].join(), [x, y, w, h], z => {
+    z.fillStyle = K.trama(z, color, paso, radio); z.fillRect(x, y, w, h);
+  });
 
   // Trama de puntos de manga, en un patrón reutilizable.
   const tramas = {};
@@ -105,11 +162,13 @@
   };
   // Banda de trama que se desvanece con puntos cada vez más pequeños.
   K.bandaTrama = (c, st, y0, y1, color, seed = 1) => {
-    const filas = 7, h = (y1 - y0) / filas;
-    for (let i = 0; i < filas; i++) {
-      c.fillStyle = K.trama(c, color, 16, 1 + (i / filas) * 5.5);
-      c.fillRect(-st.hw - 4, y0 + h * i, st.hw * 2 + 8, h + 1);
-    }
+    K.capa(c, ['ba', color, y0, y1, st.hw.toFixed(0)].join(), [-st.hw - 4, y0, st.hw * 2 + 8, y1 - y0 + 1], z => {
+      const filas = 7, h = (y1 - y0) / filas;
+      for (let i = 0; i < filas; i++) {
+        z.fillStyle = K.trama(z, color, 16, 1 + (i / filas) * 5.5);
+        z.fillRect(-st.hw - 4, y0 + h * i, st.hw * 2 + 8, h + 1);
+      }
+    });
   };
 
   // Líneas de velocidad hacia un punto, típicas de los planos de tensión.
@@ -117,16 +176,17 @@
     if (fuerza <= 0) return;
     const R = Math.hypot(st.hw + Math.abs(x), 560 + Math.abs(y)) + 40;
     c.fillStyle = color;
+    c.beginPath();
     for (let i = 0; i < cuantas; i++) {
       const s = i + Math.floor(tiempo * 10) * 31;
       const a = K.rnd(s) * 6.283, w = 0.004 + K.rnd(s + 2) * 0.016;
       const ini = K.lerp(R * 0.95, R * (0.3 + K.rnd(s + 1) * 0.35), fuerza);
-      c.beginPath();
       c.moveTo(x + Math.cos(a) * ini, y + Math.sin(a) * ini);
       c.lineTo(x + Math.cos(a - w) * R, y + Math.sin(a - w) * R);
       c.lineTo(x + Math.cos(a + w) * R, y + Math.sin(a + w) * R);
-      c.closePath(); c.fill();
+      c.closePath();
     }
+    c.fill();
   };
   // Líneas paralelas de movimiento.
   K.rafagas = (c, st, angulo, fuerza, tiempo, color = 'rgba(255,255,255,.75)', cuantas = 26) => {
@@ -147,10 +207,13 @@
     if (k <= 0) return;
     const e = K.outBack(K.clamp(k * 1.5));
     c.save(); c.translate(x, y); c.rotate(rot); c.scale(e, e);
-    c.font = `${tam}px ${fuente || '"Dela Gothic One", Impact, sans-serif'}`;
-    c.textAlign = 'center'; c.textBaseline = 'middle'; c.lineJoin = 'round';
-    c.strokeStyle = borde; c.lineWidth = tam * 0.17; c.strokeText(txt, 0, 0);
-    c.fillStyle = relleno; c.fillText(txt, 0, 0);
+    const a = tam * (txt.length * 0.62 + 0.8), al = tam * 1.1;
+    K.capa(c, ['sfx', txt, tam, relleno, borde, fuente].join(), [-a, -al, a * 2, al * 2], z => {
+      z.font = `${tam}px ${fuente || '"Dela Gothic One", Impact, sans-serif'}`;
+      z.textAlign = 'center'; z.textBaseline = 'middle'; z.lineJoin = 'round';
+      z.strokeStyle = borde; z.lineWidth = tam * 0.17; z.strokeText(txt, 0, 0);
+      z.fillStyle = relleno; z.fillText(txt, 0, 0);
+    });
     c.restore();
   };
 
@@ -209,33 +272,41 @@
   };
 
   // Lluvia de cifras al fondo.
-  K.cifras = (c, st, t, color, cuantas = 46, vel = 70, tam = 26) => {
-    c.fillStyle = color; c.textAlign = 'center'; c.textBaseline = 'middle';
+  K.cifras = (c, st, t, color, cuantas = 24, vel = 70, tam = 26) => {
+    const s = K.pasos(t, 12);
     for (let i = 0; i < cuantas; i++) {
-      const z = 0.4 + K.rnd(i + 9) * 0.9;
+      const z = 0.5 + (i % 3) * 0.4;
       const x = (K.rnd(i) - 0.5) * (st.hw * 2 + 100);
-      const y = ((K.rnd(i + 5) * 1200 + t * vel * z) % 1200) - 600;
-      c.font = `${tam * z}px "Dela Gothic One", Impact, sans-serif`;
-      c.fillText(String(Math.floor(K.rnd(i + 2) * 10)), x, y);
+      const y = ((K.rnd(i + 5) * 1200 + s * vel * z + 120000) % 1200) - 600;
+      K.txt(c, String(Math.floor(K.rnd(i + 2) * 10)), x, y, tam * z, color);
     }
   };
   K.estrellas = (c, st, t, cuantas = 110, ymax = 200) => {
-    for (let i = 0; i < cuantas; i++) {
-      const x = (K.rnd(i * 3) - 0.5) * (st.hw * 2 + 20), y = -540 + K.rnd(i * 3 + 1) * (ymax + 540);
-      const p = 0.5 + 0.5 * Math.sin(K.pasos(t, 6) * (1 + K.rnd(i) * 3) + i);
-      c.fillStyle = `rgba(255,250,225,${0.25 + p * 0.7})`;
-      const r = 0.8 + K.rnd(i + 8) * 2.4;
-      c.fillRect(x - r / 2, y - r / 2, r, r);
+    const s = K.pasos(t, 6);
+    for (let g = 0; g < 3; g++) {
+      c.fillStyle = ['rgba(255,250,225,.3)', 'rgba(255,250,225,.6)', 'rgba(255,250,225,.95)'][g];
+      c.beginPath();
+      for (let i = 0; i < cuantas; i++) {
+        const p = 0.5 + 0.5 * Math.sin(s * (1 + K.rnd(i) * 3) + i);
+        if (Math.min(2, Math.floor(p * 3)) !== g) continue;
+        const x = (K.rnd(i * 3) - 0.5) * (st.hw * 2 + 20), y = -540 + K.rnd(i * 3 + 1) * (ymax + 540), r = 0.8 + K.rnd(i + 8) * 2.4;
+        c.rect(x - r / 2, y - r / 2, r, r);
+      }
+      c.fill();
     }
   };
   // Nube de anime: masa de arcos con sombra plana.
   K.nube = (c, x, y, s, luz, sombra) => {
     const bultos = [[-90, 8, 44], [-44, -16, 60], [18, -26, 72], [76, -6, 52], [122, 12, 34]];
-    c.fillStyle = sombra;
-    bultos.forEach(b => { c.beginPath(); c.arc(x + b[0] * s, y + b[1] * s, b[2] * s, 0, 7); c.fill(); });
-    c.fillRect(x - 124 * s, y + 8 * s, 268 * s, 28 * s);
-    c.fillStyle = luz;
-    bultos.forEach(b => { c.beginPath(); c.arc(x + b[0] * s - 6 * s, y + b[1] * s - 9 * s, b[2] * s * 0.9, 0, 7); c.fill(); });
+    c.save(); c.translate(x, y); c.scale(s, s);
+    K.capa(c, 'nube' + luz + sombra, [-150, -110, 330, 160], z => {
+      z.fillStyle = sombra;
+      bultos.forEach(b => { z.beginPath(); z.arc(b[0], b[1], b[2], 0, 7); z.fill(); });
+      z.fillRect(-124, 8, 268, 28);
+      z.fillStyle = luz;
+      bultos.forEach(b => { z.beginPath(); z.arc(b[0] - 6, b[1] - 9, b[2] * 0.9, 0, 7); z.fill(); });
+    });
+    c.restore();
   };
   K.suelo = (c, st, y, color, linea = TINTA, lw = 6) => {
     c.fillStyle = color; c.fillRect(-st.hw - 4, y, st.hw * 2 + 8, 560);
@@ -249,10 +320,12 @@
     K.linea(c, [[-22, -56], [-22 - pa * 14, -24], [-24 - pa * 22, 0]], TINTA, 9);
     K.linea(c, [[22, -56], [22 + pa * 14, -24], [24 + pa * 22, 0]], TINTA, 9);
     c.translate(0, -al);
-    c.font = '190px "Dela Gothic One", Impact, sans-serif';
-    c.textAlign = 'center'; c.textBaseline = 'alphabetic'; c.lineJoin = 'round';
-    c.strokeStyle = TINTA; c.lineWidth = 16; c.strokeText(ch, 0, -32);
-    c.fillStyle = color; c.fillText(ch, 0, -32);
+    K.capa(c, 'veci' + ch + color, [-130, -240, 260, 240], z => {
+      z.font = '190px "Dela Gothic One", Impact, sans-serif';
+      z.textAlign = 'center'; z.textBaseline = 'alphabetic'; z.lineJoin = 'round';
+      z.strokeStyle = TINTA; z.lineWidth = 16; z.strokeText(ch, 0, -32);
+      z.fillStyle = color; z.fillText(ch, 0, -32);
+    });
     // La cifra no se refleja: solo la mirada cambia de lado.
     const m = mira;
     K.disco(c, m * -14, -112, 13, '#fff', 4); K.disco(c, m * 16, -112, 13, '#fff', 4);
