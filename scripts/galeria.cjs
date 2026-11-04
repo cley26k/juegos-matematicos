@@ -7,33 +7,61 @@ const clips = JSON.parse(fs.readFileSync(path.join(ROOT, 'videos', 'clips.json')
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const total = games.reduce((n, g) => n + Object.keys(clips[g.id]?.clips ?? {}).length, 0);
 
-const cards = games.map((g, i) => {
+// La historia decide el orden: de primaria a universidad.
+const historia = JSON.parse(fs.readFileSync(path.join(__dirname, 'historia.json'), 'utf8'));
+const porId = Object.fromEntries(games.map(g => [g.id, g]));
+const COLOR = { 'pizza-fraccionaria': '#ff8a3c', 'coco-conjuntos': '#27c9b8', 'laberinto-radian': '#46b8d8', 'puente-de-cristal': '#3b8fe8', mathrally: '#e25cc0', 'sudoku-academy': '#3f6fe0', residuo: '#e2606f', 'portero-algebraico': '#d9379f', 'algebra-engine': '#1fb98a' };
+const IDEA = { 'pizza-fraccionaria': 'Una parte también cuenta.', 'coco-conjuntos': 'Cada conjunto cabe dentro del siguiente.', 'laberinto-radian': 'Un radián es un radio doblado sobre el borde.', 'puente-de-cristal': 'Haz la cuenta antes de saltar.', mathrally: 'A cada entrada, una sola salida.', 'sudoku-academy': 'Tacha lo imposible hasta que solo quede uno.', residuo: 'En el Valle de Doce, 9 + 3 = 0.', 'portero-algebraico': 'Sin neutro no hay grupo.', 'algebra-engine': 'El núcleo es todo lo que va a dar a cero.' };
+const orden = historia.filter(c => porId[c.id]).map(c => porId[c.id]);
+if (orden.length !== games.length) throw new Error('historia.json debe tener un capítulo por juego');
+
+const capitulos = historia.map((cap, i) => {
+  const g = porId[cap.id];
+  const clip = g && clips[g.id]?.clips?.[cap.clip];
+  if (g && !clip) throw new Error(`Falta el clip ${cap.clip} de ${g.id}`);
+  const textos = cap.textos.map(t => `<p class="txt ${t.pos} ${t.tipo}${t.a >= 0.9 ? ' lado' : ''}" data-de="${t.de}" data-a="${t.a}"><span>${esc(t.t)}</span></p>`).join('\n        ');
+  const portal = g ? `
+        <aside class="portal${clip.vp === 'm' ? ' movil' : ''}" style="--color:${COLOR[g.id]}" aria-label="${esc(g.titulo)}">
+          <div class="portal-marco"><video src="videos/${g.id}/${cap.clip}.mp4" poster="videos/${g.id}/${cap.clip}.jpg" preload="none" muted loop playsinline aria-label="${esc(clip.titulo)}: ${esc(clip.mecanica)}"></video></div>
+          <h3>${esc(g.titulo)}</h3>
+          <p>${esc(g.tema)} · ${esc(g.nivel)}${g.hecho ? ` · hecho con ${esc(g.hecho)}` : ''}</p>
+          <div class="portal-acciones"><a class="boton fuerte" href="juegos/${g.id}/">Jugar</a><a class="boton ver-ficha" href="#ficha-${g.id}">Ficha y clips</a></div>
+        </aside>` : '';
+  return `
+    <section class="cap" id="cap-${cap.id}" data-id="${cap.id}" style="--largo:${cap.largo || 340}vh">
+      <h2>${g ? `Mundo ${i}: ${esc(g.titulo)}` : esc(cap.nombre)}</h2>
+      <div class="cap-pegado">
+        ${textos}${portal}
+      </div>
+    </section>`;
+}).join('');
+
+const carril = historia.map((c, i) => `<li><a href="#cap-${c.id}" aria-label="${esc(porId[c.id]?.titulo || c.nombre)}">${i === 0 ? '0' : porId[c.id] ? i : 'F'}</a></li>`).join('');
+
+const fichas = orden.map(g => {
   const cs = Object.entries(clips[g.id]?.clips ?? {});
   return `
-  <section class="game" id="${g.id}" style="--hue:${[262, 28, 160, 330][i % 4]}">
-    <header class="game-head">
-      <div>
-        <p class="eyebrow">${esc(g.tema)} · ${esc(g.nivel)}${g.hecho ? ` · hecho con ${esc(g.hecho)}` : ""}</p>
-        <h2>${esc(g.titulo)}</h2>
-        <p class="lead">${esc(g.resumen)}</p>
-      </div>
-      <div class="actions">
-        <a class="btn primary" href="juegos/${g.id}/">Jugar</a>
-        ${g.codigo ? `<a class="btn" href="${g.codigo}">Código</a>` : ''}
-      </div>
-    </header>
-    <div class="facts">
-      <div><h3>Matemáticas</h3><ul>${g.matematicas.map(m => `<li>${esc(m)}</li>`).join('')}</ul></div>
-      <div><h3>Gamificación</h3><ul class="tags">${g.gamificacion.map(m => `<li>${esc(m)}</li>`).join('')}</ul></div>
-    </div>
-    <div class="clips">
-      ${cs.map(([id, c]) => `
-      <figure class="clip${c.vp === 'm' ? ' phone' : ''}">
-        <video src="videos/${g.id}/${id}.mp4" poster="videos/${g.id}/${id}.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>${esc(c.titulo)}</b><span>${esc(c.mecanica)}</span><small>${c.segundos} s · <a href="videos/${g.id}/${id}.mp4" download>MP4</a></small></figcaption>
-      </figure>`).join('')}
-    </div>
-  </section>`;
+      <article class="ficha" id="ficha-${g.id}" style="--color:${COLOR[g.id]}">
+        <header class="ficha-cab">
+          <div>
+            <span class="cinta">${esc(g.tema)} · ${esc(g.nivel)}${g.hecho ? ` · hecho con ${esc(g.hecho)}` : ''}</span>
+            <h3>${esc(g.titulo)}</h3>
+            <p class="idea">${esc(IDEA[g.id])}</p>
+            <p class="resumen">${esc(g.resumen)}</p>
+          </div>
+          <div class="ficha-acciones"><a class="boton fuerte" href="juegos/${g.id}/">Jugar</a>${g.codigo ? `<a class="boton" href="${g.codigo}">Código</a>` : ''}</div>
+        </header>
+        <div class="hechos">
+          <div><h4>Matemáticas</h4><ul>${g.matematicas.map(m => `<li>${esc(m)}</li>`).join('')}</ul></div>
+          <div><h4>Gamificación</h4><ul class="etiquetas">${g.gamificacion.map(m => `<li>${esc(m)}</li>`).join('')}</ul></div>
+        </div>
+        <div class="clips">
+          ${cs.map(([id, c]) => `<figure class="clip">
+            <video src="videos/${g.id}/${id}.mp4" poster="videos/${g.id}/${id}.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>${esc(c.titulo)}</b><span>${esc(c.mecanica)}</span><small>${c.segundos} s · <a href="videos/${g.id}/${id}.mp4" download>MP4</a></small></figcaption>
+          </figure>`).join('\n          ')}
+        </div>
+      </article>`;
 }).join('\n');
 
 const html = `<!doctype html>
@@ -41,67 +69,44 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Juegos matemáticos</title>
-<meta name="description" content="Juegos para enseñar matemáticas creados con IA, con clips de prueba de cada mecánica.">
+<title>CERO · Nueve juegos para aprender matemáticas</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%2314121f%27/%3E%3Cellipse cx=%2716%27 cy=%2716%27 rx=%277%27 ry=%2710%27 fill=%27none%27 stroke=%27%23ff3d2e%27 stroke-width=%275%27/%3E%3C/svg%3E">
+<meta name="description" content="Cero, el número que nadie contaba, cruza nueve mundos. Una historia animada que se cuenta bajando, y nueve juegos de matemáticas creados con IA para jugar en el navegador.">
+<meta name="theme-color" content="#14121f">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
-<style>
-:root { --bg: #f6f5fb; --surface: #fff; --ink: #2f3245; --ink-2: #6c7088; --line: #e4e3ee; --accent: #6a4fe6; color-scheme: light; }
-@media (prefers-color-scheme: dark) { :root { --bg: #10131b; --surface: #1c2232; --ink: #eef0f7; --ink-2: #a8aec2; --line: #2a3148; --accent: #9a83ff; color-scheme: dark; } }
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 600 16px/1.5 Nunito, system-ui, sans-serif; }
-main { max-width: 1120px; margin: 0 auto; padding: 32px 16px 64px; }
-.hero { padding: 24px 0 8px; }
-.hero h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin: 0 0 10px; letter-spacing: -.02em; font-weight: 900; }
-.hero p { color: var(--ink-2); max-width: 62ch; margin: 0; font-size: 1.1rem; }
-.stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 22px 0 8px; }
-.stats div { background: var(--surface); border: 2px solid var(--line); border-radius: 16px; padding: 10px 18px; }
-.stats b { display: block; font-size: 1.6rem; font-weight: 900; color: var(--accent); }
-.stats span { font-size: .85rem; color: var(--ink-2); font-weight: 800; }
-nav.toc { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 8px; }
-nav.toc a { color: var(--ink); text-decoration: none; background: var(--surface); border: 2px solid var(--line); border-radius: 999px; padding: 6px 14px; font-weight: 800; font-size: .9rem; }
-.game { --c: hsl(var(--hue) 70% 55%); background: var(--surface); border: 2px solid var(--line); border-top: 6px solid var(--c); border-radius: 22px; padding: 24px; margin-top: 28px; }
-.game-head { display: flex; gap: 20px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
-.game-head > div:first-child { flex: 1 1 520px; }
-.eyebrow { margin: 0; color: var(--c); font-weight: 900; text-transform: uppercase; letter-spacing: .06em; font-size: .78rem; }
-h2 { margin: 4px 0 8px; font-size: 1.8rem; font-weight: 900; letter-spacing: -.01em; }
-.lead { margin: 0; color: var(--ink-2); max-width: 70ch; }
-.actions { display: flex; gap: 10px; }
-.btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 14px; border: 2px solid var(--line); border-bottom-width: 5px; color: var(--ink); text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: .04em; font-size: .85rem; }
-.btn.primary { background: var(--c); border-color: hsl(var(--hue) 60% 40%); color: #fff; }
-.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
-.facts h3 { margin: 0 0 6px; font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-2); }
-.facts ul { margin: 0; padding-left: 18px; }
-.tags { list-style: none; padding: 0 !important; display: flex; flex-wrap: wrap; gap: 6px; }
-.tags li { background: color-mix(in srgb, var(--c) 14%, transparent); color: var(--ink); border-radius: 999px; padding: 3px 12px; font-size: .85rem; font-weight: 800; }
-.clips { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
-.clip { margin: 0; background: var(--bg); border: 2px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
-.clip video { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; display: block; }
-.clip.phone video { aspect-ratio: 16 / 9; }
-.clip figcaption { padding: 10px 14px 12px; display: flex; flex-direction: column; gap: 2px; }
-.clip figcaption span { color: var(--ink-2); font-size: .9rem; }
-.clip small { color: var(--ink-2); font-weight: 800; margin-top: 4px; }
-.clip a { color: var(--accent); }
-footer { margin-top: 40px; color: var(--ink-2); font-size: .9rem; }
-@media (max-width: 700px) { .facts { grid-template-columns: 1fr; } .game { padding: 18px; } .clips { grid-template-columns: 1fr; } }
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="sitio/estilo.css">
 </head>
 <body>
+<a class="salto" href="#archivo">Saltar a los juegos ↓</a>
+<canvas id="lienzo" aria-hidden="true"></canvas>
+<nav class="carril" aria-label="Capítulos"><span class="carril-pista" aria-hidden="true"><span class="carril-barra"></span></span><ol>${carril}</ol></nav>
+<div class="desliza" aria-hidden="true">Desliza</div>
 <main>
-  <section class="hero">
-    <h1>Juegos para aprender matemáticas</h1>
-    <p>Colección de juegos creados con IA (Claude y Google AI Studio) para estudiar el potencial de la gamificación digital en la enseñanza de las matemáticas. Cada juego se puede jugar en el navegador y cada mecánica tiene un clip de prueba grabado automáticamente.</p>
-    <div class="stats"><div><b>${games.length}</b><span>juegos</span></div><div><b>${total}</b><span>clips de prueba</span></div><div><b>${new Set(games.flatMap(g => g.gamificacion)).size}</b><span>elementos de gamificación</span></div></div>
-    <nav class="toc" aria-label="Juegos">${games.map(g => `<a href="#${g.id}">${esc(g.titulo)}</a>`).join('')}</nav>
+  <h1 class="oculto">CERO: nueve juegos para aprender matemáticas</h1>
+  <div class="historia">${capitulos}
+  </div>
+  <section class="archivo" id="archivo">
+    <div class="archivo-dentro">
+      <header class="archivo-cab">
+        <h2>Ahora te toca jugar</h2>
+        <p>Nueve juegos creados con IA (Claude y Google AI Studio) para estudiar el potencial de la gamificación digital en la enseñanza de las matemáticas. Todos se juegan en el navegador y cada mecánica tiene un clip de prueba grabado automáticamente.</p>
+        <ul class="datos"><li><b>${games.length}</b><span>juegos</span></li><li><b>${total}</b><span>clips de prueba</span></li><li><b>${new Set(games.flatMap(g => g.gamificacion)).size}</b><span>elementos de gamificación</span></li></ul>
+        <ul class="indice">${orden.map(g => `<li><a href="#ficha-${g.id}">${esc(g.titulo)}</a></li>`).join('')}</ul>
+      </header>
+${fichas}
+      <footer class="pie">La historia de Cero es original y se dibuja por código en un canvas, con GSAP y Lenis. Los clips se generan con <code>npm run grabar</code> y esta página con <code>npm run galeria</code>.</footer>
+    </div>
   </section>
-${cards}
-  <footer>Los clips se generan con <code>npm run grabar</code> (Playwright + ffmpeg) y esta página con <code>npm run galeria</code>.</footer>
 </main>
-<script>
-// Los clips se reproducen solos al verse en pantalla (silenciados) y se pausan al salir.
-const io = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause(); }), { threshold: .6 });
-document.querySelectorAll('video').forEach(v => io.observe(v));
-</script>
+<script src="sitio/vendor/gsap.min.js"></script>
+<script src="sitio/vendor/ScrollTrigger.min.js"></script>
+<script src="sitio/vendor/SplitText.min.js"></script>
+<script src="sitio/vendor/lenis.min.js"></script>
+<script src="sitio/tinta.js"></script>
+<script src="sitio/cero.js"></script>
+<script src="sitio/escenas.js"></script>
+<script src="sitio/historia.js"></script>
 </body>
 </html>
 `;
@@ -135,6 +140,8 @@ ${Object.entries(clips[g.id]?.clips ?? {}).map(([id, c]) => `| [${c.titulo}](vid
 - \`scripts/clips/<juego>.cjs\`: guion de cada clip (qué se pulsa y cuándo).
 - \`scripts/grabar.cjs\`: graba los clips con Playwright y los recorta y convierte con ffmpeg.
 - \`scripts/galeria.cjs\`: genera esta página y el README.
+- \`scripts/historia.json\`: guion de la historia de Cero (textos y clip de cada capítulo).
+- \`sitio/\`: la historia animada: personaje (\`cero.js\`), escenas (\`escenas.js\`), dibujo (\`tinta.js\`) y scroll (\`historia.js\`). GSAP y Lenis están en \`sitio/vendor/\`.
 
 ## Volver a grabar
 

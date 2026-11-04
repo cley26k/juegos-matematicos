@@ -1,0 +1,97 @@
+[
+  {
+    "id": "prologo", "largo": 500, "nombre": "Prólogo",
+    "textos": [
+      { "de": 0.015, "a": 0.13, "pos": "abajo", "tipo": "lema", "t": "Una historia que se cuenta bajando." },
+      { "de": 0.25, "a": 0.355, "pos": "arriba", "tipo": "narra", "t": "En Villa Recta, todos los números valían algo." },
+      { "de": 0.36, "a": 0.465, "pos": "arriba", "tipo": "narra", "t": "El 9 mandaba. El 7 traía suerte. El 1 siempre iba primero." },
+      { "de": 0.48, "a": 0.565, "pos": "arriba", "tipo": "voz", "t": "¿Y yo? Me llamo Cero." },
+      { "de": 0.575, "a": 0.675, "pos": "arriba", "tipo": "voz", "t": "Me sumas y nada cambia. Nadie cuenta conmigo." },
+      { "de": 0.70, "a": 0.855, "pos": "arriba", "tipo": "narra", "t": "Hasta la noche en que se abrieron nueve puertas en el cielo." },
+      { "de": 0.87, "a": 0.96, "pos": "abajo", "tipo": "narra", "t": "Si no valía nada, no tenía nada que perder." }
+    ]
+  },
+  {
+    "id": "pizza-fraccionaria", "clip": "laboratorio",
+    "textos": [
+      { "de": 0.15, "a": 0.27, "pos": "arriba", "tipo": "narra", "t": "Primer mundo. Aquí, todo se reparte." },
+      { "de": 0.40, "a": 0.54, "pos": "arriba", "tipo": "narra", "t": "Una parte de ocho. Arriba, las que tienes. Abajo, en cuántas se partió." },
+      { "de": 0.56, "a": 0.92, "pos": "arriba", "tipo": "voz", "t": "¡Hasta un trozo cuenta!" }
+    ]
+  },
+  {
+    "id": "coco-conjuntos", "clip": "fusion",
+    "textos": [
+      { "de": 0.14, "a": 0.30, "pos": "arriba", "tipo": "narra", "t": "En esta isla, dos iguales se juntan y nace algo más grande." },
+      { "de": 0.32, "a": 0.50, "pos": "arriba", "tipo": "narra", "t": "Naturales, enteros, racionales, reales, complejos." },
+      { "de": 0.56, "a": 0.92, "pos": "arriba", "tipo": "voz", "t": "¡Mira! Cada conjunto cabe dentro del siguiente." }
+    ]
+  },
+  {
+    "id": "laberinto-radian", "clip": "exploracion",
+    "textos": [
+      { "de": 0.15, "a": 0.32, "pos": "arriba", "tipo": "narra", "t": "En la niebla, lo único fiable es medir." },
+      { "de": 0.35, "a": 0.54, "pos": "arriba", "tipo": "narra", "t": "Toma el radio. Dóblalo sobre el borde. Ese ángulo es un radián." },
+      { "de": 0.56, "a": 0.92, "pos": "arriba", "tipo": "voz", "t": "Y toda vuelta empieza en el ángulo cero." }
+    ]
+  },
+  {
+    "id": "puente-de-cristal", "clip": "cruzar",
+    "textos": [
+      { "de": 0.14, "a": 0.32, "pos": "arriba", "tipo": "narra", "t": "Dos cristales. Uno aguanta. El otro, no." },
+      { "de": 0.37, "a": 0.46, "pos": "arriba", "tipo": "narra", "t": "Saltó sin hacer la cuenta." },
+      { "de": 0.47, "a": 0.56, "pos": "abajo", "tipo": "narra", "t": "Volvió a empezar. Esta vez, hizo la cuenta antes." },
+      { "de": 0.58, "a": 0.92, "pos": "arriba", "tipo": "voz", "t": "Equivocarse también enseña." }
+    ]
+  },
+  {
+    "id": "mathrally", "clip": "estacion",
+    "textos": [
+      { "de": 0.14, "a": 0.32, "pos": "arriba", "tipo": "narra", "t": "En Élara, nadie llega solo. Se corre en equipo." },
+      { "de": 0.36, "a": 0.56, "pos": "abajo", "tipo": "narra", "t": "Regla de la misión: a cada entrada, una sola salida." },
+      { "de": 0.58, "a": 0.92, "pos": "arriba", "tipo": "voz", "t": "¡Empecemos por f(0)!" }
+    ]
+  },
+  {
+    "id": "sudoku-academy", "clip": "eliminar",
+    "textos": [
+      { "de": 0.14, "a": 0.30, "pos": "arriba", "tipo": "narra", "t": "Nueve filas. Nueve columnas. Del 1 al 9. Aquí no había sitio para Cero." },
+      { "de": 0.32, "a": 0.50, "pos": "arriba", "tipo": "narra", "t": "Pero aprendió a mirar lo que falta. Tachar, tachar, hasta que solo queda uno." },
+      { "de": 0.56, "a": 0.92, "pos": "arriba", "tipo": "voz", "t": "Una casilla vacía es un cero esperando." }
+    ]
+  },
+  {
+    "id": "residuo", "clip": "molino",
+    "textos": [
+      { "de": 0.14, "a": 0.30, "pos": "arriba", "tipo": "narra", "t": "Al norte del arco, los números dan la vuelta." },
+      { "de": 0.31, "a": 0.42, "pos": "arriba", "tipo": "narra", "t": "Nueve más tres no daba doce." },
+      { "de": 0.47, "a": 0.55, "pos": "arriba", "tipo": "voz", "t": "Daba... yo." },
+      { "de": 0.58, "a": 0.92, "pos": "arriba", "tipo": "narra", "t": "Por primera vez, todo el camino llevaba a él." }
+    ]
+  },
+  {
+    "id": "portero-algebraico", "clip": "decision-correcta",
+    "textos": [
+      { "de": 0.14, "a": 0.26, "pos": "arriba", "tipo": "voz", "t": "¿Y tú qué sabes hacer?" },
+      { "de": 0.27, "a": 0.36, "pos": "arriba", "tipo": "voz", "t": "Nada. A quien me suman, se queda igual." },
+      { "de": 0.37, "a": 0.46, "pos": "arriba", "tipo": "voz", "t": "Justo. Sin neutro no hay grupo." },
+      { "de": 0.47, "a": 0.92, "pos": "arriba", "tipo": "narra", "t": "Lo que le faltaba al club era precisamente él." }
+    ]
+  },
+  {
+    "id": "algebra-engine", "clip": "garra",
+    "textos": [
+      { "de": 0.14, "a": 0.30, "pos": "arriba", "tipo": "narra", "t": "La última máquina traducía un mundo en otro." },
+      { "de": 0.31, "a": 0.44, "pos": "arriba", "tipo": "narra", "t": "Le entraban cosas distintas. Muchas salían iguales." },
+      { "de": 0.48, "a": 0.92, "pos": "arriba", "tipo": "voz", "t": "El núcleo: todo lo que va a dar a cero." }
+    ]
+  },
+  {
+    "id": "final", "largo": 460, "nombre": "Final",
+    "textos": [
+      { "de": 0.04, "a": 0.2, "pos": "arriba", "tipo": "narra", "t": "Volvió a Villa Recta. Seguía valiendo lo mismo." },
+      { "de": 0.22, "a": 0.38, "pos": "arriba", "tipo": "narra", "t": "Entonces, el 1 le hizo sitio a su lado." },
+      { "de": 0.48, "a": 0.66, "pos": "arriba", "tipo": "narra", "t": "Cero no había cambiado. Cambió con quién estaba." }
+    ]
+  }
+]

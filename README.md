@@ -157,6 +157,8 @@ El Profe Nelson enseña fracciones con pizzas y sabor dominicano. En el laborato
 - `scripts/clips/<juego>.cjs`: guion de cada clip (qué se pulsa y cuándo).
 - `scripts/grabar.cjs`: graba los clips con Playwright y los recorta y convierte con ffmpeg.
 - `scripts/galeria.cjs`: genera esta página y el README.
+- `scripts/historia.json`: guion de la historia de Cero (textos y clip de cada capítulo).
+- `sitio/`: la historia animada: personaje (`cero.js`), escenas (`escenas.js`), dibujo (`tinta.js`) y scroll (`historia.js`). GSAP y Lenis están en `sitio/vendor/`.
 
 ## Volver a grabar
 

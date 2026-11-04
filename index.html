@@ -3,410 +3,509 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Juegos matemáticos</title>
-<meta name="description" content="Juegos para enseñar matemáticas creados con IA, con clips de prueba de cada mecánica.">
+<title>CERO · Nueve juegos para aprender matemáticas</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%2314121f%27/%3E%3Cellipse cx=%2716%27 cy=%2716%27 rx=%277%27 ry=%2710%27 fill=%27none%27 stroke=%27%23ff3d2e%27 stroke-width=%275%27/%3E%3C/svg%3E">
+<meta name="description" content="Cero, el número que nadie contaba, cruza nueve mundos. Una historia animada que se cuenta bajando, y nueve juegos de matemáticas creados con IA para jugar en el navegador.">
+<meta name="theme-color" content="#14121f">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
-<style>
-:root { --bg: #f6f5fb; --surface: #fff; --ink: #2f3245; --ink-2: #6c7088; --line: #e4e3ee; --accent: #6a4fe6; color-scheme: light; }
-@media (prefers-color-scheme: dark) { :root { --bg: #10131b; --surface: #1c2232; --ink: #eef0f7; --ink-2: #a8aec2; --line: #2a3148; --accent: #9a83ff; color-scheme: dark; } }
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 600 16px/1.5 Nunito, system-ui, sans-serif; }
-main { max-width: 1120px; margin: 0 auto; padding: 32px 16px 64px; }
-.hero { padding: 24px 0 8px; }
-.hero h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin: 0 0 10px; letter-spacing: -.02em; font-weight: 900; }
-.hero p { color: var(--ink-2); max-width: 62ch; margin: 0; font-size: 1.1rem; }
-.stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 22px 0 8px; }
-.stats div { background: var(--surface); border: 2px solid var(--line); border-radius: 16px; padding: 10px 18px; }
-.stats b { display: block; font-size: 1.6rem; font-weight: 900; color: var(--accent); }
-.stats span { font-size: .85rem; color: var(--ink-2); font-weight: 800; }
-nav.toc { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 8px; }
-nav.toc a { color: var(--ink); text-decoration: none; background: var(--surface); border: 2px solid var(--line); border-radius: 999px; padding: 6px 14px; font-weight: 800; font-size: .9rem; }
-.game { --c: hsl(var(--hue) 70% 55%); background: var(--surface); border: 2px solid var(--line); border-top: 6px solid var(--c); border-radius: 22px; padding: 24px; margin-top: 28px; }
-.game-head { display: flex; gap: 20px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
-.game-head > div:first-child { flex: 1 1 520px; }
-.eyebrow { margin: 0; color: var(--c); font-weight: 900; text-transform: uppercase; letter-spacing: .06em; font-size: .78rem; }
-h2 { margin: 4px 0 8px; font-size: 1.8rem; font-weight: 900; letter-spacing: -.01em; }
-.lead { margin: 0; color: var(--ink-2); max-width: 70ch; }
-.actions { display: flex; gap: 10px; }
-.btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 14px; border: 2px solid var(--line); border-bottom-width: 5px; color: var(--ink); text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: .04em; font-size: .85rem; }
-.btn.primary { background: var(--c); border-color: hsl(var(--hue) 60% 40%); color: #fff; }
-.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
-.facts h3 { margin: 0 0 6px; font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-2); }
-.facts ul { margin: 0; padding-left: 18px; }
-.tags { list-style: none; padding: 0 !important; display: flex; flex-wrap: wrap; gap: 6px; }
-.tags li { background: color-mix(in srgb, var(--c) 14%, transparent); color: var(--ink); border-radius: 999px; padding: 3px 12px; font-size: .85rem; font-weight: 800; }
-.clips { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
-.clip { margin: 0; background: var(--bg); border: 2px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
-.clip video { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; display: block; }
-.clip.phone video { aspect-ratio: 16 / 9; }
-.clip figcaption { padding: 10px 14px 12px; display: flex; flex-direction: column; gap: 2px; }
-.clip figcaption span { color: var(--ink-2); font-size: .9rem; }
-.clip small { color: var(--ink-2); font-weight: 800; margin-top: 4px; }
-.clip a { color: var(--accent); }
-footer { margin-top: 40px; color: var(--ink-2); font-size: .9rem; }
-@media (max-width: 700px) { .facts { grid-template-columns: 1fr; } .game { padding: 18px; } .clips { grid-template-columns: 1fr; } }
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="sitio/estilo.css">
 </head>
 <body>
+<a class="salto" href="#archivo">Saltar a los juegos ↓</a>
+<canvas id="lienzo" aria-hidden="true"></canvas>
+<nav class="carril" aria-label="Capítulos"><span class="carril-pista" aria-hidden="true"><span class="carril-barra"></span></span><ol><li><a href="#cap-prologo" aria-label="Prólogo">0</a></li><li><a href="#cap-pizza-fraccionaria" aria-label="Pizza Fraccionaria">1</a></li><li><a href="#cap-coco-conjuntos" aria-label="Coco Conjuntos">2</a></li><li><a href="#cap-laberinto-radian" aria-label="El Laberinto del Radián">3</a></li><li><a href="#cap-puente-de-cristal" aria-label="Puente de Cristal">4</a></li><li><a href="#cap-mathrally" aria-label="MathRally · Misión Élara">5</a></li><li><a href="#cap-sudoku-academy" aria-label="Sudoku Academy">6</a></li><li><a href="#cap-residuo" aria-label="RESIDUO: El Valle de Doce">7</a></li><li><a href="#cap-portero-algebraico" aria-label="Portero Algebraico · UMBRAL">8</a></li><li><a href="#cap-algebra-engine" aria-label="The Algebra Engine">9</a></li><li><a href="#cap-final" aria-label="Final">F</a></li></ol></nav>
+<div class="desliza" aria-hidden="true">Desliza</div>
 <main>
-  <section class="hero">
-    <h1>Juegos para aprender matemáticas</h1>
-    <p>Colección de juegos creados con IA (Claude y Google AI Studio) para estudiar el potencial de la gamificación digital en la enseñanza de las matemáticas. Cada juego se puede jugar en el navegador y cada mecánica tiene un clip de prueba grabado automáticamente.</p>
-    <div class="stats"><div><b>9</b><span>juegos</span></div><div><b>39</b><span>clips de prueba</span></div><div><b>54</b><span>elementos de gamificación</span></div></div>
-    <nav class="toc" aria-label="Juegos"><a href="#sudoku-academy">Sudoku Academy</a><a href="#laberinto-radian">El Laberinto del Radián</a><a href="#coco-conjuntos">Coco Conjuntos</a><a href="#portero-algebraico">Portero Algebraico · UMBRAL</a><a href="#algebra-engine">The Algebra Engine</a><a href="#residuo">RESIDUO: El Valle de Doce</a><a href="#mathrally">MathRally · Misión Élara</a><a href="#puente-de-cristal">Puente de Cristal</a><a href="#pizza-fraccionaria">Pizza Fraccionaria</a></nav>
-  </section>
+  <h1 class="oculto">CERO: nueve juegos para aprender matemáticas</h1>
+  <div class="historia">
+    <section class="cap" id="cap-prologo" data-id="prologo" style="--largo:500vh">
+      <h2>Prólogo</h2>
+      <div class="cap-pegado">
+        <p class="txt abajo lema" data-de="0.015" data-a="0.13"><span>Una historia que se cuenta bajando.</span></p>
+        <p class="txt arriba narra" data-de="0.25" data-a="0.355"><span>En Villa Recta, todos los números valían algo.</span></p>
+        <p class="txt arriba narra" data-de="0.36" data-a="0.465"><span>El 9 mandaba. El 7 traía suerte. El 1 siempre iba primero.</span></p>
+        <p class="txt arriba voz" data-de="0.48" data-a="0.565"><span>¿Y yo? Me llamo Cero.</span></p>
+        <p class="txt arriba voz" data-de="0.575" data-a="0.675"><span>Me sumas y nada cambia. Nadie cuenta conmigo.</span></p>
+        <p class="txt arriba narra" data-de="0.7" data-a="0.855"><span>Hasta la noche en que se abrieron nueve puertas en el cielo.</span></p>
+        <p class="txt abajo narra lado" data-de="0.87" data-a="0.96"><span>Si no valía nada, no tenía nada que perder.</span></p>
+      </div>
+    </section>
+    <section class="cap" id="cap-pizza-fraccionaria" data-id="pizza-fraccionaria" style="--largo:340vh">
+      <h2>Mundo 1: Pizza Fraccionaria</h2>
+      <div class="cap-pegado">
+        <p class="txt arriba narra" data-de="0.15" data-a="0.27"><span>Primer mundo. Aquí, todo se reparte.</span></p>
+        <p class="txt arriba narra" data-de="0.4" data-a="0.54"><span>Una parte de ocho. Arriba, las que tienes. Abajo, en cuántas se partió.</span></p>
+        <p class="txt arriba voz lado" data-de="0.56" data-a="0.92"><span>¡Hasta un trozo cuenta!</span></p>
+        <aside class="portal" style="--color:#ff8a3c" aria-label="Pizza Fraccionaria">
+          <div class="portal-marco"><video src="videos/pizza-fraccionaria/laboratorio.mp4" poster="videos/pizza-fraccionaria/laboratorio.jpg" preload="none" muted loop playsinline aria-label="Laboratorio de pizza: Manipulación: cortar la pizza y comerse pedazos construye la fracción"></video></div>
+          <h3>Pizza Fraccionaria</h3>
+          <p>Fracciones propias · Primaria · hecho con Google AI Studio</p>
+          <div class="portal-acciones"><a class="boton fuerte" href="juegos/pizza-fraccionaria/">Jugar</a><a class="boton ver-ficha" href="#ficha-pizza-fraccionaria">Ficha y clips</a></div>
+        </aside>
+      </div>
+    </section>
+    <section class="cap" id="cap-coco-conjuntos" data-id="coco-conjuntos" style="--largo:340vh">
+      <h2>Mundo 2: Coco Conjuntos</h2>
+      <div class="cap-pegado">
+        <p class="txt arriba narra" data-de="0.14" data-a="0.3"><span>En esta isla, dos iguales se juntan y nace algo más grande.</span></p>
+        <p class="txt arriba narra" data-de="0.32" data-a="0.5"><span>Naturales, enteros, racionales, reales, complejos.</span></p>
+        <p class="txt arriba voz lado" data-de="0.56" data-a="0.92"><span>¡Mira! Cada conjunto cabe dentro del siguiente.</span></p>
+        <aside class="portal" style="--color:#27c9b8" aria-label="Coco Conjuntos">
+          <div class="portal-marco"><video src="videos/coco-conjuntos/fusion.mp4" poster="videos/coco-conjuntos/fusion.jpg" preload="none" muted loop playsinline aria-label="Junta y crece: Juego de fusión: dos números iguales forman el siguiente conjunto (ℕ → ℤ → ℚ → ℝ → ℂ)"></video></div>
+          <h3>Coco Conjuntos</h3>
+          <p>Conjuntos numéricos · Primaria alta / secundaria</p>
+          <div class="portal-acciones"><a class="boton fuerte" href="juegos/coco-conjuntos/">Jugar</a><a class="boton ver-ficha" href="#ficha-coco-conjuntos">Ficha y clips</a></div>
+        </aside>
+      </div>
+    </section>
+    <section class="cap" id="cap-laberinto-radian" data-id="laberinto-radian" style="--largo:340vh">
+      <h2>Mundo 3: El Laberinto del Radián</h2>
+      <div class="cap-pegado">
+        <p class="txt arriba narra" data-de="0.15" data-a="0.32"><span>En la niebla, lo único fiable es medir.</span></p>
+        <p class="txt arriba narra" data-de="0.35" data-a="0.54"><span>Toma el radio. Dóblalo sobre el borde. Ese ángulo es un radián.</span></p>
+        <p class="txt arriba voz lado" data-de="0.56" data-a="0.92"><span>Y toda vuelta empieza en el ángulo cero.</span></p>
+        <aside class="portal" style="--color:#46b8d8" aria-label="El Laberinto del Radián">
+          <div class="portal-marco"><video src="videos/laberinto-radian/exploracion.mp4" poster="videos/laberinto-radian/exploracion.jpg" preload="none" muted loop playsinline aria-label="Explorar con niebla: Exploración: solo se ve lo cercano; hay que orientarse"></video></div>
+          <h3>El Laberinto del Radián</h3>
+          <p>Ángulos y radianes · Secundaria / bachillerato</p>
+          <div class="portal-acciones"><a class="boton fuerte" href="juegos/laberinto-radian/">Jugar</a><a class="boton ver-ficha" href="#ficha-laberinto-radian">Ficha y clips</a></div>
+        </aside>
+      </div>
+    </section>
+    <section class="cap" id="cap-puente-de-cristal" data-id="puente-de-cristal" style="--largo:340vh">
+      <h2>Mundo 4: Puente de Cristal</h2>
+      <div class="cap-pegado">
+        <p class="txt arriba narra" data-de="0.14" data-a="0.32"><span>Dos cristales. Uno aguanta. El otro, no.</span></p>
+        <p class="txt arriba narra" data-de="0.37" data-a="0.46"><span>Saltó sin hacer la cuenta.</span></p>
+        <p class="txt abajo narra" data-de="0.47" data-a="0.56"><span>Volvió a empezar. Esta vez, hizo la cuenta antes.</span></p>
+        <p class="txt arriba voz lado" data-de="0.58" data-a="0.92"><span>Equivocarse también enseña.</span></p>
+        <aside class="portal" style="--color:#3b8fe8" aria-label="Puente de Cristal">
+          <div class="portal-marco"><video src="videos/puente-de-cristal/cruzar.mp4" poster="videos/puente-de-cristal/cruzar.jpg" preload="none" muted loop playsinline aria-label="Cruzar el puente: Cada respuesta es un salto: el cristal correcto aguanta y la racha multiplica"></video></div>
+          <h3>Puente de Cristal</h3>
+          <p>Inecuaciones y porcentajes · Secundaria · hecho con Google AI Studio</p>
+          <div class="portal-acciones"><a class="boton fuerte" href="juegos/puente-de-cristal/">Jugar</a><a class="boton ver-ficha" href="#ficha-puente-de-cristal">Ficha y clips</a></div>
+        </aside>
+      </div>
+    </section>
+    <section class="cap" id="cap-mathrally" data-id="mathrally" style="--largo:340vh">
+      <h2>Mundo 5: MathRally · Misión Élara</h2>
+      <div class="cap-pegado">
+        <p class="txt arriba narra" data-de="0.14" data-a="0.32"><span>En Élara, nadie llega solo. Se corre en equipo.</span></p>
+        <p class="txt abajo narra" data-de="0.36" data-a="0.56"><span>Regla de la misión: a cada entrada, una sola salida.</span></p>
+        <p class="txt arriba voz lado" data-de="0.58" data-a="0.92"><span>¡Empecemos por f(0)!</span></p>
+        <aside class="portal movil" style="--color:#e25cc0" aria-label="MathRally · Misión Élara">
+          <div class="portal-marco"><video src="videos/mathrally/estacion.mp4" poster="videos/mathrally/estacion.jpg" preload="none" muted loop playsinline aria-label="Desafío en una estación: Estaciones físicas con QR: cada acierto suma puntos al equipo"></video></div>
+          <h3>MathRally · Misión Élara</h3>
+          <p>Funciones · Secundaria</p>
+          <div class="portal-acciones"><a class="boton fuerte" href="juegos/mathrally/">Jugar</a><a class="boton ver-ficha" href="#ficha-mathrally">Ficha y clips</a></div>
+        </aside>
+      </div>
+    </section>
+    <section class="cap" id="cap-sudoku-academy" data-id="sudoku-academy" style="--largo:340vh">
+      <h2>Mundo 6: Sudoku Academy</h2>
+      <div class="cap-pegado">
+        <p class="txt arriba narra" data-de="0.14" data-a="0.3"><span>Nueve filas. Nueve columnas. Del 1 al 9. Aquí no había sitio para Cero.</span></p>
+        <p class="txt arriba narra" data-de="0.32" data-a="0.5"><span>Pero aprendió a mirar lo que falta. Tachar, tachar, hasta que solo queda uno.</span></p>
+        <p class="txt arriba voz lado" data-de="0.56" data-a="0.92"><span>Una casilla vacía es un cero esperando.</span></p>
+        <aside class="portal" style="--color:#3f6fe0" aria-label="Sudoku Academy">
+          <div class="portal-marco"><video src="videos/sudoku-academy/eliminar.mp4" poster="videos/sudoku-academy/eliminar.jpg" preload="none" muted loop playsinline aria-label="Tachar candidatos: Técnicas avanzadas: eliminar candidatos con un patrón (bloqueo caja-línea)"></video></div>
+          <h3>Sudoku Academy</h3>
+          <p>Lógica y razonamiento deductivo · Secundaria en adelante</p>
+          <div class="portal-acciones"><a class="boton fuerte" href="juegos/sudoku-academy/">Jugar</a><a class="boton ver-ficha" href="#ficha-sudoku-academy">Ficha y clips</a></div>
+        </aside>
+      </div>
+    </section>
+    <section class="cap" id="cap-residuo" data-id="residuo" style="--largo:340vh">
+      <h2>Mundo 7: RESIDUO: El Valle de Doce</h2>
+      <div class="cap-pegado">
+        <p class="txt arriba narra" data-de="0.14" data-a="0.3"><span>Al norte del arco, los números dan la vuelta.</span></p>
+        <p class="txt arriba narra" data-de="0.31" data-a="0.42"><span>Nueve más tres no daba doce.</span></p>
+        <p class="txt arriba voz" data-de="0.47" data-a="0.55"><span>Daba... yo.</span></p>
+        <p class="txt arriba narra lado" data-de="0.58" data-a="0.92"><span>Por primera vez, todo el camino llevaba a él.</span></p>
+        <aside class="portal" style="--color:#e2606f" aria-label="RESIDUO: El Valle de Doce">
+          <div class="portal-marco"><video src="videos/residuo/molino.mp4" poster="videos/residuo/molino.jpg" preload="none" muted loop playsinline aria-label="La rueda del molino: Suma modular: 9 ⊕ 1 = 10 y 10 ⊕ 2 = 0, la rueda vuelve al reposo"></video></div>
+          <h3>RESIDUO: El Valle de Doce</h3>
+          <p>Aritmética modular · Secundaria / bachillerato</p>
+          <div class="portal-acciones"><a class="boton fuerte" href="juegos/residuo/">Jugar</a><a class="boton ver-ficha" href="#ficha-residuo">Ficha y clips</a></div>
+        </aside>
+      </div>
+    </section>
+    <section class="cap" id="cap-portero-algebraico" data-id="portero-algebraico" style="--largo:340vh">
+      <h2>Mundo 8: Portero Algebraico · UMBRAL</h2>
+      <div class="cap-pegado">
+        <p class="txt arriba voz" data-de="0.14" data-a="0.26"><span>¿Y tú qué sabes hacer?</span></p>
+        <p class="txt arriba voz" data-de="0.27" data-a="0.36"><span>Nada. A quien me suman, se queda igual.</span></p>
+        <p class="txt arriba voz" data-de="0.37" data-a="0.46"><span>Justo. Sin neutro no hay grupo.</span></p>
+        <p class="txt arriba narra lado" data-de="0.47" data-a="0.92"><span>Lo que le faltaba al club era precisamente él.</span></p>
+        <aside class="portal" style="--color:#d9379f" aria-label="Portero Algebraico · UMBRAL">
+          <div class="portal-marco"><video src="videos/portero-algebraico/decision-correcta.mp4" poster="videos/portero-algebraico/decision-correcta.jpg" preload="none" muted loop playsinline aria-label="Decidir bien: ¿La operación es cerrada / forma grupo? Acertar muestra el porqué"></video></div>
+          <h3>Portero Algebraico · UMBRAL</h3>
+          <p>Estructuras algebraicas · Bachillerato / universidad</p>
+          <div class="portal-acciones"><a class="boton fuerte" href="juegos/portero-algebraico/">Jugar</a><a class="boton ver-ficha" href="#ficha-portero-algebraico">Ficha y clips</a></div>
+        </aside>
+      </div>
+    </section>
+    <section class="cap" id="cap-algebra-engine" data-id="algebra-engine" style="--largo:340vh">
+      <h2>Mundo 9: The Algebra Engine</h2>
+      <div class="cap-pegado">
+        <p class="txt arriba narra" data-de="0.14" data-a="0.3"><span>La última máquina traducía un mundo en otro.</span></p>
+        <p class="txt arriba narra" data-de="0.31" data-a="0.44"><span>Le entraban cosas distintas. Muchas salían iguales.</span></p>
+        <p class="txt arriba voz lado" data-de="0.48" data-a="0.92"><span>El núcleo: todo lo que va a dar a cero.</span></p>
+        <aside class="portal" style="--color:#1fb98a" aria-label="The Algebra Engine">
+          <div class="portal-marco"><video src="videos/algebra-engine/garra.mp4" poster="videos/algebra-engine/garra.jpg" preload="none" muted loop playsinline aria-label="Taller de inspección: Experimentar: la palanca prueba la máquina ×2 y la lupa muestra por qué no es inyectiva"></video></div>
+          <h3>The Algebra Engine</h3>
+          <p>Homomorfismos de grupos · Universidad</p>
+          <div class="portal-acciones"><a class="boton fuerte" href="juegos/algebra-engine/">Jugar</a><a class="boton ver-ficha" href="#ficha-algebra-engine">Ficha y clips</a></div>
+        </aside>
+      </div>
+    </section>
+    <section class="cap" id="cap-final" data-id="final" style="--largo:460vh">
+      <h2>Final</h2>
+      <div class="cap-pegado">
+        <p class="txt arriba narra" data-de="0.04" data-a="0.2"><span>Volvió a Villa Recta. Seguía valiendo lo mismo.</span></p>
+        <p class="txt arriba narra" data-de="0.22" data-a="0.38"><span>Entonces, el 1 le hizo sitio a su lado.</span></p>
+        <p class="txt arriba narra" data-de="0.48" data-a="0.66"><span>Cero no había cambiado. Cambió con quién estaba.</span></p>
+      </div>
+    </section>
+  </div>
+  <section class="archivo" id="archivo">
+    <div class="archivo-dentro">
+      <header class="archivo-cab">
+        <h2>Ahora te toca jugar</h2>
+        <p>Nueve juegos creados con IA (Claude y Google AI Studio) para estudiar el potencial de la gamificación digital en la enseñanza de las matemáticas. Todos se juegan en el navegador y cada mecánica tiene un clip de prueba grabado automáticamente.</p>
+        <ul class="datos"><li><b>9</b><span>juegos</span></li><li><b>39</b><span>clips de prueba</span></li><li><b>54</b><span>elementos de gamificación</span></li></ul>
+        <ul class="indice"><li><a href="#ficha-pizza-fraccionaria">Pizza Fraccionaria</a></li><li><a href="#ficha-coco-conjuntos">Coco Conjuntos</a></li><li><a href="#ficha-laberinto-radian">El Laberinto del Radián</a></li><li><a href="#ficha-puente-de-cristal">Puente de Cristal</a></li><li><a href="#ficha-mathrally">MathRally · Misión Élara</a></li><li><a href="#ficha-sudoku-academy">Sudoku Academy</a></li><li><a href="#ficha-residuo">RESIDUO: El Valle de Doce</a></li><li><a href="#ficha-portero-algebraico">Portero Algebraico · UMBRAL</a></li><li><a href="#ficha-algebra-engine">The Algebra Engine</a></li></ul>
+      </header>
 
-  <section class="game" id="sudoku-academy" style="--hue:262">
-    <header class="game-head">
-      <div>
-        <p class="eyebrow">Lógica y razonamiento deductivo · Secundaria en adelante</p>
-        <h2>Sudoku Academy</h2>
-        <p class="lead">Entrenador de técnicas de sudoku al estilo de una app de idiomas: lecciones animadas, práctica ilimitada verificada por un motor lógico, sudokus completos, contrarreloj y una liga semanal en línea.</p>
-      </div>
-      <div class="actions">
-        <a class="btn primary" href="juegos/sudoku-academy/">Jugar</a>
-        <a class="btn" href="https://github.com/cley26k/sudoku-academy">Código</a>
-      </div>
-    </header>
-    <div class="facts">
-      <div><h3>Matemáticas</h3><ul><li>Deducción y eliminación de casos</li><li>26 técnicas: de los singles a cadenas y coloreado</li><li>Razonamiento con conjuntos de candidatos</li></ul></div>
-      <div><h3>Gamificación</h3><ul class="tags"><li>Ruta de unidades desbloqueables</li><li>XP, niveles, racha y gemas</li><li>Misiones diarias y logros</li><li>Contrarreloj con vidas</li><li>Liga semanal con ascensos</li><li>Retroalimentación y pistas graduadas</li></ul></div>
-    </div>
-    <div class="clips">
-      
-      <figure class="clip phone">
-        <video src="videos/sudoku-academy/ruta.mp4" poster="videos/sudoku-academy/ruta.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Ruta de aprendizaje</b><span>Progresión: unidades, lecciones desbloqueables, racha y misiones diarias</span><small>9 s · <a href="videos/sudoku-academy/ruta.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/sudoku-academy/leccion-concepto.mp4" poster="videos/sudoku-academy/leccion-concepto.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Lección animada</b><span>Explicación visual paso a paso de una técnica (X-Wing)</span><small>16 s · <a href="videos/sudoku-academy/leccion-concepto.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/sudoku-academy/acierto.mp4" poster="videos/sudoku-academy/acierto.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Deducir y acertar</b><span>Práctica: colocar el número correcto da XP y una celebración</span><small>6 s · <a href="videos/sudoku-academy/acierto.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/sudoku-academy/error-pista.mp4" poster="videos/sudoku-academy/error-pista.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Error y pista</b><span>Retroalimentación: el tutor explica el error y ofrece pistas graduadas</span><small>11 s · <a href="videos/sudoku-academy/error-pista.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/sudoku-academy/eliminar.mp4" poster="videos/sudoku-academy/eliminar.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Tachar candidatos</b><span>Técnicas avanzadas: eliminar candidatos con un patrón (bloqueo caja-línea)</span><small>7 s · <a href="videos/sudoku-academy/eliminar.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/sudoku-academy/sudoku.mp4" poster="videos/sudoku-academy/sudoku.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Sudoku completo</b><span>Juego libre: notas, pistas que se aplican y cronómetro</span><small>15 s · <a href="videos/sudoku-academy/sudoku.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/sudoku-academy/contrarreloj.mp4" poster="videos/sudoku-academy/contrarreloj.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Contrarreloj</b><span>Reto con tiempo y vidas: 3 minutos para resolver todo lo posible</span><small>14 s · <a href="videos/sudoku-academy/contrarreloj.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip phone">
-        <video src="videos/sudoku-academy/subida-nivel.mp4" poster="videos/sudoku-academy/subida-nivel.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Subir de nivel</b><span>Recompensa: celebración al subir de nivel, con gemas</span><small>6 s · <a href="videos/sudoku-academy/subida-nivel.mp4" download>MP4</a></small></figcaption>
-      </figure>
-    </div>
-  </section>
+      <article class="ficha" id="ficha-pizza-fraccionaria" style="--color:#ff8a3c">
+        <header class="ficha-cab">
+          <div>
+            <span class="cinta">Fracciones propias · Primaria · hecho con Google AI Studio</span>
+            <h3>Pizza Fraccionaria</h3>
+            <p class="idea">Una parte también cuenta.</p>
+            <p class="resumen">El Profe Nelson enseña fracciones con pizzas y sabor dominicano. En el laboratorio se corta la pizza y se comen pedazos para ver la fracción; en el modo desafío se identifican numerador y denominador para ganar puntos y desbloquear niveles.</p>
+          </div>
+          <div class="ficha-acciones"><a class="boton fuerte" href="juegos/pizza-fraccionaria/">Jugar</a></div>
+        </header>
+        <div class="hechos">
+          <div><h4>Matemáticas</h4><ul><li>Numerador y denominador</li><li>Fracción como parte de un todo</li><li>Partes iguales</li></ul></div>
+          <div><h4>Gamificación</h4><ul class="etiquetas"><li>Personaje guía</li><li>Manipulación directa</li><li>Puntos y estrellas</li><li>Niveles desbloqueables</li><li>Récord</li><li>Confeti y sonidos</li></ul></div>
+        </div>
+        <div class="clips">
+          <figure class="clip">
+            <video src="videos/pizza-fraccionaria/laboratorio.mp4" poster="videos/pizza-fraccionaria/laboratorio.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Laboratorio de pizza</b><span>Manipulación: cortar la pizza y comerse pedazos construye la fracción</span><small>12 s · <a href="videos/pizza-fraccionaria/laboratorio.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/pizza-fraccionaria/desafio.mp4" poster="videos/pizza-fraccionaria/desafio.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Desafío del Profe Nelson</b><span>Evaluación con personaje: identificar numerador y denominador suma puntos y estrellas</span><small>11 s · <a href="videos/pizza-fraccionaria/desafio.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/pizza-fraccionaria/error.mp4" poster="videos/pizza-fraccionaria/error.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Respuesta incorrecta</b><span>Retroalimentación: el profe muestra la respuesta correcta y anima a seguir</span><small>6 s · <a href="videos/pizza-fraccionaria/error.mp4" download>MP4</a></small></figcaption>
+          </figure>
+        </div>
+      </article>
 
-  <section class="game" id="laberinto-radian" style="--hue:28">
-    <header class="game-head">
-      <div>
-        <p class="eyebrow">Ángulos y radianes · Secundaria / bachillerato</p>
-        <h2>El Laberinto del Radián</h2>
-        <p class="lead">Aventura de exploración con niebla: hay que conseguir la llave con un minijuego de parejas y superar seis desafíos sobre radianes para escapar. Incluye un modo difícil con antorchas y tiempo límite.</p>
-      </div>
-      <div class="actions">
-        <a class="btn primary" href="juegos/laberinto-radian/">Jugar</a>
-        
-      </div>
-    </header>
-    <div class="facts">
-      <div><h3>Matemáticas</h3><ul><li>Definición de radián</li><li>Conversión entre grados y radianes</li><li>Ángulos notables: recto, llano, vuelta completa</li></ul></div>
-      <div><h3>Gamificación</h3><ul class="tags"><li>Narrativa con escenas</li><li>Exploración con niebla</li><li>Memoria (parejas)</li><li>Vidas y cronómetro</li><li>Récord del laberinto</li><li>Modo desbloqueable</li></ul></div>
-    </div>
-    <div class="clips">
-      
-      <figure class="clip">
-        <video src="videos/laberinto-radian/inicio.mp4" poster="videos/laberinto-radian/inicio.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Portada e historia</b><span>Narrativa: el reto se presenta como una aventura</span><small>10 s · <a href="videos/laberinto-radian/inicio.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/laberinto-radian/pregunta.mp4" poster="videos/laberinto-radian/pregunta.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Desafío correcto</b><span>Evaluación: cada pregunta acertada abre el camino</span><small>6 s · <a href="videos/laberinto-radian/pregunta.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/laberinto-radian/error.mp4" poster="videos/laberinto-radian/error.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Respuesta incorrecta</b><span>Retroalimentación: el error cuesta una vida y muestra la respuesta correcta</span><small>6 s · <a href="videos/laberinto-radian/error.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/laberinto-radian/exploracion.mp4" poster="videos/laberinto-radian/exploracion.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Explorar con niebla</b><span>Exploración: solo se ve lo cercano; hay que orientarse</span><small>5 s · <a href="videos/laberinto-radian/exploracion.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/laberinto-radian/parejas.mp4" poster="videos/laberinto-radian/parejas.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Minijuego de parejas</b><span>Memoria: emparejar conceptos para conseguir la llave</span><small>16 s · <a href="videos/laberinto-radian/parejas.mp4" download>MP4</a></small></figcaption>
-      </figure>
-    </div>
-  </section>
+      <article class="ficha" id="ficha-coco-conjuntos" style="--color:#27c9b8">
+        <header class="ficha-cab">
+          <div>
+            <span class="cinta">Conjuntos numéricos · Primaria alta / secundaria</span>
+            <h3>Coco Conjuntos</h3>
+            <p class="idea">Cada conjunto cabe dentro del siguiente.</p>
+            <p class="resumen">Juego de fusión: al juntar dos personajes iguales nace el siguiente conjunto numérico (ℕ → ℤ → ℚ → ℝ → ℂ). Las preguntas de trivia cargan energía para usar poderes, y las monedas compran fondos y accesorios.</p>
+          </div>
+          <div class="ficha-acciones"><a class="boton fuerte" href="juegos/coco-conjuntos/">Jugar</a></div>
+        </header>
+        <div class="hechos">
+          <div><h4>Matemáticas</h4><ul><li>ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ</li><li>Clasificar números en su conjunto</li><li>Racionales e irracionales con ejemplos</li></ul></div>
+          <div><h4>Gamificación</h4><ul class="etiquetas"><li>Mecánica de fusión</li><li>Trivia que da energía</li><li>Poderes</li><li>Monedas y tiendita</li><li>Personajes coleccionables</li><li>Récord personal</li></ul></div>
+        </div>
+        <div class="clips">
+          <figure class="clip">
+            <video src="videos/coco-conjuntos/fusion.mp4" poster="videos/coco-conjuntos/fusion.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Junta y crece</b><span>Juego de fusión: dos números iguales forman el siguiente conjunto (ℕ → ℤ → ℚ → ℝ → ℂ)</span><small>14 s · <a href="videos/coco-conjuntos/fusion.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/coco-conjuntos/fusion-movil.mp4" poster="videos/coco-conjuntos/fusion-movil.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Junta y crece (móvil)</b><span>La misma mecánica en el teléfono: apuntar y soltar con el dedo</span><small>14 s · <a href="videos/coco-conjuntos/fusion-movil.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/coco-conjuntos/trivia.mp4" poster="videos/coco-conjuntos/trivia.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Trivia de conjuntos</b><span>Pregunta conceptual: acertar carga energía para los poderes</span><small>6 s · <a href="videos/coco-conjuntos/trivia.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/coco-conjuntos/poder.mp4" poster="videos/coco-conjuntos/poder.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Usar un poder</b><span>Recompensa: la energía ganada pensando se gasta para despejar el tablero</span><small>6 s · <a href="videos/coco-conjuntos/poder.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/coco-conjuntos/aprender.mp4" poster="videos/coco-conjuntos/aprender.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Aprender: la familia de conjuntos</b><span>Contenido: cada personaje es un conjunto numérico con ejemplos</span><small>11 s · <a href="videos/coco-conjuntos/aprender.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/coco-conjuntos/tiendita.mp4" poster="videos/coco-conjuntos/tiendita.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Tiendita</b><span>Economía: las monedas ganadas compran fondos y accesorios</span><small>7 s · <a href="videos/coco-conjuntos/tiendita.mp4" download>MP4</a></small></figcaption>
+          </figure>
+        </div>
+      </article>
 
-  <section class="game" id="coco-conjuntos" style="--hue:160">
-    <header class="game-head">
-      <div>
-        <p class="eyebrow">Conjuntos numéricos · Primaria alta / secundaria</p>
-        <h2>Coco Conjuntos</h2>
-        <p class="lead">Juego de fusión: al juntar dos personajes iguales nace el siguiente conjunto numérico (ℕ → ℤ → ℚ → ℝ → ℂ). Las preguntas de trivia cargan energía para usar poderes, y las monedas compran fondos y accesorios.</p>
-      </div>
-      <div class="actions">
-        <a class="btn primary" href="juegos/coco-conjuntos/">Jugar</a>
-        
-      </div>
-    </header>
-    <div class="facts">
-      <div><h3>Matemáticas</h3><ul><li>ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ</li><li>Clasificar números en su conjunto</li><li>Racionales e irracionales con ejemplos</li></ul></div>
-      <div><h3>Gamificación</h3><ul class="tags"><li>Mecánica de fusión</li><li>Trivia que da energía</li><li>Poderes</li><li>Monedas y tiendita</li><li>Personajes coleccionables</li><li>Récord personal</li></ul></div>
-    </div>
-    <div class="clips">
-      
-      <figure class="clip">
-        <video src="videos/coco-conjuntos/fusion.mp4" poster="videos/coco-conjuntos/fusion.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Junta y crece</b><span>Juego de fusión: dos números iguales forman el siguiente conjunto (ℕ → ℤ → ℚ → ℝ → ℂ)</span><small>14 s · <a href="videos/coco-conjuntos/fusion.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip phone">
-        <video src="videos/coco-conjuntos/fusion-movil.mp4" poster="videos/coco-conjuntos/fusion-movil.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Junta y crece (móvil)</b><span>La misma mecánica en el teléfono: apuntar y soltar con el dedo</span><small>14 s · <a href="videos/coco-conjuntos/fusion-movil.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/coco-conjuntos/trivia.mp4" poster="videos/coco-conjuntos/trivia.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Trivia de conjuntos</b><span>Pregunta conceptual: acertar carga energía para los poderes</span><small>6 s · <a href="videos/coco-conjuntos/trivia.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/coco-conjuntos/poder.mp4" poster="videos/coco-conjuntos/poder.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Usar un poder</b><span>Recompensa: la energía ganada pensando se gasta para despejar el tablero</span><small>6 s · <a href="videos/coco-conjuntos/poder.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/coco-conjuntos/aprender.mp4" poster="videos/coco-conjuntos/aprender.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Aprender: la familia de conjuntos</b><span>Contenido: cada personaje es un conjunto numérico con ejemplos</span><small>11 s · <a href="videos/coco-conjuntos/aprender.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/coco-conjuntos/tiendita.mp4" poster="videos/coco-conjuntos/tiendita.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Tiendita</b><span>Economía: las monedas ganadas compran fondos y accesorios</span><small>7 s · <a href="videos/coco-conjuntos/tiendita.mp4" download>MP4</a></small></figcaption>
-      </figure>
-    </div>
-  </section>
+      <article class="ficha" id="ficha-laberinto-radian" style="--color:#46b8d8">
+        <header class="ficha-cab">
+          <div>
+            <span class="cinta">Ángulos y radianes · Secundaria / bachillerato</span>
+            <h3>El Laberinto del Radián</h3>
+            <p class="idea">Un radián es un radio doblado sobre el borde.</p>
+            <p class="resumen">Aventura de exploración con niebla: hay que conseguir la llave con un minijuego de parejas y superar seis desafíos sobre radianes para escapar. Incluye un modo difícil con antorchas y tiempo límite.</p>
+          </div>
+          <div class="ficha-acciones"><a class="boton fuerte" href="juegos/laberinto-radian/">Jugar</a></div>
+        </header>
+        <div class="hechos">
+          <div><h4>Matemáticas</h4><ul><li>Definición de radián</li><li>Conversión entre grados y radianes</li><li>Ángulos notables: recto, llano, vuelta completa</li></ul></div>
+          <div><h4>Gamificación</h4><ul class="etiquetas"><li>Narrativa con escenas</li><li>Exploración con niebla</li><li>Memoria (parejas)</li><li>Vidas y cronómetro</li><li>Récord del laberinto</li><li>Modo desbloqueable</li></ul></div>
+        </div>
+        <div class="clips">
+          <figure class="clip">
+            <video src="videos/laberinto-radian/inicio.mp4" poster="videos/laberinto-radian/inicio.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Portada e historia</b><span>Narrativa: el reto se presenta como una aventura</span><small>10 s · <a href="videos/laberinto-radian/inicio.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/laberinto-radian/pregunta.mp4" poster="videos/laberinto-radian/pregunta.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Desafío correcto</b><span>Evaluación: cada pregunta acertada abre el camino</span><small>6 s · <a href="videos/laberinto-radian/pregunta.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/laberinto-radian/error.mp4" poster="videos/laberinto-radian/error.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Respuesta incorrecta</b><span>Retroalimentación: el error cuesta una vida y muestra la respuesta correcta</span><small>6 s · <a href="videos/laberinto-radian/error.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/laberinto-radian/exploracion.mp4" poster="videos/laberinto-radian/exploracion.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Explorar con niebla</b><span>Exploración: solo se ve lo cercano; hay que orientarse</span><small>5 s · <a href="videos/laberinto-radian/exploracion.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/laberinto-radian/parejas.mp4" poster="videos/laberinto-radian/parejas.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Minijuego de parejas</b><span>Memoria: emparejar conceptos para conseguir la llave</span><small>16 s · <a href="videos/laberinto-radian/parejas.mp4" download>MP4</a></small></figcaption>
+          </figure>
+        </div>
+      </article>
 
-  <section class="game" id="portero-algebraico" style="--hue:330">
-    <header class="game-head">
-      <div>
-        <p class="eyebrow">Estructuras algebraicas · Bachillerato / universidad</p>
-        <h2>Portero Algebraico · UMBRAL</h2>
-        <p class="lead">Simulador 3D en primera persona: eres el portero de un club y cada cliente trae un carnet con una operación sobre un conjunto. Decides si cumple la propiedad del mundo (cerradura, grupo…). Seis mundos, de ℕ a matrices y permutaciones.</p>
-      </div>
-      <div class="actions">
-        <a class="btn primary" href="juegos/portero-algebraico/">Jugar</a>
-        
-      </div>
-    </header>
-    <div class="facts">
-      <div><h3>Matemáticas</h3><ul><li>Operaciones binarias y cerradura</li><li>Grupos sobre ℤ, ℚ y ℤₙ</li><li>Matrices y permutaciones (S₃)</li></ul></div>
-      <div><h3>Gamificación</h3><ul class="tags"><li>Mundos 3D con historia en cómic</li><li>Personajes con diálogo</li><li>Decisión con consecuencia inmediata</li><li>Explicación con contraejemplo</li><li>Estrellas por mundo</li><li>Mundos desbloqueables</li></ul></div>
-    </div>
-    <div class="clips">
-      
-      <figure class="clip">
-        <video src="videos/portero-algebraico/historia.mp4" poster="videos/portero-algebraico/historia.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Mundos e historia</b><span>Narrativa: cada mundo es una propiedad algebraica contada como un cómic</span><small>13 s · <a href="videos/portero-algebraico/historia.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/portero-algebraico/carnet.mp4" poster="videos/portero-algebraico/carnet.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Revisar el carnet</b><span>Exploración 3D: cada cliente trae una operación sobre un conjunto</span><small>10 s · <a href="videos/portero-algebraico/carnet.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/portero-algebraico/decision-correcta.mp4" poster="videos/portero-algebraico/decision-correcta.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Decidir bien</b><span>¿La operación es cerrada / forma grupo? Acertar muestra el porqué</span><small>9 s · <a href="videos/portero-algebraico/decision-correcta.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/portero-algebraico/decision-incorrecta.mp4" poster="videos/portero-algebraico/decision-incorrecta.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Equivocarse</b><span>Retroalimentación: el error se explica con un contraejemplo</span><small>10 s · <a href="videos/portero-algebraico/decision-incorrecta.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/portero-algebraico/reporte.mp4" poster="videos/portero-algebraico/reporte.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Cierre del turno</b><span>Evaluación: estrellas y repaso de cada decisión al final del mundo</span><small>12 s · <a href="videos/portero-algebraico/reporte.mp4" download>MP4</a></small></figcaption>
-      </figure>
-    </div>
-  </section>
+      <article class="ficha" id="ficha-puente-de-cristal" style="--color:#3b8fe8">
+        <header class="ficha-cab">
+          <div>
+            <span class="cinta">Inecuaciones y porcentajes · Secundaria · hecho con Google AI Studio</span>
+            <h3>Puente de Cristal</h3>
+            <p class="idea">Haz la cuenta antes de saltar.</p>
+            <p class="resumen">Trivia 3D tensa: para cruzar el puente hay que saltar al cristal de la respuesta correcta. El modo aventura trae 30 niveles sobre sueldos, comisiones e inecuaciones; el modo libre puede generar preguntas con IA.</p>
+          </div>
+          <div class="ficha-acciones"><a class="boton fuerte" href="juegos/puente-de-cristal/">Jugar</a></div>
+        </header>
+        <div class="hechos">
+          <div><h4>Matemáticas</h4><ul><li>Porcentajes</li><li>Planteamiento de inecuaciones</li><li>Comparar ofertas con inecuaciones</li></ul></div>
+          <div><h4>Gamificación</h4><ul class="etiquetas"><li>Salto con consecuencia inmediata</li><li>Vidas y racha multiplicadora</li><li>30 niveles de aventura</li><li>Monedas, niveles y tienda</li><li>Multijugador</li><li>Editor de niveles</li></ul></div>
+        </div>
+        <div class="clips">
+          <figure class="clip">
+            <video src="videos/puente-de-cristal/menu.mp4" poster="videos/puente-de-cristal/menu.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Menú y modo aventura</b><span>Progresión: 30 niveles en tres semanas de contenido (inecuaciones y porcentajes)</span><small>8 s · <a href="videos/puente-de-cristal/menu.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/puente-de-cristal/cruzar.mp4" poster="videos/puente-de-cristal/cruzar.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Cruzar el puente</b><span>Cada respuesta es un salto: el cristal correcto aguanta y la racha multiplica</span><small>14 s · <a href="videos/puente-de-cristal/cruzar.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/puente-de-cristal/caida.mp4" poster="videos/puente-de-cristal/caida.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Cristal equivocado</b><span>Consecuencia inmediata: la respuesta incorrecta rompe el cristal y cuesta una vida</span><small>8 s · <a href="videos/puente-de-cristal/caida.mp4" download>MP4</a></small></figcaption>
+          </figure>
+        </div>
+      </article>
 
-  <section class="game" id="algebra-engine" style="--hue:262">
-    <header class="game-head">
-      <div>
-        <p class="eyebrow">Homomorfismos de grupos · Universidad</p>
-        <h2>The Algebra Engine</h2>
-        <p class="lead">Campaña de puzles en una fábrica nocturna: eres el técnico que repara ocho máquinas que traducen entre grupos. Cada máquina se prueba experimentando (palancas, garras, probadores) y el juego reconoce el tipo de homomorfismo y da contraejemplos concretos.</p>
-      </div>
-      <div class="actions">
-        <a class="btn primary" href="juegos/algebra-engine/">Jugar</a>
-        <a class="btn" href="https://github.com/cley26k/algebra-engine">Código</a>
-      </div>
-    </header>
-    <div class="facts">
-      <div><h3>Matemáticas</h3><ul><li>Homomorfismos entre grupos cíclicos</li><li>Núcleo, inyectividad y sobreyectividad</li><li>Isomorfismos y contraejemplos</li></ul></div>
-      <div><h3>Gamificación</h3><ul class="tags"><li>Cómic por máquina</li><li>Puzles experimentales</li><li>Pistas graduadas en tres niveles</li><li>Veredicto con contraejemplo</li><li>Mapa de máquinas reparadas</li><li>Progreso guardado</li></ul></div>
-    </div>
-    <div class="clips">
-      
-      <figure class="clip">
-        <video src="videos/algebra-engine/comic.mp4" poster="videos/algebra-engine/comic.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Portada y cómic</b><span>Narrativa: el técnico del turno de noche llega a la fábrica de estructuras</span><small>12 s · <a href="videos/algebra-engine/comic.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/algebra-engine/garra.mp4" poster="videos/algebra-engine/garra.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Taller de inspección</b><span>Experimentar: la palanca prueba la máquina ×2 y la lupa muestra por qué no es inyectiva</span><small>12 s · <a href="videos/algebra-engine/garra.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/algebra-engine/clasificacion.mp4" poster="videos/algebra-engine/clasificacion.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Planta de clasificación</b><span>Contraejemplo: el probador encuentra el par que rompe la operación</span><small>14 s · <a href="videos/algebra-engine/clasificacion.mp4" download>MP4</a></small></figcaption>
-      </figure>
-    </div>
-  </section>
+      <article class="ficha" id="ficha-mathrally" style="--color:#e25cc0">
+        <header class="ficha-cab">
+          <div>
+            <span class="cinta">Funciones · Secundaria</span>
+            <h3>MathRally · Misión Élara</h3>
+            <p class="idea">A cada entrada, una sola salida.</p>
+            <p class="resumen">Rally por equipos en el centro escolar: cada estación física tiene un código QR que abre desafíos sobre funciones. El Dr. Leo Estrella guía la misión y el docente sigue el progreso de cada equipo en tiempo real.</p>
+          </div>
+          <div class="ficha-acciones"><a class="boton fuerte" href="juegos/mathrally/">Jugar</a><a class="boton" href="https://github.com/cley26k/Rally">Código</a></div>
+        </header>
+        <div class="hechos">
+          <div><h4>Matemáticas</h4><ul><li>Relación y función</li><li>Dominio, rango y diagrama sagital</li><li>Simplificar y evaluar funciones</li></ul></div>
+          <div><h4>Gamificación</h4><ul class="etiquetas"><li>Narrativa espacial</li><li>Estaciones físicas con QR</li><li>Trabajo en equipo</li><li>Puntos e intentos limitados</li><li>Pistas</li><li>Panel del docente en vivo</li></ul></div>
+        </div>
+        <div class="clips">
+          <figure class="clip">
+            <video src="videos/mathrally/mision.mp4" poster="videos/mathrally/mision.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Unirse a la misión</b><span>Narrativa y trabajo en equipo: el Dr. Leo encarga la misión y el mapa marca la estación activa</span><small>12 s · <a href="videos/mathrally/mision.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/mathrally/estacion.mp4" poster="videos/mathrally/estacion.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Desafío en una estación</b><span>Estaciones físicas con QR: cada acierto suma puntos al equipo</span><small>16 s · <a href="videos/mathrally/estacion.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/mathrally/pista.mp4" poster="videos/mathrally/pista.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Pista y segundo intento</b><span>Retroalimentación: el error resta un intento y la pista orienta sin dar la respuesta</span><small>12 s · <a href="videos/mathrally/pista.mp4" download>MP4</a></small></figcaption>
+          </figure>
+        </div>
+      </article>
 
-  <section class="game" id="residuo" style="--hue:28">
-    <header class="game-head">
-      <div>
-        <p class="eyebrow">Aritmética modular · Secundaria / bachillerato</p>
-        <h2>RESIDUO: El Valle de Doce</h2>
-        <p class="lead">Aventura 3D de mundo abierto: al norte del arco la materia obedece a la aritmética de doce. Imre explora el valle, habla con sus habitantes y resuelve cinco misiones con sumas que dan la vuelta, piedras sin inverso y fracciones que no existen.</p>
-      </div>
-      <div class="actions">
-        <a class="btn primary" href="juegos/residuo/">Jugar</a>
-        
-      </div>
-    </header>
-    <div class="facts">
-      <div><h3>Matemáticas</h3><ul><li>Restos al dividir entre 12 (ℤ/12)</li><li>Suma y producto modulares</li><li>Inversos y divisores de cero</li></ul></div>
-      <div><h3>Gamificación</h3><ul class="tags"><li>Mundo 3D explorable</li><li>Personajes y misiones</li><li>Descubrir la regla jugando</li><li>Cuaderno de observaciones</li><li>Sellos y semillas coleccionables</li><li>Música que cambia por zona</li></ul></div>
-    </div>
-    <div class="clips">
-      
-      <figure class="clip">
-        <video src="videos/residuo/mira.mp4" poster="videos/residuo/mira.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Llegada al valle</b><span>Narrativa: Mira explica que al norte del arco todo llega como su resto entre 12</span><small>15 s · <a href="videos/residuo/mira.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/residuo/umbral.mp4" poster="videos/residuo/umbral.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Cruzar el umbral</b><span>Descubrir la regla: al cruzar, 25 → 1 y 36 se vuelve limo (múltiplo de 12)</span><small>9 s · <a href="videos/residuo/umbral.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/residuo/molino.mp4" poster="videos/residuo/molino.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>La rueda del molino</b><span>Suma modular: 9 ⊕ 1 = 10 y 10 ⊕ 2 = 0, la rueda vuelve al reposo</span><small>14 s · <a href="videos/residuo/molino.mp4" download>MP4</a></small></figcaption>
-      </figure>
-    </div>
-  </section>
+      <article class="ficha" id="ficha-sudoku-academy" style="--color:#3f6fe0">
+        <header class="ficha-cab">
+          <div>
+            <span class="cinta">Lógica y razonamiento deductivo · Secundaria en adelante</span>
+            <h3>Sudoku Academy</h3>
+            <p class="idea">Tacha lo imposible hasta que solo quede uno.</p>
+            <p class="resumen">Entrenador de técnicas de sudoku al estilo de una app de idiomas: lecciones animadas, práctica ilimitada verificada por un motor lógico, sudokus completos, contrarreloj y una liga semanal en línea.</p>
+          </div>
+          <div class="ficha-acciones"><a class="boton fuerte" href="juegos/sudoku-academy/">Jugar</a><a class="boton" href="https://github.com/cley26k/sudoku-academy">Código</a></div>
+        </header>
+        <div class="hechos">
+          <div><h4>Matemáticas</h4><ul><li>Deducción y eliminación de casos</li><li>26 técnicas: de los singles a cadenas y coloreado</li><li>Razonamiento con conjuntos de candidatos</li></ul></div>
+          <div><h4>Gamificación</h4><ul class="etiquetas"><li>Ruta de unidades desbloqueables</li><li>XP, niveles, racha y gemas</li><li>Misiones diarias y logros</li><li>Contrarreloj con vidas</li><li>Liga semanal con ascensos</li><li>Retroalimentación y pistas graduadas</li></ul></div>
+        </div>
+        <div class="clips">
+          <figure class="clip">
+            <video src="videos/sudoku-academy/ruta.mp4" poster="videos/sudoku-academy/ruta.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Ruta de aprendizaje</b><span>Progresión: unidades, lecciones desbloqueables, racha y misiones diarias</span><small>9 s · <a href="videos/sudoku-academy/ruta.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/sudoku-academy/leccion-concepto.mp4" poster="videos/sudoku-academy/leccion-concepto.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Lección animada</b><span>Explicación visual paso a paso de una técnica (X-Wing)</span><small>16 s · <a href="videos/sudoku-academy/leccion-concepto.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/sudoku-academy/acierto.mp4" poster="videos/sudoku-academy/acierto.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Deducir y acertar</b><span>Práctica: colocar el número correcto da XP y una celebración</span><small>6 s · <a href="videos/sudoku-academy/acierto.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/sudoku-academy/error-pista.mp4" poster="videos/sudoku-academy/error-pista.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Error y pista</b><span>Retroalimentación: el tutor explica el error y ofrece pistas graduadas</span><small>11 s · <a href="videos/sudoku-academy/error-pista.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/sudoku-academy/eliminar.mp4" poster="videos/sudoku-academy/eliminar.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Tachar candidatos</b><span>Técnicas avanzadas: eliminar candidatos con un patrón (bloqueo caja-línea)</span><small>7 s · <a href="videos/sudoku-academy/eliminar.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/sudoku-academy/sudoku.mp4" poster="videos/sudoku-academy/sudoku.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Sudoku completo</b><span>Juego libre: notas, pistas que se aplican y cronómetro</span><small>15 s · <a href="videos/sudoku-academy/sudoku.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/sudoku-academy/contrarreloj.mp4" poster="videos/sudoku-academy/contrarreloj.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Contrarreloj</b><span>Reto con tiempo y vidas: 3 minutos para resolver todo lo posible</span><small>14 s · <a href="videos/sudoku-academy/contrarreloj.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/sudoku-academy/subida-nivel.mp4" poster="videos/sudoku-academy/subida-nivel.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Subir de nivel</b><span>Recompensa: celebración al subir de nivel, con gemas</span><small>6 s · <a href="videos/sudoku-academy/subida-nivel.mp4" download>MP4</a></small></figcaption>
+          </figure>
+        </div>
+      </article>
 
-  <section class="game" id="mathrally" style="--hue:160">
-    <header class="game-head">
-      <div>
-        <p class="eyebrow">Funciones · Secundaria</p>
-        <h2>MathRally · Misión Élara</h2>
-        <p class="lead">Rally por equipos en el centro escolar: cada estación física tiene un código QR que abre desafíos sobre funciones. El Dr. Leo Estrella guía la misión y el docente sigue el progreso de cada equipo en tiempo real.</p>
-      </div>
-      <div class="actions">
-        <a class="btn primary" href="juegos/mathrally/">Jugar</a>
-        <a class="btn" href="https://github.com/cley26k/Rally">Código</a>
-      </div>
-    </header>
-    <div class="facts">
-      <div><h3>Matemáticas</h3><ul><li>Relación y función</li><li>Dominio, rango y diagrama sagital</li><li>Simplificar y evaluar funciones</li></ul></div>
-      <div><h3>Gamificación</h3><ul class="tags"><li>Narrativa espacial</li><li>Estaciones físicas con QR</li><li>Trabajo en equipo</li><li>Puntos e intentos limitados</li><li>Pistas</li><li>Panel del docente en vivo</li></ul></div>
-    </div>
-    <div class="clips">
-      
-      <figure class="clip phone">
-        <video src="videos/mathrally/mision.mp4" poster="videos/mathrally/mision.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Unirse a la misión</b><span>Narrativa y trabajo en equipo: el Dr. Leo encarga la misión y el mapa marca la estación activa</span><small>12 s · <a href="videos/mathrally/mision.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip phone">
-        <video src="videos/mathrally/estacion.mp4" poster="videos/mathrally/estacion.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Desafío en una estación</b><span>Estaciones físicas con QR: cada acierto suma puntos al equipo</span><small>16 s · <a href="videos/mathrally/estacion.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip phone">
-        <video src="videos/mathrally/pista.mp4" poster="videos/mathrally/pista.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Pista y segundo intento</b><span>Retroalimentación: el error resta un intento y la pista orienta sin dar la respuesta</span><small>12 s · <a href="videos/mathrally/pista.mp4" download>MP4</a></small></figcaption>
-      </figure>
-    </div>
-  </section>
+      <article class="ficha" id="ficha-residuo" style="--color:#e2606f">
+        <header class="ficha-cab">
+          <div>
+            <span class="cinta">Aritmética modular · Secundaria / bachillerato</span>
+            <h3>RESIDUO: El Valle de Doce</h3>
+            <p class="idea">En el Valle de Doce, 9 + 3 = 0.</p>
+            <p class="resumen">Aventura 3D de mundo abierto: al norte del arco la materia obedece a la aritmética de doce. Imre explora el valle, habla con sus habitantes y resuelve cinco misiones con sumas que dan la vuelta, piedras sin inverso y fracciones que no existen.</p>
+          </div>
+          <div class="ficha-acciones"><a class="boton fuerte" href="juegos/residuo/">Jugar</a></div>
+        </header>
+        <div class="hechos">
+          <div><h4>Matemáticas</h4><ul><li>Restos al dividir entre 12 (ℤ/12)</li><li>Suma y producto modulares</li><li>Inversos y divisores de cero</li></ul></div>
+          <div><h4>Gamificación</h4><ul class="etiquetas"><li>Mundo 3D explorable</li><li>Personajes y misiones</li><li>Descubrir la regla jugando</li><li>Cuaderno de observaciones</li><li>Sellos y semillas coleccionables</li><li>Música que cambia por zona</li></ul></div>
+        </div>
+        <div class="clips">
+          <figure class="clip">
+            <video src="videos/residuo/mira.mp4" poster="videos/residuo/mira.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Llegada al valle</b><span>Narrativa: Mira explica que al norte del arco todo llega como su resto entre 12</span><small>15 s · <a href="videos/residuo/mira.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/residuo/umbral.mp4" poster="videos/residuo/umbral.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Cruzar el umbral</b><span>Descubrir la regla: al cruzar, 25 → 1 y 36 se vuelve limo (múltiplo de 12)</span><small>9 s · <a href="videos/residuo/umbral.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/residuo/molino.mp4" poster="videos/residuo/molino.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>La rueda del molino</b><span>Suma modular: 9 ⊕ 1 = 10 y 10 ⊕ 2 = 0, la rueda vuelve al reposo</span><small>14 s · <a href="videos/residuo/molino.mp4" download>MP4</a></small></figcaption>
+          </figure>
+        </div>
+      </article>
 
-  <section class="game" id="puente-de-cristal" style="--hue:330">
-    <header class="game-head">
-      <div>
-        <p class="eyebrow">Inecuaciones y porcentajes · Secundaria · hecho con Google AI Studio</p>
-        <h2>Puente de Cristal</h2>
-        <p class="lead">Trivia 3D tensa: para cruzar el puente hay que saltar al cristal de la respuesta correcta. El modo aventura trae 30 niveles sobre sueldos, comisiones e inecuaciones; el modo libre puede generar preguntas con IA.</p>
-      </div>
-      <div class="actions">
-        <a class="btn primary" href="juegos/puente-de-cristal/">Jugar</a>
-        
-      </div>
-    </header>
-    <div class="facts">
-      <div><h3>Matemáticas</h3><ul><li>Porcentajes</li><li>Planteamiento de inecuaciones</li><li>Comparar ofertas con inecuaciones</li></ul></div>
-      <div><h3>Gamificación</h3><ul class="tags"><li>Salto con consecuencia inmediata</li><li>Vidas y racha multiplicadora</li><li>30 niveles de aventura</li><li>Monedas, niveles y tienda</li><li>Multijugador</li><li>Editor de niveles</li></ul></div>
-    </div>
-    <div class="clips">
-      
-      <figure class="clip">
-        <video src="videos/puente-de-cristal/menu.mp4" poster="videos/puente-de-cristal/menu.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Menú y modo aventura</b><span>Progresión: 30 niveles en tres semanas de contenido (inecuaciones y porcentajes)</span><small>8 s · <a href="videos/puente-de-cristal/menu.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/puente-de-cristal/cruzar.mp4" poster="videos/puente-de-cristal/cruzar.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Cruzar el puente</b><span>Cada respuesta es un salto: el cristal correcto aguanta y la racha multiplica</span><small>14 s · <a href="videos/puente-de-cristal/cruzar.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/puente-de-cristal/caida.mp4" poster="videos/puente-de-cristal/caida.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Cristal equivocado</b><span>Consecuencia inmediata: la respuesta incorrecta rompe el cristal y cuesta una vida</span><small>8 s · <a href="videos/puente-de-cristal/caida.mp4" download>MP4</a></small></figcaption>
-      </figure>
-    </div>
-  </section>
+      <article class="ficha" id="ficha-portero-algebraico" style="--color:#d9379f">
+        <header class="ficha-cab">
+          <div>
+            <span class="cinta">Estructuras algebraicas · Bachillerato / universidad</span>
+            <h3>Portero Algebraico · UMBRAL</h3>
+            <p class="idea">Sin neutro no hay grupo.</p>
+            <p class="resumen">Simulador 3D en primera persona: eres el portero de un club y cada cliente trae un carnet con una operación sobre un conjunto. Decides si cumple la propiedad del mundo (cerradura, grupo…). Seis mundos, de ℕ a matrices y permutaciones.</p>
+          </div>
+          <div class="ficha-acciones"><a class="boton fuerte" href="juegos/portero-algebraico/">Jugar</a></div>
+        </header>
+        <div class="hechos">
+          <div><h4>Matemáticas</h4><ul><li>Operaciones binarias y cerradura</li><li>Grupos sobre ℤ, ℚ y ℤₙ</li><li>Matrices y permutaciones (S₃)</li></ul></div>
+          <div><h4>Gamificación</h4><ul class="etiquetas"><li>Mundos 3D con historia en cómic</li><li>Personajes con diálogo</li><li>Decisión con consecuencia inmediata</li><li>Explicación con contraejemplo</li><li>Estrellas por mundo</li><li>Mundos desbloqueables</li></ul></div>
+        </div>
+        <div class="clips">
+          <figure class="clip">
+            <video src="videos/portero-algebraico/historia.mp4" poster="videos/portero-algebraico/historia.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Mundos e historia</b><span>Narrativa: cada mundo es una propiedad algebraica contada como un cómic</span><small>13 s · <a href="videos/portero-algebraico/historia.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/portero-algebraico/carnet.mp4" poster="videos/portero-algebraico/carnet.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Revisar el carnet</b><span>Exploración 3D: cada cliente trae una operación sobre un conjunto</span><small>10 s · <a href="videos/portero-algebraico/carnet.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/portero-algebraico/decision-correcta.mp4" poster="videos/portero-algebraico/decision-correcta.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Decidir bien</b><span>¿La operación es cerrada / forma grupo? Acertar muestra el porqué</span><small>9 s · <a href="videos/portero-algebraico/decision-correcta.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/portero-algebraico/decision-incorrecta.mp4" poster="videos/portero-algebraico/decision-incorrecta.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Equivocarse</b><span>Retroalimentación: el error se explica con un contraejemplo</span><small>10 s · <a href="videos/portero-algebraico/decision-incorrecta.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/portero-algebraico/reporte.mp4" poster="videos/portero-algebraico/reporte.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Cierre del turno</b><span>Evaluación: estrellas y repaso de cada decisión al final del mundo</span><small>12 s · <a href="videos/portero-algebraico/reporte.mp4" download>MP4</a></small></figcaption>
+          </figure>
+        </div>
+      </article>
 
-  <section class="game" id="pizza-fraccionaria" style="--hue:262">
-    <header class="game-head">
-      <div>
-        <p class="eyebrow">Fracciones propias · Primaria · hecho con Google AI Studio</p>
-        <h2>Pizza Fraccionaria</h2>
-        <p class="lead">El Profe Nelson enseña fracciones con pizzas y sabor dominicano. En el laboratorio se corta la pizza y se comen pedazos para ver la fracción; en el modo desafío se identifican numerador y denominador para ganar puntos y desbloquear niveles.</p>
-      </div>
-      <div class="actions">
-        <a class="btn primary" href="juegos/pizza-fraccionaria/">Jugar</a>
-        
-      </div>
-    </header>
-    <div class="facts">
-      <div><h3>Matemáticas</h3><ul><li>Numerador y denominador</li><li>Fracción como parte de un todo</li><li>Partes iguales</li></ul></div>
-      <div><h3>Gamificación</h3><ul class="tags"><li>Personaje guía</li><li>Manipulación directa</li><li>Puntos y estrellas</li><li>Niveles desbloqueables</li><li>Récord</li><li>Confeti y sonidos</li></ul></div>
-    </div>
-    <div class="clips">
-      
-      <figure class="clip">
-        <video src="videos/pizza-fraccionaria/laboratorio.mp4" poster="videos/pizza-fraccionaria/laboratorio.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Laboratorio de pizza</b><span>Manipulación: cortar la pizza y comerse pedazos construye la fracción</span><small>12 s · <a href="videos/pizza-fraccionaria/laboratorio.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/pizza-fraccionaria/desafio.mp4" poster="videos/pizza-fraccionaria/desafio.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Desafío del Profe Nelson</b><span>Evaluación con personaje: identificar numerador y denominador suma puntos y estrellas</span><small>11 s · <a href="videos/pizza-fraccionaria/desafio.mp4" download>MP4</a></small></figcaption>
-      </figure>
-      <figure class="clip">
-        <video src="videos/pizza-fraccionaria/error.mp4" poster="videos/pizza-fraccionaria/error.jpg" preload="none" muted loop playsinline controls></video>
-        <figcaption><b>Respuesta incorrecta</b><span>Retroalimentación: el profe muestra la respuesta correcta y anima a seguir</span><small>6 s · <a href="videos/pizza-fraccionaria/error.mp4" download>MP4</a></small></figcaption>
-      </figure>
+      <article class="ficha" id="ficha-algebra-engine" style="--color:#1fb98a">
+        <header class="ficha-cab">
+          <div>
+            <span class="cinta">Homomorfismos de grupos · Universidad</span>
+            <h3>The Algebra Engine</h3>
+            <p class="idea">El núcleo es todo lo que va a dar a cero.</p>
+            <p class="resumen">Campaña de puzles en una fábrica nocturna: eres el técnico que repara ocho máquinas que traducen entre grupos. Cada máquina se prueba experimentando (palancas, garras, probadores) y el juego reconoce el tipo de homomorfismo y da contraejemplos concretos.</p>
+          </div>
+          <div class="ficha-acciones"><a class="boton fuerte" href="juegos/algebra-engine/">Jugar</a><a class="boton" href="https://github.com/cley26k/algebra-engine">Código</a></div>
+        </header>
+        <div class="hechos">
+          <div><h4>Matemáticas</h4><ul><li>Homomorfismos entre grupos cíclicos</li><li>Núcleo, inyectividad y sobreyectividad</li><li>Isomorfismos y contraejemplos</li></ul></div>
+          <div><h4>Gamificación</h4><ul class="etiquetas"><li>Cómic por máquina</li><li>Puzles experimentales</li><li>Pistas graduadas en tres niveles</li><li>Veredicto con contraejemplo</li><li>Mapa de máquinas reparadas</li><li>Progreso guardado</li></ul></div>
+        </div>
+        <div class="clips">
+          <figure class="clip">
+            <video src="videos/algebra-engine/comic.mp4" poster="videos/algebra-engine/comic.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Portada y cómic</b><span>Narrativa: el técnico del turno de noche llega a la fábrica de estructuras</span><small>12 s · <a href="videos/algebra-engine/comic.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/algebra-engine/garra.mp4" poster="videos/algebra-engine/garra.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Taller de inspección</b><span>Experimentar: la palanca prueba la máquina ×2 y la lupa muestra por qué no es inyectiva</span><small>12 s · <a href="videos/algebra-engine/garra.mp4" download>MP4</a></small></figcaption>
+          </figure>
+          <figure class="clip">
+            <video src="videos/algebra-engine/clasificacion.mp4" poster="videos/algebra-engine/clasificacion.jpg" preload="none" muted loop playsinline controls></video>
+            <figcaption><b>Planta de clasificación</b><span>Contraejemplo: el probador encuentra el par que rompe la operación</span><small>14 s · <a href="videos/algebra-engine/clasificacion.mp4" download>MP4</a></small></figcaption>
+          </figure>
+        </div>
+      </article>
+      <footer class="pie">La historia de Cero es original y se dibuja por código en un canvas, con GSAP y Lenis. Los clips se generan con <code>npm run grabar</code> y esta página con <code>npm run galeria</code>.</footer>
     </div>
   </section>
-  <footer>Los clips se generan con <code>npm run grabar</code> (Playwright + ffmpeg) y esta página con <code>npm run galeria</code>.</footer>
 </main>
-<script>
-// Los clips se reproducen solos al verse en pantalla (silenciados) y se pausan al salir.
-const io = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause(); }), { threshold: .6 });
-document.querySelectorAll('video').forEach(v => io.observe(v));
-</script>
+<script src="sitio/vendor/gsap.min.js"></script>
+<script src="sitio/vendor/ScrollTrigger.min.js"></script>
+<script src="sitio/vendor/SplitText.min.js"></script>
+<script src="sitio/vendor/lenis.min.js"></script>
+<script src="sitio/tinta.js"></script>
+<script src="sitio/cero.js"></script>
+<script src="sitio/escenas.js"></script>
+<script src="sitio/historia.js"></script>
 </body>
 </html>
