@@ -78,7 +78,8 @@
   });
 
   const FOCO = K.FOCO;
-  let activo = null, vistoAct = -1, medias = [], ultimoT = performance.now();
+  let activo = null, vistoAct = -1, medias = [], ultimoT = performance.now(), yPrevio = window.scrollY;
+  K.Sonido.iniciar();
   const t0 = performance.now();
 
   function capituloEn(y) {
@@ -93,10 +94,12 @@
     raiz.classList.toggle('ya-bajo', y > 40);
     const s = capituloEn(y);
     const u = K.clamp((y - s._top) / s._h);
+    K.Sonido.avance(s.dataset.id, u, K.clamp(Math.abs(y - yPrevio) / Math.max(1, dt) / 6));
+    yPrevio = y;
     const fin = caps[caps.length - 1];
     const tapado = y > fin._top + fin._h + H * 0.98;
     raiz.classList.toggle('sin-lienzo', tapado);
-    if (tapado) { if (activo) parar(activo); return; }
+    if (tapado) { if (activo) parar(activo); K.Sonido.silenciar(); return; }
 
     pintar(c, lienzo.width, lienzo.height, s.dataset.id, u, (ahora - t0) / 1000, (ahora - t0) / 1000);
 

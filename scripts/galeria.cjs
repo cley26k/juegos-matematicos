@@ -79,6 +79,7 @@ const html = `<!doctype html>
 </head>
 <body>
 <a class="salto" href="#archivo">Saltar a los juegos ↓</a>
+<button class="sonido" type="button" aria-pressed="false"><span aria-hidden="true">♪</span> <b>Activar sonido</b></button>
 <canvas id="lienzo" aria-hidden="true"></canvas>
 <nav class="carril" aria-label="Capítulos"><span class="carril-pista" aria-hidden="true"><span class="carril-barra"></span></span><ol>${carril}</ol></nav>
 <div class="desliza" aria-hidden="true">Desliza</div>
@@ -95,7 +96,7 @@ const html = `<!doctype html>
         <ul class="indice">${orden.map(g => `<li><a href="#ficha-${g.id}">${esc(g.titulo)}</a></li>`).join('')}</ul>
       </header>
 ${fichas}
-      <footer class="pie">La historia de Cero es original y se dibuja por código en un canvas, con GSAP y Lenis. Los clips se generan con <code>npm run grabar</code> y esta página con <code>npm run galeria</code>.</footer>
+      <footer class="pie">La historia de Cero es original y se dibuja por código en un canvas, con GSAP y Lenis; la música y los efectos se sintetizan con Web Audio. Los clips se generan con <code>npm run grabar</code> y esta página con <code>npm run galeria</code>.</footer>
     </div>
   </section>
 </main>
@@ -106,6 +107,7 @@ ${fichas}
 <script src="sitio/tinta.js"></script>
 <script src="sitio/cero.js"></script>
 <script src="sitio/escenas.js"></script>
+<script src="sitio/sonido.js"></script>
 <script src="sitio/historia.js"></script>
 </body>
 </html>

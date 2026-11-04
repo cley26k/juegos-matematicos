@@ -13,6 +13,7 @@
 </head>
 <body>
 <a class="salto" href="#archivo">Saltar a los juegos ↓</a>
+<button class="sonido" type="button" aria-pressed="false"><span aria-hidden="true">♪</span> <b>Activar sonido</b></button>
 <canvas id="lienzo" aria-hidden="true"></canvas>
 <nav class="carril" aria-label="Capítulos"><span class="carril-pista" aria-hidden="true"><span class="carril-barra"></span></span><ol><li><a href="#cap-prologo" aria-label="Prólogo">0</a></li><li><a href="#cap-pizza-fraccionaria" aria-label="Pizza Fraccionaria">1</a></li><li><a href="#cap-coco-conjuntos" aria-label="Coco Conjuntos">2</a></li><li><a href="#cap-laberinto-radian" aria-label="El Laberinto del Radián">3</a></li><li><a href="#cap-puente-de-cristal" aria-label="Puente de Cristal">4</a></li><li><a href="#cap-mathrally" aria-label="MathRally · Misión Élara">5</a></li><li><a href="#cap-sudoku-academy" aria-label="Sudoku Academy">6</a></li><li><a href="#cap-residuo" aria-label="RESIDUO: El Valle de Doce">7</a></li><li><a href="#cap-portero-algebraico" aria-label="Portero Algebraico · UMBRAL">8</a></li><li><a href="#cap-algebra-engine" aria-label="The Algebra Engine">9</a></li><li><a href="#cap-final" aria-label="Final">F</a></li></ol></nav>
 <div class="desliza" aria-hidden="true">Desliza</div>
@@ -495,7 +496,7 @@
           </figure>
         </div>
       </article>
-      <footer class="pie">La historia de Cero es original y se dibuja por código en un canvas, con GSAP y Lenis. Los clips se generan con <code>npm run grabar</code> y esta página con <code>npm run galeria</code>.</footer>
+      <footer class="pie">La historia de Cero es original y se dibuja por código en un canvas, con GSAP y Lenis; la música y los efectos se sintetizan con Web Audio. Los clips se generan con <code>npm run grabar</code> y esta página con <code>npm run galeria</code>.</footer>
     </div>
   </section>
 </main>
@@ -506,6 +507,7 @@
 <script src="sitio/tinta.js"></script>
 <script src="sitio/cero.js"></script>
 <script src="sitio/escenas.js"></script>
+<script src="sitio/sonido.js"></script>
 <script src="sitio/historia.js"></script>
 </body>
 </html>
