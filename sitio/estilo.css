@@ -53,7 +53,12 @@ a { color: inherit; }
 
 /* Portal: el clip real del juego dentro de una viñeta. */
 .portal { margin: 18px 0 0; }
-.portal-marco { position: relative; background: #000; border: 4px solid var(--papel); }
+.portal-marco { position: relative; background: #000; border: 4px solid var(--papel); cursor: pointer; }
+.portal-marco::after, .clip::after { content: "▶ Pasa el ratón para verlo"; position: absolute; left: 50%; top: 50%; translate: -50% -50%; background: var(--tinta); color: #fff; font: 800 .82rem var(--texto); padding: 7px 13px; border: 2px solid #fff; pointer-events: none; transition: opacity .2s; white-space: nowrap; }
+.clip { position: relative; }
+.clip::after { top: 30%; }
+.sonando::after { opacity: 0; }
+@media (hover: none) { .portal-marco::after, .clip::after { content: "▶ Toca para verlo"; } }
 .portal video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
 .portal-num { font: 400 .8rem var(--titulo); letter-spacing: .08em; }
 .portal h3 { font-size: clamp(1.25rem, 2.3vw, 2.05rem); line-height: 1.12; margin: 8px 0 6px; }

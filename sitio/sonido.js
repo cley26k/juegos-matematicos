@@ -15,7 +15,7 @@
     fabrica: { k: [0, 6, 8, 11], s: [4, 12, 15], h: [1, 3, 5, 7, 9, 11, 13, 15] },
   };
   const TEMAS = {
-    prologo: { bpm: 76, raiz: 57, escala: 'menor', acordes: [0, 5, 3, 4], lead: 'piano', arp: 'lento', voz: 'piano', bat: 'suave', amb: { tipo: 'highpass', f: 2600, g: 0.03 } },
+    prologo: { bpm: 76, raiz: 57, escala: 'menor', acordes: [0, 5, 3, 4], lead: 'piano', arp: 'lento', voz: 'piano', bat: 'suave', amb: { tipo: 'bandpass', f: 1500, g: 0.012 } },
     'pizza-fraccionaria': { bpm: 126, raiz: 60, escala: 'mayor', acordes: [0, 3, 4, 0], lead: 'marimba', arp: 'salta', voz: 'marimba', bat: 'paso' },
     'coco-conjuntos': { bpm: 108, raiz: 53, escala: 'mayor', acordes: [0, 4, 5, 3], lead: 'campana', arp: 'sube', voz: 'pulso', bat: 'suave', amb: { tipo: 'lowpass', f: 650, g: 0.07, ola: 0.12 } },
     'laberinto-radian': { bpm: 80, raiz: 50, escala: 'armonica', acordes: [0, 5, 0, 4], lead: 'campana', arp: 'lento', voz: 'campana', amb: { tipo: 'lowpass', f: 240, g: 0.1, ola: 0.08 } },
@@ -205,23 +205,19 @@
       if (estado.prox < ctx.currentTime) estado.prox = ctx.currentTime + 0.03;
       while (estado.prox < hasta) {
         tocarPaso(T, estado.paso, estado.prox, seg);
-        const s = estado.paso % 2 ? 0.93 : 1.07; // leve swing, menos mecánico
+        const s = T.bpm < 110 ? 1 : estado.paso % 2 ? 0.95 : 1.05; // leve swing solo en los temas rápidos
         estado.prox += seg * s; estado.paso++;
       }
     }
 
-    // Ambiente: ruido filtrado continuo (lluvia, olas, viento, zumbido) y viento ligado a la velocidad del scroll.
+    // Ambiente: ruido filtrado continuo (lluvia, olas, viento, zumbido).
     const ambS = ctx.createBufferSource(); ambS.buffer = ruidoBuf; ambS.loop = true;
     const ambF = ctx.createBiquadFilter(); const ambG = ctx.createGain(); ambG.gain.value = 0;
     const ola = ctx.createGain(); ola.gain.value = 0; const lfo = ctx.createOscillator(); lfo.frequency.value = 0.14;
     lfo.connect(ola); ola.connect(ambG.gain); lfo.start();
     ambS.connect(ambF); ambF.connect(ambG); ambG.connect(limite); ambS.start();
-    const vieS = ctx.createBufferSource(); vieS.buffer = ruidoBuf; vieS.loop = true;
-    const vieF = ctx.createBiquadFilter(); vieF.type = 'bandpass'; vieF.frequency.value = 700; vieF.Q.value = 0.7;
-    const vieG = ctx.createGain(); vieG.gain.value = 0;
-    vieS.connect(vieF); vieF.connect(vieG); vieG.connect(limite); vieS.start();
 
-    let vientoAct = 0, volAct = 1;
+    let volAct = 1;
     return {
       estado, FX, salida: salidaG, musica, programar,
       cambiarTema(id) {
@@ -238,11 +234,6 @@
         if (a) { ambF.type = a.tipo; ambF.frequency.setTargetAtTime(a.f, t, 0.2); }
       },
       fijarNivel(id, u) { estado.nivel = nivelDe(id, u); },
-      viento(v) {
-        if (Math.abs(v - vientoAct) < 0.03) return;
-        vientoAct = v;
-        vieG.gain.setTargetAtTime(Math.min(0.11, v * 0.11), ctx.currentTime, 0.12); vieF.frequency.setTargetAtTime(500 + v * 1500, ctx.currentTime, 0.2);
-      },
       volumen(v, s = 0.25) {
         if (v === volAct) return;
         volAct = v;
@@ -290,16 +281,16 @@
       }
       document.addEventListener('visibilitychange', () => { if (!ctx || !encendido) return; document.hidden ? ctx.suspend() : ctx.resume(); });
     },
-    // Se llama en cada fotograma con el capítulo, el avance y la velocidad del scroll.
-    avance(id, u, vel) {
+    // Se llama en cada fotograma con el capítulo y el avance.
+    avance(id, u) {
       if (!encendido || !motor) { previo = { id, u }; return; }
-      motor.estado.pausa = false; motor.cambiarTema(id); motor.fijarNivel(id, u); motor.viento(vel); motor.volumen(1);
+      motor.estado.pausa = false; motor.cambiarTema(id); motor.fijarNivel(id, u); motor.volumen(1);
       if (previo.id === id && u > previo.u && u - previo.u < 0.07) {
         for (const q of cuesDe(id)) if (q[0] > previo.u && q[0] <= u) motor.FX[q[1]](ctx.currentTime + 0.005, q[2]);
       }
       previo = { id, u };
     },
-    silenciar() { if (encendido && motor) { motor.estado.pausa = true; motor.volumen(0, 0.5); motor.viento(0); } },
+    silenciar() { if (encendido && motor) { motor.estado.pausa = true; motor.volumen(0, 0.5); } },
     get motor() { return motor; }, get ctx() { return ctx; },
   };
 })();

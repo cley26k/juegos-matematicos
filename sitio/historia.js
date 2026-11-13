@@ -1,5 +1,5 @@
 // Conecta el scroll con el canvas: decide qué escena se dibuja, los textos y los clips de cada capítulo.
-// La historia sigue al scroll con un límite de velocidad y espera a que dé tiempo a leer cada texto.
+// La historia sigue al scroll de cerca, sin parones; los textos se quedan un poco más para poder leerlos.
 (function () {
   const raiz = document.documentElement;
   const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -45,7 +45,24 @@
     });
   }
 
-  if (quieto) { document.fonts.load('40px "Dela Gothic One"').finally(modoQuieto); return; }
+  // Ningún clip arranca solo: se reproduce mientras el ratón está encima, o al tocarlo en pantallas táctiles.
+  function activarClips() {
+    document.querySelectorAll('.portal video, .archivo video').forEach(v => {
+      const caja = v.closest('.portal-marco, .clip');
+      const play = () => { v.preload = 'auto'; v.play().catch(() => {}); };
+      const pausa = () => v.pause();
+      v.addEventListener('play', () => caja.classList.add('sonando'));
+      v.addEventListener('pause', () => caja.classList.remove('sonando'));
+      caja.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') play(); });
+      caja.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') pausa(); });
+      if (caja.classList.contains('portal-marco')) {
+        caja.addEventListener('click', e => { if (e.pointerType !== 'mouse') (v.paused ? play() : pausa()); });
+        caja.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); v.paused ? play() : pausa(); } });
+      }
+    });
+  }
+
+  if (quieto) { document.fonts.load('40px "Dela Gothic One"').finally(modoQuieto); activarClips(); return; }
   raiz.classList.add('cine');
 
   const lienzo = document.getElementById('lienzo');
@@ -121,34 +138,28 @@
       return;
     }
 
-    // La historia persigue al scroll sin pasarse de velocidad, y más deprisa cuanto más lejos queda.
+    // La historia sigue al scroll con un suavizado corto: se mueve en cuanto mueves la rueda
+    // y nunca acumula retraso. Solo un tope de velocidad evita que un tirón brusco lo emborrone todo.
     const hueco = yReal - yVista, dist = Math.abs(hueco);
     let mov = 0;
-    if (dist > innerHeight * 7) { yVista = yReal; mov = dist; }
+    if (dist > innerHeight * 4) { yVista = yReal; mov = dist; }
     else if (dist > 0.5) {
-      mov = Math.min(dist, ((innerHeight * 0.26 + dist * 0.55) * dt) / 1000);
-      let destino = yVista + Math.sign(hueco) * mov;
-      // Al avanzar a ritmo normal, un texto no se va hasta que dé tiempo a leerlo.
-      if (hueco > 0 && dist < innerHeight * 3 && activo) {
-        for (const o of activo._textos) {
-          if (o.on && ahora - o.desde < o.minimo) destino = Math.min(destino, activo._top + activo._h * o.a - 1);
-        }
-        destino = Math.max(yVista, destino);
-      }
-      mov = Math.abs(destino - yVista);
-      yVista = destino;
+      mov = Math.min(dist, (Math.min(dist * 7, innerHeight * 1.6) * dt) / 1000 + 0.5);
+      yVista += Math.sign(hueco) * mov;
     }
 
     const s = capituloEn(yVista);
     const u = K.clamp((yVista - s._top) / s._h);
-    K.Sonido.avance(s.dataset.id, u, K.clamp((mov / Math.max(1, dt)) / (innerHeight / 1000) / 1.2));
+    K.Sonido.avance(s.dataset.id, u);
 
     if (activo !== s) {
       if (activo) { activo._textos.forEach(o => { if (o.on) { o.on = false; o.tl.reverse(); } }); parar(activo); activo.classList.remove('activo'); }
       activo = s; s.classList.add('activo');
     }
+    const alguno = s._textos.some(o => u >= o.de && u < o.a);
     s._textos.forEach(o => {
-      const v = u >= o.de && u < o.a;
+      let v = u >= o.de && u < o.a;
+      if (!v && o.on && !alguno && u > o.a && ahora - o.desde < o.minimo) v = true;
       if (v !== o.on) {
         o.on = v;
         if (v) { o.desde = ahora; o.tl.timeScale(1).play(); } else o.tl.timeScale(2.6).reverse();
@@ -158,7 +169,7 @@
       const v = u > FOCO[0] + 0.035 && u < FOCO[3] - 0.012;
       if (v !== !!s._vis) {
         s._vis = v; s._portal.classList.toggle('visible', v);
-        if (s._video) { if (v) { s._video.preload = 'auto'; s._video.play().catch(() => {}); } else s._video.pause(); }
+        if (s._video && !v) s._video.pause();
       }
     }
     const idx = caps.indexOf(s);
@@ -213,9 +224,7 @@
     gsap.from(el, { y: 70, autoAlpha: 0, duration: 0.7, ease: 'back.out(1.5)', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
   });
 
-  // Los clips del archivo se reproducen solos al verse y se pausan al salir.
-  const io = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause(); }), { threshold: 0.6 });
-  document.querySelectorAll('.archivo video').forEach(v => io.observe(v));
+  activarClips();
 
   // Para las pruebas automáticas.
   window.__historia = { lenis, caps, irA(id, u) { const s = caps.find(x => x.dataset.id === id); irA(s._top + s._h * u); }, get yVista() { return yVista; }, get reduccion() { return reduccion; } };

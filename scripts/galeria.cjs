@@ -22,7 +22,7 @@ const capitulos = historia.map((cap, i) => {
   const textos = cap.textos.map(t => `<p class="txt ${t.pos} ${t.tipo}${t.a >= 0.9 ? ' lado' : ''}" data-de="${t.de}" data-a="${t.a}"><span>${esc(t.t)}</span></p>`).join('\n        ');
   const portal = g ? `
         <aside class="portal${clip.vp === 'm' ? ' movil' : ''}" style="--color:${COLOR[g.id]}" aria-label="${esc(g.titulo)}">
-          <div class="portal-marco"><video src="videos/${g.id}/${cap.clip}.mp4" poster="videos/${g.id}/${cap.clip}.jpg" preload="none" muted loop playsinline aria-label="${esc(clip.titulo)}: ${esc(clip.mecanica)}"></video></div>
+          <div class="portal-marco" tabindex="0" role="button" aria-label="Ver el clip de ${esc(g.titulo)}"><video src="videos/${g.id}/${cap.clip}.mp4" poster="videos/${g.id}/${cap.clip}.jpg" preload="none" muted loop playsinline aria-label="${esc(clip.titulo)}: ${esc(clip.mecanica)}"></video></div>
           <h3>${esc(g.titulo)}</h3>
           <p>${esc(g.tema)} · ${esc(g.nivel)}${g.hecho ? ` · hecho con ${esc(g.hecho)}` : ''}</p>
           <div class="portal-acciones"><a class="boton fuerte" href="juegos/${g.id}/">Jugar</a><a class="boton ver-ficha" href="#ficha-${g.id}">Ficha y clips</a></div>
