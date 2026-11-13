@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los 3 encargos · Docentes que construyen</title>
+<meta name="description" content="Tres plantillas para diseñar con ChatGPT, construir con Claude y mejorar un recurso digital de matemáticas. COIL 2026.">
+<meta name="theme-color" content="#14121f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%2314121f%27/%3E%3Cellipse cx=%2716%27 cy=%2716%27 rx=%277%27 ry=%2710%27 fill=%27none%27 stroke=%27%23ff3d2e%27 stroke-width=%275%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
+<style>
+:root { --tinta:#14121f; --papel:#fff6e3; --rojo:#ff3d2e; --oro:#ffb627; --menta:#58ffb8; --lila:#6a4fe6;
+  --titulo:"Dela Gothic One", Impact, sans-serif; --texto:"M PLUS Rounded 1c", system-ui, sans-serif; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--papel); color:var(--tinta); font:500 17px/1.55 var(--texto); }
+h1,h2 { font-family:var(--titulo); font-weight:400; margin:0; }
+.envoltura { max-width:860px; margin:0 auto; padding:28px 16px 48px; }
+.cab { text-align:center; padding:12px 0 8px; }
+.cab small { display:inline-block; background:var(--tinta); color:var(--papel); padding:3px 11px; font-weight:800; font-size:.8rem; letter-spacing:.04em; }
+.cab h1 { font-size:clamp(2.2rem,8vw,4.2rem); line-height:1.05; margin:14px 0 10px; text-shadow:4px 4px 0 var(--oro); }
+.cab p { max-width:56ch; margin:0 auto; font-weight:700; color:#3f3c50; }
+.pasos { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; list-style:none; padding:0; margin:22px 0 6px; }
+.pasos a { display:block; background:#fff; border:3px solid var(--tinta); padding:5px 13px; font-weight:800; font-size:.9rem; color:var(--tinta); text-decoration:none; }
+.encargo { background:#fff; border:4px solid var(--tinta); box-shadow:7px 7px 0 var(--tinta); margin:34px 0 0; }
+.encargo header { display:flex; align-items:center; gap:14px; padding:14px 18px; border-bottom:4px solid var(--tinta); background:var(--color); }
+.num { font:400 2rem/1 var(--titulo); }
+.encargo h2 { font-size:clamp(1.15rem,3.6vw,1.6rem); line-height:1.15; }
+.encargo header span { display:block; font-weight:800; font-size:.9rem; }
+.cuerpo { padding:16px 18px 18px; }
+.cuerpo > p { margin:0 0 12px; font-weight:700; }
+pre { margin:0; white-space:pre-wrap; word-wrap:break-word; font:500 1rem/1.6 var(--texto); background:var(--papel); border:2px dashed var(--tinta); padding:14px 16px; }
+mark { background:color-mix(in srgb, var(--oro) 55%, #fff); color:inherit; padding:0 2px; font-weight:800; }
+.copiar { margin-top:14px; display:inline-flex; align-items:center; min-height:46px; padding:0 20px; border:4px solid var(--tinta); background:var(--tinta); color:#fff; font:400 .95rem var(--titulo); box-shadow:5px 5px 0 var(--rojo); cursor:pointer; }
+.copiar:active { transform:translate(3px,3px); box-shadow:2px 2px 0 var(--rojo); }
+.copiar.hecho { background:var(--menta); color:var(--tinta); }
+.nota { margin:36px 0 0; padding:16px 18px; border:3px solid var(--tinta); background:#fff; font-weight:700; }
+.nota b { font-family:var(--titulo); font-weight:400; }
+.pie { text-align:center; font-size:.9rem; color:#33313f; margin-top:34px; }
+.pie a { color:inherit; font-weight:800; }
+@media (max-width:520px) { body { font-size:16px; } .encargo { box-shadow:4px 4px 0 var(--tinta); } pre { font-size:.95rem; padding:12px; } }
+</style>
+</head>
+<body>
+<div class="envoltura">
+  <div class="cab">
+    <small>DOCENTES QUE CONSTRUYEN · COIL 2026</small>
+    <h1>Los 3 encargos</h1>
+    <p>Diseña con ChatGPT, construye con Claude y mejora probando. Copia cada plantilla y completa lo que está <mark>[entre corchetes]</mark>.</p>
+    <ul class="pasos">
+      <li><a href="#disenar">1 · Diseñar</a></li>
+      <li><a href="#construir">2 · Construir</a></li>
+      <li><a href="#mejorar">3 · Mejorar</a></li>
+    </ul>
+  </div>
+
+  <section class="encargo" id="disenar" style="--color:var(--oro)">
+    <header><span class="num">1</span><div><h2>Encargo para diseñar</h2><span>Pégalo en ChatGPT</span></div></header>
+    <div class="cuerpo">
+<pre>Soy docente de [asignatura] en [nivel]. En mi próxima clase quiero que mis estudiantes [acción que puedo observar] para comprender [concepto]. Tendrán [dispositivos, tiempo y conexión].
+
+1. Propón 2 o 3 ideas de recurso digital interactivo (juego, simulación, visualizador u otro). Para cada una: qué hace el estudiante, qué le devuelve el recurso cuando acierta y cuando se equivoca, y cómo es la pantalla principal.
+2. Recomienda una y explica por qué encaja con mi objetivo.
+3. Dame 3 referencias verificables (con enlace) que pueda revisar. Si no estás seguro de que una existe, dilo.
+4. Escribe un prompt de construcción listo para pegar en Claude: objetivo, interacción matemática, pantallas, retroalimentación ante el error, idioma y condiciones de uso.</pre>
+      <button class="copiar" type="button">Copiar encargo 1</button>
+    </div>
+  </section>
+
+  <section class="encargo" id="construir" style="--color:var(--menta)">
+    <header><span class="num">2</span><div><h2>Encargo para construir</h2><span>Pégalo en claude.ai</span></div></header>
+    <div class="cuerpo">
+<pre>Quiero una primera versión jugable de este recurso para mi clase:
+[pega aquí el diseño elegido y el prompt que te dio ChatGPT]
+
+Requisitos:
+- Un solo archivo HTML que funcione en el navegador, sin cuentas ni datos personales.
+- La interacción matemática central: [qué hace el estudiante, p. ej. arrastrar dos puntos y ver la pendiente].
+- Si el estudiante se equivoca, una pista que lo oriente antes de mostrar la respuesta.
+- Español claro, letra grande, que funcione también en el móvil.
+
+Al terminar, dame de 3 a 5 casos de prueba: qué hago y qué debería pasar, para comprobar que la matemática es correcta.</pre>
+      <button class="copiar" type="button">Copiar encargo 2</button>
+    </div>
+  </section>
+
+  <section class="encargo" id="mejorar" style="--color:color-mix(in srgb, var(--lila) 35%, #fff)">
+    <header><span class="num">3</span><div><h2>Encargo para mejorar</h2><span>En la misma conversación con Claude</span></div></header>
+    <div class="cuerpo">
+<pre>Probé la versión actual.
+Observé que [qué hice y qué pasó exactamente].
+Esperaba que [qué debía pasar y por qué].
+Cambia [una sola cosa concreta] y no toques nada más.
+
+Después dime cómo comprobar que funcionó: el caso exacto que debo probar y lo que debo ver.</pre>
+      <button class="copiar" type="button">Copiar encargo 3</button>
+    </div>
+  </section>
+
+  <p class="nota"><b>Tu criterio orienta lo que la IA ayuda a construir.</b><br>Antes de llevarlo a clase, pruébalo tú: haz los casos de prueba y equivócate a propósito para ver qué le dice al estudiante.</p>
+
+  <p class="pie">Cleyton González · Jones Hernández · COIL 2026 · Loyola<br><a href="../">Ver la galería de juegos</a></p>
+</div>
+<script>
+document.querySelectorAll('.copiar').forEach(function (b) {
+  var etiqueta = b.textContent;
+  b.addEventListener('click', function () {
+    var texto = b.parentNode.querySelector('pre').textContent;
+    function listo() { b.textContent = '¡Copiado!'; b.classList.add('hecho'); setTimeout(function () { b.textContent = etiqueta; b.classList.remove('hecho'); }, 1800); }
+    function respaldo() {
+      var t = document.createElement('textarea'); t.value = texto; t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); listo(); } catch (e) {}
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texto).then(listo, respaldo); else respaldo();
+  });
+});
+document.querySelectorAll('pre').forEach(function (p) {
+  p.innerHTML = p.innerHTML.replace(/\[[^\]]+\]/g, function (m) { return '<mark>' + m + '</mark>'; });
+});
+</script>
+</body>
+</html>
