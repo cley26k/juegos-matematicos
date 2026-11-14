@@ -3,6 +3,6 @@
 // de supabase/esquema.sql. NUNCA pongas aquí la clave "secret" ni la "service_role".
 // Si se dejan vacíos, el juego funciona sin conexión (progreso solo en el navegador).
 window.MATRIX_SUPABASE = {
-  url: '',
-  key: ''
+  url: 'https://bbedkzedmnplsqwanbft.supabase.co',
+  key: 'sb_publishable_TsC_f_4Sn8hjJNePDjSJbg_iQpHQTBp'
 };
