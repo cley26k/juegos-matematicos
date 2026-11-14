@@ -96,6 +96,7 @@ const html = `<!doctype html>
         <ul class="indice">${orden.map(g => `<li><a href="#ficha-${g.id}">${esc(g.titulo)}</a></li>`).join('')}</ul>
       </header>
 ${fichas}
+      <p class="apoyo-pie">Todos estos juegos son gratis. Si te sirven en clase, <a href="https://ko-fi.com/cleygonzalez" target="_blank" rel="noopener">☕ invítame un café en Ko-fi</a>.</p>
       <footer class="pie">La historia de Cero es original y se dibuja por código en un canvas, con GSAP y Lenis; la música y los efectos se sintetizan con Web Audio. Los clips se generan con <code>npm run grabar</code> y esta página con <code>npm run galeria</code>.</footer>
     </div>
   </section>
