@@ -1,0 +1,5 @@
+Stockfish.js 17.1 (lite, single-threaded), copiado tal cual del paquete npm "stockfish@17.1.0".
+Licencia GPLv3 (ver Copying.txt). Código fuente:
+  https://github.com/nmrugg/stockfish.js
+  https://github.com/official-stockfish/Stockfish
+Se aloja aquí porque jsDelivr no sirve ese paquete (supera su límite de 150 MB).
