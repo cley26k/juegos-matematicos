@@ -158,6 +158,7 @@
     if (box) return box;
     box = document.createElement('div'); box.id = 'netLogin';
     box.style.cssText = 'position:fixed;inset:0;z-index:60;background:rgba(20,14,8,.72);overflow:auto;padding:16px';
+    const st = document.createElement('style'); st.textContent = '#netLogin input[type=text],#netLogin input[type=email],#netLogin input[type=password]{width:100%;box-sizing:border-box;font-size:16px}#netLogin label{margin-top:4px}#netLogin .row{margin-top:4px}'; if (!document.getElementById('nlStyle')) { st.id = 'nlStyle'; document.head.appendChild(st) }
     document.body.appendChild(box); return box;
   }
   function closeOverlay() { if (box) { box.remove(); box = null } }
@@ -169,7 +170,7 @@
     const saved = LS.get('mxarena-sb-code') || '';
     frame('Entrar a Valle Matricia', 'Matrix Arena · juego de matrices',
       `<div class="tabs" role="tablist"><button class="tab" data-t="est" aria-selected="true">Soy estudiante</button><button class="tab" data-t="doc" aria-selected="false">Soy docente</button></div>
-       <div id="nlBody"></div><div id="nlMsg" aria-live="polite"></div>
+       <div id="nlBody" style="display:grid;gap:6px"></div><div id="nlMsg" aria-live="polite"></div>
        <div class="row"><button class="btn alt sm" id="nlOff">${fromGame ? 'Seguir sin cambiar' : 'Jugar sin conexión'}</button></div>
        <p class="muted" style="margin:0">Sin conexión tu progreso se guarda solo en este navegador y no hay multijugador.</p>`);
     const est = () => { document.getElementById('nlBody').innerHTML = `
