@@ -62,7 +62,7 @@ p{margin:0 0 8px;line-height:1.5;max-width:72ch}
 .btn.alt{background:var(--paper2);color:var(--ink);border-color:var(--wood2);box-shadow:0 3px 0 var(--wood2)}
 .btn.vio{background:var(--violet);border-color:#3e2b66;box-shadow:0 3px 0 #3e2b66}
 .btn.sm{padding:4px 9px;font-size:13px}
-.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn[disabled]{opacity:.6;cursor:not-allowed}
 .card{background:var(--paper2);border:2px solid var(--paper3);border-radius:5px;padding:12px;min-width:0}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
@@ -106,6 +106,10 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--f
 .hist{display:flex;flex-direction:column;gap:4px;max-height:260px;overflow:auto}
 .hist button{display:flex;gap:8px;align-items:center;text-align:left;background:#fffaf0;border:1px solid var(--paper3);border-radius:4px;padding:5px 8px;font-size:13px;font-family:var(--fm)}
 .hist button[aria-current=true]{border-color:var(--teal);box-shadow:0 0 0 2px var(--teal2)}
+.dstep:disabled,.hist button:disabled,.bcard:disabled{color:var(--ink);cursor:default}
+.dstep:disabled:not([aria-pressed=true]){opacity:.8}
+.dstep:disabled .c,.hist button:disabled span,.bcard:disabled .c{color:var(--ink)}
+.btn.qok,.btn.qbad{opacity:1!important;color:#fff}.btn.qok{background:var(--ok);border-color:#25621f;box-shadow:0 3px 0 #25621f}.btn.qbad{background:var(--err);border-color:#7a2019;box-shadow:0 3px 0 #7a2019}
 .swapanim{animation:swp .45s ease}
 @keyframes swp{0%{transform:translateY(-6px);opacity:.3}100%{transform:none;opacity:1}}
 .flash{animation:fl .6s ease}
@@ -205,8 +209,8 @@ svg .gr{stroke:var(--paper3);stroke-width:1}
 <div id="overlay" hidden></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
-<script src="supabase-config.js?v=2"></script>
-<script src="red.js?v=2"></script>
+<script src="supabase-config.js?v=3"></script>
+<script src="red.js?v=3"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 "use strict";
@@ -1660,7 +1664,7 @@ PANELS.quiz=(o,fresh)=>{if(fresh||!QZ||QZ.over&&fresh!==false){QZ={qs:quizGen(),
       <div class="row" style="justify-content:center"><button class="btn" id="qAgain">Otra ronda</button></div></div>`}
   else{const a=QZ.ans;body=`<div class="card"><div class="row" style="justify-content:space-between"><h3 style="margin:0">Pregunta ${QZ.i+1} de 5</h3><span class="chip gold">${QZ.score} dulce(s)</span></div>
       <p style="font-size:16px;margin:10px 0">${esc(Q.q)}</p>${Q.mats?`<div class="mxwrap" style="gap:16px">${Q.mats.map(([l,M])=>`<div><div class="muted mono">${esc(l)}</div>${mxHTML(M)}</div>`).join('')}</div>`:''}
-      <div style="margin-top:12px">${Q.kind==='num'?`<div class="row"><input id="qIn" type="text" aria-label="Tu respuesta" autocomplete="off" ${a?'disabled':''} style="width:10em"><button class="btn" id="qOk" ${a?'disabled':''}>Responder</button></div>`:`<div class="row">${Q.opts.map(op=>`<button class="btn alt" data-op="${esc(op)}" ${a?'disabled':''}>${esc(op)}</button>`).join('')}</div>`}</div>
+      <div style="margin-top:12px">${Q.kind==='num'?`<div class="row"><input id="qIn" type="text" aria-label="Tu respuesta" autocomplete="off" ${a?'disabled':''} style="width:10em"><button class="btn" id="qOk" ${a?'disabled':''}>Responder</button></div>`:`<div class="row">${Q.opts.map(op=>`<button class="btn alt${a?(op===Q.ans?' qok':op===a.val?' qbad':''):''}" data-op="${esc(op)}" ${a?'disabled':''}>${esc(op)}</button>`).join('')}</div>`}</div>
       ${a?`<div class="fb ${a.ok?'ok':'err'}" style="margin-top:12px"><p style="margin:0"><b>${a.ok?'¡Correcto! +1 dulce.':'No es correcto.'}</b> ${esc(Q.exp)}</p></div><div class="row" style="margin-top:10px"><button class="btn" id="qNext">${QZ.i<4?'Siguiente':'Ver resultado'}</button></div>`:''}</div>`}
   o.innerHTML=`<div class="panel">${head('Casa del Sr. Pila','¿Qué tan pila eres con las matrices?')}<div class="pb">${body}<p class="muted">Las respuestas se validan con aritmética exacta. Los errores quedan en tu diario para darte recomendaciones.</p></div></div>`;
   o.querySelector('.close').onclick=closePanel;
