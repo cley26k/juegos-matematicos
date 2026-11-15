@@ -15,6 +15,7 @@ Colección de juegos educativos creados con IA (Claude y Google AI Studio), junt
 | [MathRally · Misión Élara](juegos/mathrally/) | Funciones | Secundaria | 3 |
 | [Puente de Cristal](juegos/puente-de-cristal/) | Inecuaciones y porcentajes | Secundaria | 3 |
 | [Pizza Fraccionaria](juegos/pizza-fraccionaria/) | Fracciones propias | Primaria | 3 |
+| [Extra: Matrix Arena](juegos/matrix-arena/) | Matrices: inversa, determinante y transformaciones | Bachillerato / universidad | — |
 
 ## Sudoku Academy
 
