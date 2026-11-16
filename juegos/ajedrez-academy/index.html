@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Aprende ajedrez de verdad: tratado en 4 tomos, táctica verificada, repertorios de aperturas, finales y bots que te explican cada jugada.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&display=swap">
 <style>/* Sudoku Academy — estilo amigable: colores vivos, volumen con sombra inferior, formas redondas.
    Tablero: amarillo = patrón, rojo = eliminación, verde = confirmado, azul/rosa = colores de cadena, morado = selección. */
 :root {
@@ -885,6 +885,141 @@ details.settings[open] > * + * { margin-top: 10px; }
 :root[data-board="madera"] { --sq-l: #f0d9b5; --sq-d: #b58863; }
 :root[data-board="marmol"] { --sq-l: #e8e6e1; --sq-d: #8b8f99; }
 .sq-last { fill: rgba(255, 220, 60, .45) !important; }
+</style><style id="diseno-v2">/* ═══ Diseño v2 · «Club de ajedrez» ═══
+   Neutros con un leve tinte verde (el del tapete y del tablero), una sola voz de color por pantalla,
+   tipografía display para titulares, tablero con canto físico y modo oscuro «tapete nocturno». */
+:root {
+  --fd: 'Bricolage Grotesque', 'Nunito', system-ui, sans-serif;
+  --bg: #f3f5f2; --surface: #ffffff; --surface-2: #f6f8f5; --surface-3: #ebefe9;
+  --ink: #1d2520; --ink-2: #5b675f; --ink-3: #96a199; --line: #e1e7df; --line-d: #cdd6cb;
+  --green: #2bb45c; --green-d: #1d8a44; --green-s: #e3f5e8;
+  --gray: #e3e8e1; --gray-d: #c8d1c6;
+  --lift: 0 1px 0 rgba(20, 40, 25, .04), 0 10px 24px -18px rgba(20, 40, 25, .28);
+  --lift-hi: 0 1px 0 rgba(20, 40, 25, .05), 0 18px 34px -20px rgba(20, 40, 25, .38);
+  --r: 20px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1310; --surface: #161d18; --surface-2: #1b241e; --surface-3: #232e27;
+    --ink: #e8efea; --ink-2: #a2b1a7; --ink-3: #6c7c71; --line: #253029; --line-d: #314037;
+    --green: #3ccb6c; --green-d: #23964b; --green-s: #183424;
+    --gray: #27322b; --gray-d: #1e2822;
+    --lift: 0 1px 0 rgba(0, 0, 0, .3), 0 14px 28px -18px rgba(0, 0, 0, .7);
+    --lift-hi: 0 1px 0 rgba(0, 0, 0, .35), 0 22px 40px -20px rgba(0, 0, 0, .85);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1310; --surface: #161d18; --surface-2: #1b241e; --surface-3: #232e27;
+  --ink: #e8efea; --ink-2: #a2b1a7; --ink-3: #6c7c71; --line: #253029; --line-d: #314037;
+  --green: #3ccb6c; --green-d: #23964b; --green-s: #183424;
+  --gray: #27322b; --gray-d: #1e2822;
+  --lift: 0 1px 0 rgba(0, 0, 0, .3), 0 14px 28px -18px rgba(0, 0, 0, .7);
+  --lift-hi: 0 1px 0 rgba(0, 0, 0, .35), 0 22px 40px -20px rgba(0, 0, 0, .85);
+}
+
+/* Tipografía: titulares con carácter, cuerpo legible */
+h1, h2, .wordmark, .ubanner h2, .unit-banner h2, .epic-title { font-family: var(--fd); }
+h1 { font-size: clamp(1.75rem, 3vw, 2.35rem); font-weight: 800; letter-spacing: -.025em; }
+h2 { font-weight: 800; letter-spacing: -.02em; }
+.muted, .card-cta small, .lc-txt small, .bot-txt small, .fam small, .sec-t small { color: var(--ink-2); }
+.small, small { font-size: .84rem; }
+
+/* Estructura: el riel se funde con el fondo, el contenido flota en tarjetas */
+.rail { background: var(--bg); border-right: 1px solid var(--line); padding: 26px 16px; }
+.wordmark { color: var(--ink); font-weight: 700; letter-spacing: -.01em; }
+.wordmark b { color: var(--green-d); font-weight: 800; letter-spacing: -.03em; }
+.nav { text-transform: none; letter-spacing: 0; font-size: .98rem; font-weight: 800; color: var(--ink-2); border: 1px solid transparent; padding: 7px 10px; gap: 12px; transition: background .15s, color .15s; }
+.nav-ico { width: 36px; height: 36px; background: transparent; color: var(--uc); box-shadow: none; transition: background .15s, color .15s, box-shadow .15s; }
+.nav:hover { background: var(--surface); color: var(--ink); }
+.nav.on { background: var(--surface); border-color: var(--line); color: var(--ink); box-shadow: var(--lift); }
+.nav.on .nav-ico { background: var(--uc); color: #fff; box-shadow: 0 3px 0 var(--ucd); }
+.theme-btn { border: 1px solid var(--line); border-bottom-width: 3px; background: var(--surface); }
+
+/* Tarjetas: borde fino, canto inferior suave y sombra difusa */
+.card, .bot, .fam, .sec, .coach, .lp-opt, .mrow, .rv-note, .acc div, .tree-mv, .line-row, .movelist, .plan-card, .unit-test {
+  border-width: 1px; border-color: var(--line); border-bottom: 3px solid var(--line-d); border-radius: var(--r); box-shadow: var(--lift);
+}
+.card-cta { transition: transform .15s, box-shadow .15s, border-color .15s; }
+.card-cta:hover { background: var(--surface); border-color: var(--line-d); transform: translateY(-2px); box-shadow: var(--lift-hi); }
+.home-course { border-color: var(--line); border-left: 4px solid var(--orange); }
+.level-pick { border: 1px solid var(--line); border-bottom: 3px solid var(--line-d); background: linear-gradient(180deg, var(--green-s), var(--surface) 62%); }
+.lp-opt { box-shadow: none; }
+.lp-opt:hover { border-color: var(--green); transform: translateY(-2px); }
+.lp-opt { transition: transform .15s, border-color .15s; }
+
+/* Botones: el verde de la marca es la acción principal */
+.btn { border-width: 1.5px; border-bottom-width: 4px; letter-spacing: .04em; border-radius: 15px; }
+.btn-primary { background: var(--green); border-color: var(--green-d); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--green); filter: brightness(1.05); }
+.btn-ghost { border-color: var(--line-d); }
+
+/* Bandas de tomo con un damero sutil: el detalle que solo tiene una app de ajedrez */
+.unit-banner, .ubanner { position: relative; overflow: hidden; isolation: isolate; border-radius: 22px; }
+.unit-banner::after, .ubanner::after { content: ""; position: absolute; right: -10px; top: -10px; bottom: -10px; width: 46%; z-index: -1; opacity: .16;
+  background: conic-gradient(#fff 25%, transparent 0 50%, #fff 0 75%, transparent 0) 0 0 / 28px 28px;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 70%); mask: linear-gradient(90deg, transparent, #000 70%); }
+.ub-count { background: rgba(255, 255, 255, .24); border-radius: 999px; padding: 6px 14px; }
+
+/* Tablero con canto: parece un tablero de verdad apoyado en la mesa */
+.cb { border: 0; border-radius: 14px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 6px 0 color-mix(in srgb, var(--sq-d) 55%, #1b1b1b), 0 22px 36px -18px rgba(10, 25, 15, .55); overflow: hidden; }
+.fam-board .cb, .drill-board .cb { box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 3px 0 color-mix(in srgb, var(--sq-d) 55%, #1b1b1b); border-radius: 10px; }
+.cb.flash-ok { box-shadow: 0 0 0 3px var(--green), 0 6px 0 color-mix(in srgb, var(--sq-d) 55%, #1b1b1b); }
+.cb.flash-bad { box-shadow: 0 0 0 3px var(--red), 0 6px 0 color-mix(in srgb, var(--sq-d) 55%, #1b1b1b); }
+.evalbar { border: 0; border-radius: 10px; background: #262b28; width: 24px; box-shadow: 0 6px 0 #121513; outline: 1px solid color-mix(in srgb, var(--ink) 22%, transparent); outline-offset: -1px; }
+.eb-w { background: #f1f4f0; }
+.pg-row { gap: 10px; }
+
+/* Aperturas: menos columnas, más aire */
+.fam-grid { grid-template-columns: repeat(auto-fill, minmax(214px, 1fr)); gap: 16px; }
+.fam { padding: 12px; gap: 6px; transition: transform .15s, box-shadow .15s; }
+.fam:hover { transform: translateY(-2px); box-shadow: var(--lift-hi); }
+.fam.mine { border-color: var(--orange); }
+.op-hero { border: 1px solid var(--line); border-bottom: 3px solid var(--line-d); border-left: 5px solid var(--orange); box-shadow: var(--lift); background: linear-gradient(120deg, var(--orange-s), var(--surface) 55%); }
+
+/* Chips y segmentos más finos */
+.tchip, .chip-toggle, .seg button { border-width: 1.5px; border-bottom-width: 3px; }
+.tchip.on { box-shadow: none; }
+
+/* Móvil: barra inferior con etiquetas y cristal */
+@media (max-width: 899px) {
+  .rail { background: var(--bg); border-bottom: 1px solid var(--line); padding-top: 10px; padding-bottom: 10px; }
+  .rail ul { background: color-mix(in srgb, var(--surface) 90%, transparent); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); border-top: 1px solid var(--line); box-shadow: 0 -10px 30px -22px rgba(0, 0, 0, .45); }
+  .nav { font-size: .62rem; font-weight: 800; border: 0; box-shadow: none !important; background: none !important; padding: 2px 0; }
+  .nav-ico { width: 40px; height: 30px; border-radius: 999px; color: var(--ink-3); }
+  .nav.on { color: var(--ink); }
+  .nav.on .nav-ico { box-shadow: none; }
+  body::before { background: var(--bg); }
+}
+@media (max-width: 760px) { .rail .nav-lbl { display: block; white-space: nowrap; } }
+
+/* Aperturas: una acción principal y una secundaria discreta */
+.fam-actions .btn:not(.btn-primary) { border-color: transparent; background: transparent; box-shadow: none; color: var(--ink-2); min-height: 34px; }
+.fam-actions .btn:not(.btn-primary):hover { background: var(--surface-2); color: var(--ink); }
+.fam-meta { color: var(--ink-3); font-weight: 800; letter-spacing: .01em; }
+.fam b { font-family: var(--fd); font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; }
+
+/* Progreso: cifras protagonistas en tarjetas neutras; el color queda solo en el icono */
+.st { border: 1px solid var(--line); border-bottom: 3px solid var(--line-d); border-radius: 18px; box-shadow: var(--lift); background: var(--surface); padding: 14px 10px 12px; gap: 2px !important; }
+.st span { order: 2; background: none; color: var(--ink-2); padding: 0; text-transform: none; letter-spacing: 0; font-size: .82rem; font-weight: 800; flex-basis: 100%; }
+.st b { color: var(--ink); font-family: var(--fd); font-weight: 800; font-size: 1.7rem; padding: 0; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.stat-tiles.big .st svg { color: var(--t); align-self: center; margin-right: 4px; }
+.stat-tiles.big { gap: 14px; }
+
+/* Ajustes: una opción por línea, etiquetas legibles */
+details.settings { background: var(--surface); border: 1px solid var(--line); border-bottom: 3px solid var(--line-d); border-radius: var(--r); padding: 16px 18px; box-shadow: var(--lift); }
+details.settings summary { font-family: var(--fd); font-weight: 800; font-size: 1.1rem; cursor: pointer; }
+details.settings > .toggle { display: flex; }
+.tc-opt > span { text-transform: none !important; letter-spacing: 0 !important; font-size: .9rem !important; color: var(--ink-2); width: 170px !important; min-width: 0; }
+@media (max-width: 600px) { .tc-opt > span { width: 100% !important; } }
+
+/* Saludo: mascota y texto en una fila compacta */
+.card.hello { flex-direction: row; align-items: center; gap: 14px; }
+.card.hello > svg, .card.hello .mascot { width: 58px; height: auto; flex: none; }
+.card.hello b { font-family: var(--fd); font-size: 1.1rem; }
+
+/* Cabecera móvil: cada estadística separada para que «0 🔥» y «⚡ 800» no se lean pegadas */
+.ts + .ts { margin-left: 8px; }
+.mobile-stats .ts { font-family: var(--fd); }
 </style></head><body><div id="root"><main style="max-width:760px;margin:40px auto;padding:0 16px;font-family:system-ui,sans-serif;line-height:1.55"><h1>Ajedrez Academy: aprende ajedrez paso a paso</h1>
 <p>Una escuela de ajedrez gratuita e interactiva en español. Aprende desde cómo se mueven las piezas hasta la estrategia de los grandes maestros, con ejercicios que el motor corrige al instante.</p>
 <h2>Qué puedes aprender</h2><ul>
