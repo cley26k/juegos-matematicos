@@ -128,7 +128,7 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
 @media (max-width:899px){#aa-chip{width:auto;margin:0 0 0 8px;flex:none}
   #aa-chip .aa-who{padding:3px;border-radius:13px;gap:0}#aa-chip .aa-lbl,#aa-chip .aa-who>.aa-dot{display:none}
   #aa-chip .aa-menu{left:auto;right:0;bottom:auto;top:calc(100% + 10px);width:min(280px,calc(100vw - 24px))}
-  #aa-chip .aa-go{display:grid;grid-template-columns:repeat(3,1fr)}
+  #aa-chip .aa-go{display:grid;grid-template-columns:repeat(2,1fr)}
   .rail:has(#aa-chip) .theme-btn{display:none}
   .mobile-stats{cursor:pointer;border-radius:12px}}
 `;
@@ -427,7 +427,7 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
       (pic ? '<img alt="" referrerpolicy="no-referrer" src="' + esc(pic) + '">' : esc(name.trim().charAt(0).toUpperCase())) +
       '</span><span class="aa-lbl">' + esc(first) + '</span><span class="aa-dot"></span></button>' +
       '<div class="aa-menu" hidden><p class="aa-cap">Conectado como</p><p class="aa-em">' + esc(email) + '</p><p class="aa-state"><span class="aa-dot"></span><span class="aa-stt"></span></p>' +
-      '<div class="aa-go"><button type="button" data-go="Progreso">Progreso</button><button type="button" data-go="Evaluar">Evaluar</button><button type="button" data-go="tema">Tema</button></div>' +
+      '<div class="aa-go"><button type="button" data-go="Progreso">Progreso</button><button type="button" data-go="Ajustes">Ajustes</button><button type="button" data-go="Evaluar">Evaluar</button><button type="button" data-go="tema">Tema</button></div>' +
       '<button type="button" class="aa-exit" data-a="out">Cerrar sesión</button></div>';
     var btn = chip.firstChild, menu = chip.querySelector('.aa-menu');
     /* El botón vive dentro de la barra de navegación de la app: encima de «Tema» en el ordenador y
