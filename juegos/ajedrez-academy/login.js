@@ -118,17 +118,23 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
 #aa-chip .aa-lbl{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #aa-chip .aa-dot{flex:none;width:8px;height:8px;border-radius:999px;background:var(--green,#2bb45c);box-shadow:0 0 0 3px color-mix(in srgb,var(--green,#2bb45c) 22%,transparent)}
 #aa-chip .aa-dot.wait{background:#e0a400;box-shadow:0 0 0 3px rgba(224,164,0,.22)}#aa-chip .aa-dot.err{background:#d64545;box-shadow:0 0 0 3px rgba(214,69,69,.22)}
-#aa-chip .aa-menu{position:absolute;left:0;bottom:calc(100% + 8px);width:260px;padding:16px;border-radius:18px;background:var(--surface,#fff);color:var(--ink,#1d2520);
-  border:1px solid var(--line,#e1e7df);border-bottom:3px solid var(--line-d,#cdd6cb);box-shadow:0 18px 40px -18px rgba(0,0,0,.35);animation:aa-rise .18s ease both}
-#aa-chip .aa-cap{margin:0 0 2px;font-size:.76rem;color:var(--ink-3,#96a199);font-weight:800}
-#aa-chip .aa-em{margin:0 0 12px;font-size:.92rem;color:var(--ink,#1d2520);overflow-wrap:anywhere}
-#aa-chip .aa-state{display:flex;align-items:center;gap:10px;margin:0 0 14px;padding:10px 12px;border-radius:12px;background:var(--surface-2,#f6f8f5);color:var(--ink-2,#5b675f);font-size:.84rem;font-weight:700}
-#aa-chip .aa-exit{width:100%;min-height:42px;border-radius:12px;border:1.5px solid var(--line-d,#cdd6cb);border-bottom-width:3px;background:var(--surface,#fff);color:var(--ink,#1d2520);font:800 .9rem Nunito,sans-serif;cursor:pointer}
-#aa-chip .aa-exit:hover{border-color:#d64545;color:#d64545}
+#aa-chip .aa-menu{position:absolute;left:0;bottom:calc(100% + 8px);width:244px;padding:8px;border-radius:16px;background:var(--surface,#fff);color:var(--ink,#1d2520);border:1px solid var(--line,#e1e7df);box-shadow:0 18px 40px -16px rgba(0,0,0,.35);z-index:60;animation:aa-mnu .14s ease}
+@keyframes aa-mnu{from{opacity:0;transform:translateY(4px)}}
+#aa-chip .aa-menu[hidden]{display:none}
+#aa-chip .aa-mh{display:flex;align-items:center;gap:10px;padding:6px 6px 10px}
+#aa-chip .aa-mh .aa-av{width:36px;height:36px;border-radius:50%}
+#aa-chip .aa-mt{display:flex;flex-direction:column;min-width:0}
+#aa-chip .aa-mt b{font-size:.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#aa-chip .aa-em{display:block;font-size:.76rem;font-weight:700;color:var(--ink-3,#96a199);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#aa-chip .aa-state{display:flex;align-items:center;gap:8px;margin:0;padding:8px 8px 10px;border-top:1px solid var(--line,#e1e7df);color:var(--ink-3,#96a199);font-size:.78rem;font-weight:700}
+#aa-chip .aa-state .aa-dot{width:7px;height:7px;box-shadow:none}
+#aa-chip .aa-exit{width:100%;display:flex;align-items:center;gap:8px;padding:9px 8px;border:0;border-radius:10px;background:none;color:var(--ink-2,#5b675f);font:800 .86rem Nunito,sans-serif;cursor:pointer;text-align:left}
+#aa-chip .aa-exit svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#aa-chip .aa-exit:hover{background:color-mix(in srgb,#d64545 10%,transparent);color:#d64545}
 @media (max-width:899px){#aa-chip{width:auto;margin:0 0 0 8px;flex:none}
   #aa-chip .aa-who{padding:3px;border-radius:13px;gap:0}#aa-chip .aa-lbl,#aa-chip .aa-who>.aa-dot{display:none}
   #aa-chip .aa-menu{left:auto;right:0;bottom:auto;top:calc(100% + 10px);width:min(280px,calc(100vw - 24px))}
-  #aa-chip .aa-go{display:grid;grid-template-columns:repeat(2,1fr)}
+  #aa-chip .aa-go{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin:0;padding:4px 0 6px;border-top:1px solid var(--line,#e1e7df)}#aa-chip .aa-go button{min-height:36px;border:0;background:none;text-align:left;padding:0 8px;font-size:.84rem;color:var(--ink-2,#5b675f)}#aa-chip .aa-go button:hover{background:var(--surface-2,#f6f8f5);color:var(--ink,#1d2520)}
   .rail:has(#aa-chip) .theme-btn{display:none}
   .mobile-stats{cursor:pointer;border-radius:12px}}
 `;
@@ -414,7 +420,7 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
     if (!chip) return;
     chip.querySelectorAll('.aa-dot').forEach(function (d) { d.className = 'aa-dot' + (s === 'ok' ? '' : ' ' + s); });
     var t = chip.querySelector('.aa-stt');
-    if (t) t.textContent = s === 'ok' ? 'Progreso guardado en tu cuenta' : s === 'wait' ? 'Guardando…' : 'Sin conexión: se guardará al volver';
+    if (t) t.textContent = s === 'ok' ? 'Progreso guardado' : s === 'wait' ? 'Guardando…' : 'Sin conexión · se guardará luego';
   }
   function mountChip(user) {
     var m = (user && user.user_metadata) || {};
@@ -426,9 +432,10 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
     chip.innerHTML = '<button type="button" class="aa-who" aria-haspopup="true" aria-expanded="false" aria-label="Tu cuenta: ' + esc(email) + '"><span class="aa-av">' +
       (pic ? '<img alt="" referrerpolicy="no-referrer" src="' + esc(pic) + '">' : esc(name.trim().charAt(0).toUpperCase())) +
       '</span><span class="aa-lbl">' + esc(first) + '</span><span class="aa-dot"></span></button>' +
-      '<div class="aa-menu" hidden><p class="aa-cap">Conectado como</p><p class="aa-em">' + esc(email) + '</p><p class="aa-state"><span class="aa-dot"></span><span class="aa-stt"></span></p>' +
+      '<div class="aa-menu" hidden><div class="aa-mh"><span class="aa-av">' + (pic ? '<img alt="" referrerpolicy="no-referrer" src="' + esc(pic) + '">' : esc(name.trim().charAt(0).toUpperCase())) + '</span><span class="aa-mt"><b>' + esc(name.indexOf('@') > 0 ? first : name) + '</b><small class="aa-em" title="' + esc(email) + '">' + esc(email) + '</small></span></div>' +
+      '<p class="aa-state"><span class="aa-dot"></span><span class="aa-stt"></span></p>' +
       '<div class="aa-go"><button type="button" data-go="Progreso">Progreso</button><button type="button" data-go="Ajustes">Ajustes</button><button type="button" data-go="Evaluar">Evaluar</button><button type="button" data-go="Clasificación">Clasificación</button><button type="button" data-go="Memoria">Memoria</button><button type="button" data-go="tema">Tema</button></div>' +
-      '<button type="button" class="aa-exit" data-a="out">Cerrar sesión</button></div>';
+      '<button type="button" class="aa-exit" data-a="out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11"/></svg>Cerrar sesión</button></div>';
     var btn = chip.firstChild, menu = chip.querySelector('.aa-menu');
     /* El botón vive dentro de la barra de navegación de la app: encima de «Tema» en el ordenador y
        en la cabecera en el móvil. En pantallas sin barra (lecciones, Evaluar…) no se muestra. */
@@ -450,7 +457,11 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
         if (window.AA_GOTO) window.AA_GOTO(b.dataset.go);
       });
     });
-    btn.addEventListener('click', function (e) { e.stopPropagation(); menu.hidden = !menu.hidden; btn.setAttribute('aria-expanded', String(!menu.hidden)); });
+    function pos() { if (matchMedia('(max-width:899px)').matches) { menu.style.cssText = ''; return; }
+      var r = btn.getBoundingClientRect(), rail = document.querySelector('.rail'), rr = rail ? rail.getBoundingClientRect() : r;
+      menu.style.cssText = 'position:fixed;left:' + Math.round(rr.right + 10) + 'px;bottom:' + Math.max(10, Math.round(innerHeight - r.bottom)) + 'px;top:auto'; }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); menu.hidden = !menu.hidden; if (!menu.hidden) pos(); btn.setAttribute('aria-expanded', String(!menu.hidden)); });
+    addEventListener('resize', function () { if (!menu.hidden) pos(); });
     document.addEventListener('click', function (e) { if (!chip.contains(e.target)) { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); } });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); } });
     chip.querySelector('[data-a="out"]').addEventListener('click', signOut);
