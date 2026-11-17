@@ -1,0 +1,98 @@
+/* ═══ Ajedrez Academy · retoques (semana de racha, cofre, botón desactivado) ═══ */
+:root {
+  --m-flame: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.6 1.8c.5 3.3 3.1 5.4 4.7 7.6 1.3 1.8 2.2 3.7 2.2 5.9A7.5 7.5 0 0 1 4.5 15.3c0-2.9 1.6-5 3.4-6.6.2 1.9 1 3.2 2.3 3.9-.3-3.9.6-7.4 2.4-10.8z'/%3E%3C/svg%3E");
+  --m-shield: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1.8 20.5 5v6.3c0 5.2-3.6 9.6-8.5 11-4.9-1.4-8.5-5.8-8.5-11V5z'/%3E%3C/svg%3E");
+  --flame-a: #ffb547; --flame-b: #ff7a1a; --flame-d: #c75a0c;
+  --ice: #2b7fc6; --ice-s: #e3f1fc;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ice: #7cc4ff; --ice-s: #15283a; } }
+:root[data-theme="dark"] { --ice: #7cc4ff; --ice-s: #15283a; }
+
+/* ── Semana de racha: siete casillas con la letra arriba y el estado abajo;
+      debajo, el recuento y los protectores. Se adapta al ancho de la columna. ── */
+.week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-items: center; gap: 5px; margin-top: 12px; max-width: 300px; }
+.wd {
+  width: auto; min-width: 0; height: 40px; border-radius: 11px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  background: var(--surface-3); color: var(--ink-3);
+  font: 800 10.5px/1 var(--fd, inherit); letter-spacing: .02em;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .06);
+}
+.wd i { font-style: normal; }
+.wd::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .45; }
+.wd.on { background: linear-gradient(180deg, var(--flame-a), var(--flame-b)); color: #fff; box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--flame-d) 70%, transparent); }
+.wd.on::after { width: 13px; height: 13px; border-radius: 0; opacity: 1; background: #fff; -webkit-mask: var(--m-flame) center / contain no-repeat; mask: var(--m-flame) center / contain no-repeat; }
+.wd.ice { background: var(--ice-s); color: var(--ice); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ice) 45%, transparent); }
+.wd.ice::after { width: 12px; height: 12px; border-radius: 0; opacity: 1; background: currentColor; -webkit-mask: var(--m-shield) center / contain no-repeat; mask: var(--m-shield) center / contain no-repeat; }
+.wd.today:not(.on):not(.ice) { background: var(--surface); color: var(--flame-d); box-shadow: inset 0 0 0 2px var(--flame-b); }
+.wd.fut { background: transparent; box-shadow: inset 0 0 0 1.5px var(--line); opacity: 1; color: var(--ink-3); }
+.wd.fut::after { opacity: .25; }
+.week small { grid-column: 1 / 5; margin-top: 4px; font: 800 .82rem/1 var(--fd, inherit); color: var(--ink-2); white-space: nowrap; }
+.week .freeze {
+  grid-column: 5 / 8; justify-self: end; margin-top: 4px; display: inline-flex; align-items: center; gap: 5px; flex: none;
+  padding: 5px 10px 5px 8px; border-radius: 999px; background: var(--ice-s); color: var(--ice);
+  font: 800 .82rem/1 var(--fd, inherit); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ice) 30%, transparent);
+}
+.ico-shield { display: inline-block; width: 14px; height: 14px; background: currentColor; -webkit-mask: var(--m-shield) center / contain no-repeat; mask: var(--m-shield) center / contain no-repeat; font-style: normal; }
+@media (max-width: 420px) { .week { gap: 4px; } }
+
+/* Racha: llama dibujada (no emoji) en «Meta diaria», rellena en la cabecera */
+.streak-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px 2px 6px; border-radius: 999px; background: color-mix(in srgb, var(--flame-b) 14%, var(--surface)); color: var(--flame-d); font-weight: 800; vertical-align: 1px; }
+.ico-flame { display: inline-block; width: 13px; height: 13px; background: linear-gradient(180deg, var(--flame-a), var(--flame-b)); -webkit-mask: var(--m-flame) center / contain no-repeat; mask: var(--m-flame) center / contain no-repeat; font-style: normal; }
+.freeze-note .ico-shield { color: var(--ice); width: 18px; height: 18px; margin-right: 6px; vertical-align: -3px; }
+.ts-flame svg path { fill: color-mix(in srgb, currentColor 35%, transparent); }
+
+/* ── Cofre de misiones ── */
+.q-chest {
+  margin-top: 12px; padding: 10px 14px 10px 10px; gap: 14px; border-top: 0; border-radius: 16px;
+  background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line);
+  font-weight: 700; color: var(--ink-2); line-height: 1.35;
+}
+.q-chest.ready { background: color-mix(in srgb, #ffc83d 16%, var(--surface)); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, #e0a400 55%, transparent); color: var(--ink); }
+.q-chest.open { background: color-mix(in srgb, var(--green) 12%, var(--surface)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green) 40%, transparent); color: var(--ink); }
+.q-chest svg.chest2 { width: 60px; height: 53px; flex: none; overflow: visible; filter: none !important; }
+.chest2 .c-shadow { fill: rgba(0, 0, 0, .13); }
+.chest2 .c-wood { fill: #b97a3e; }
+.chest2 .c-wood-l { fill: #d08f4d; }
+.chest2 .c-plank { stroke: #7b4a1d; stroke-width: 1.6; opacity: .45; }
+.chest2 .c-band { fill: #8d99a8; }
+.chest2 .c-edge { fill: none; stroke: #5e3a17; stroke-width: 2.2; stroke-linejoin: round; }
+.chest2 .c-shine { fill: none; stroke: #fff; stroke-opacity: .45; stroke-width: 2; stroke-linecap: round; }
+.chest2 .c-lock rect { fill: #ffcd4a; stroke: #a87700; stroke-width: 1.6; }
+.chest2 .c-key { fill: #6e4d00; stroke: #6e4d00; stroke-width: 1.7; stroke-linecap: round; }
+.chest2 .c-spark path { fill: #ffd24a; }
+.chest2 .c-spark { opacity: 0; }
+.chest2 .c-lid { transform-origin: 9px 27px; transition: transform .5s var(--ease, ease); }
+/* Cerrado y sin completar: madera apagada y candado gris */
+.q-chest:not(.ready):not(.open) .chest2 .c-base, .q-chest:not(.ready):not(.open) .chest2 .c-lid { filter: saturate(.35) brightness(.95); }
+.q-chest:not(.ready):not(.open) .chest2 .c-lock rect { fill: #b7bfc8; stroke: #7d8792; }
+.q-chest:not(.ready):not(.open) .chest2 .c-key { fill: #5d6670; stroke: #5d6670; }
+/* Listo para abrir: brillo y destellos */
+.q-chest.ready .chest2 { filter: drop-shadow(0 0 10px color-mix(in srgb, #ffc83d 70%, transparent)) !important; }
+.q-chest.ready .chest2 .c-spark { opacity: 1; animation: aa-twinkle 1.4s ease-in-out infinite; }
+/* Abierto: tapa levantada */
+.q-chest.open .chest2 .c-lid, .q-chest.opening .chest2 .c-lid { transform: translate(-2px, -8px) rotate(-16deg); }
+.q-chest.open .chest2 .c-spark { opacity: .9; }
+@keyframes aa-twinkle { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .q-chest .chest2 .c-spark { animation: none; } }
+
+/* ── Botón grande desactivado («Mueve una pieza»): hueco discontinuo, no un bloque oscuro ── */
+.btn-big:disabled, .btn-big:disabled:hover {
+  background: transparent !important; color: var(--ink-3) !important;
+  border: 2px dashed var(--line-d) !important; box-shadow: none !important;
+  opacity: 1 !important; filter: none !important; transform: none !important;
+}
+
+/* Racha en Táctica */
+.streak .ico-flame { width: 14px; height: 14px; margin-right: 3px; vertical-align: -2px; }
+
+/* Portátiles con poca altura: la barra lateral se compacta para que quepan
+   todas las secciones, la cuenta y el tema sin taparse */
+@media (min-width: 900px) and (max-height: 800px) {
+  .rail { padding-top: 16px; padding-bottom: 14px; overflow-y: auto; scrollbar-width: none; }
+  .rail .brand { margin-bottom: 4px; }
+  .rail ul { gap: 0; }
+  .rail .nav { padding-top: 4px; padding-bottom: 4px; }
+  .rail .nav-ico { width: 32px; height: 32px; }
+  .rail .theme-btn { padding-top: 7px; padding-bottom: 7px; }
+}

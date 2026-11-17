@@ -105,7 +105,10 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
   #aa-login .aa-main{place-items:start center;padding:28px 18px 36px}
 }
 @media (prefers-reduced-motion:reduce){#aa-login *,#aa-login{animation:none!important;transition:none!important}}
-#aa-chip{position:fixed;z-index:2147482000;left:16px;bottom:88px;width:218px;font:800 .92rem/1.2 Nunito,system-ui,sans-serif}
+#aa-chip{position:relative;z-index:30;width:100%;margin-top:auto;font:800 .92rem/1.2 Nunito,system-ui,sans-serif}
+.rail #aa-chip + .theme-btn{margin-top:10px}
+#aa-chip .aa-go{display:none;gap:8px;margin:0 0 10px}
+#aa-chip .aa-go button{flex:1;min-height:40px;border-radius:12px;border:1px solid var(--line,#e1e7df);background:var(--surface-2,#f6f8f5);color:var(--ink,#1d2520);font:800 .86rem Nunito,sans-serif;cursor:pointer}
 #aa-chip .aa-who{width:100%;display:flex;align-items:center;gap:10px;padding:7px 12px 7px 7px;border-radius:16px;cursor:pointer;color:var(--ink,#1d2520);background:var(--surface,#fff);
   border:1px solid var(--line,#e1e7df);border-bottom:3px solid var(--line-d,#cdd6cb);box-shadow:var(--lift,0 10px 24px -18px rgba(20,40,25,.28));font:inherit;text-align:left}
 #aa-chip .aa-who:hover{border-color:var(--line-d,#cdd6cb)}
@@ -122,9 +125,12 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
 #aa-chip .aa-state{display:flex;align-items:center;gap:10px;margin:0 0 14px;padding:10px 12px;border-radius:12px;background:var(--surface-2,#f6f8f5);color:var(--ink-2,#5b675f);font-size:.84rem;font-weight:700}
 #aa-chip .aa-exit{width:100%;min-height:42px;border-radius:12px;border:1.5px solid var(--line-d,#cdd6cb);border-bottom-width:3px;background:var(--surface,#fff);color:var(--ink,#1d2520);font:800 .9rem Nunito,sans-serif;cursor:pointer}
 #aa-chip .aa-exit:hover{border-color:#d64545;color:#d64545}
-@media (max-width:899px){#aa-chip{left:auto;width:auto;bottom:auto;top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right))}
+@media (max-width:899px){#aa-chip{width:auto;margin:0 0 0 8px;flex:none}
   #aa-chip .aa-who{padding:3px;border-radius:13px;gap:0}#aa-chip .aa-lbl,#aa-chip .aa-who>.aa-dot{display:none}
-  #aa-chip .aa-menu{left:auto;right:0;bottom:auto;top:calc(100% + 8px)}}
+  #aa-chip .aa-menu{left:auto;right:0;bottom:auto;top:calc(100% + 10px);width:min(280px,calc(100vw - 24px))}
+  #aa-chip .aa-go{display:grid;grid-template-columns:repeat(3,1fr)}
+  .rail:has(#aa-chip) .theme-btn{display:none}
+  .mobile-stats{cursor:pointer;border-radius:12px}}
 `;
   var styleEl = document.createElement('style');
   styleEl.id = 'aa-login-css';
@@ -420,9 +426,30 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
     chip.innerHTML = '<button type="button" class="aa-who" aria-haspopup="true" aria-expanded="false" aria-label="Tu cuenta: ' + esc(email) + '"><span class="aa-av">' +
       (pic ? '<img alt="" referrerpolicy="no-referrer" src="' + esc(pic) + '">' : esc(name.trim().charAt(0).toUpperCase())) +
       '</span><span class="aa-lbl">' + esc(first) + '</span><span class="aa-dot"></span></button>' +
-      '<div class="aa-menu" hidden><p class="aa-cap">Conectado como</p><p class="aa-em">' + esc(email) + '</p><p class="aa-state"><span class="aa-dot"></span><span class="aa-stt"></span></p><button type="button" class="aa-exit" data-a="out">Cerrar sesión</button></div>';
-    document.body.appendChild(chip);
+      '<div class="aa-menu" hidden><p class="aa-cap">Conectado como</p><p class="aa-em">' + esc(email) + '</p><p class="aa-state"><span class="aa-dot"></span><span class="aa-stt"></span></p>' +
+      '<div class="aa-go"><button type="button" data-go="Progreso">Progreso</button><button type="button" data-go="Evaluar">Evaluar</button><button type="button" data-go="tema">Tema</button></div>' +
+      '<button type="button" class="aa-exit" data-a="out">Cerrar sesión</button></div>';
     var btn = chip.firstChild, menu = chip.querySelector('.aa-menu');
+    /* El botón vive dentro de la barra de navegación de la app: encima de «Tema» en el ordenador y
+       en la cabecera en el móvil. En pantallas sin barra (lecciones, Evaluar…) no se muestra. */
+    var queued = false;
+    function place() {
+      queued = false;
+      var rail = document.querySelector('.rail');
+      var shown = rail && rail.getClientRects().length > 0 && getComputedStyle(rail).display !== 'none';
+      if (!shown) { if (chip.isConnected) { chip.remove(); menu.hidden = true; } return; }
+      if (chip.parentNode !== rail) rail.insertBefore(chip, rail.querySelector('.theme-btn'));
+    }
+    place();
+    new MutationObserver(function () { if (!queued) { queued = true; requestAnimationFrame(place); } })
+      .observe(document.body, { childList: true, subtree: true });
+    chip.querySelectorAll('[data-go]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        menu.hidden = true;
+        if (b.dataset.go === 'tema') { var t = document.querySelector('.rail .theme-btn'); if (t) t.click(); return; }
+        if (window.AA_GOTO) window.AA_GOTO(b.dataset.go);
+      });
+    });
     btn.addEventListener('click', function (e) { e.stopPropagation(); menu.hidden = !menu.hidden; btn.setAttribute('aria-expanded', String(!menu.hidden)); });
     document.addEventListener('click', function (e) { if (!chip.contains(e.target)) { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); } });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); } });
