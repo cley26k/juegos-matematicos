@@ -37,8 +37,14 @@
     return k % 3 === 0 ? (MAIN[tomo] || 'dama') : ALL[(tomo + k) % 4];
   };
 
+  /* Evaluar: cerca de un corte entre dos valoraciones (±0,35) se aceptan las dos */
+  var EV = [[150, 1e9], [50, 150], [-50, 50], [-150, -50], [-1e9, -150]];
+  window.AA_EVOK = function (n, cp) { var b = EV[n]; return !!b && cp != null && cp >= b[0] - 35 && cp <= b[1] + 35; };
+
+  var OWN = { 'Clasificación': 'clasificacion', 'Memoria': 'memoria' };
   function goTo(label) {
     if (label === 'Ajustes') { openSettings(); return; }
+    if (OWN[label]) { location.hash = OWN[label]; window.scrollTo(0, 0); return; }
     var b = Array.prototype.find.call(document.querySelectorAll('.rail .nav'), function (n) {
       return !n.classList.contains('aa-nav-set') && n.textContent.trim() === label;
     });
@@ -61,9 +67,20 @@
     requestAnimationFrame(function () { setSettings(true); window.scrollTo(0, 0); });
   }
   var ICON = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M19 6h1M4 12h3M13 12h7M4 18h11M21 18h-1"/><circle cx="16" cy="6" r="2.4"/><circle cx="10" cy="12" r="2.4"/><circle cx="18" cy="18" r="2.4"/></svg>';
+  var ICON_TROPHY = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 20h8"/></svg>';
+  var ICON_EYE = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+  function ownNav(hash, label, icon, cls) { var li = document.createElement('li'); li.className = 'aa-own-li';
+    li.innerHTML = '<button type="button" class="nav aa-nav-own ' + cls + '" data-hash="' + hash + '"><span class="nav-ico">' + icon + '</span><span class="nav-lbl">' + label + '</span></button>';
+    return li; }
+  function markOwn() { var h = location.hash.slice(1); document.querySelectorAll('.aa-nav-own').forEach(function (b) { b.classList.toggle('on', b.dataset.hash === h); });
+    document.documentElement.classList.toggle('aa-own-page', h === 'memoria' || h === 'clasificacion'); }
+  window.addEventListener('hashchange', markOwn);
   function ensureNav() {
     var ul = document.querySelector('.rail ul');
     if (!ul || ul.querySelector('.aa-nav-set')) return;
+    ul.appendChild(ownNav('clasificacion', 'Clasificación', ICON_TROPHY, 'aa-nav-lb'));
+    ul.appendChild(ownNav('memoria', 'Memoria', ICON_EYE, 'aa-nav-mm'));
+    markOwn();
     var li = document.createElement('li');
     li.className = 'aa-sep';
     li.innerHTML = '<button type="button" class="nav aa-nav-set"><span class="nav-ico">' + ICON + '</span><span class="nav-lbl">Ajustes</span></button>';
@@ -75,6 +92,7 @@
     var t = e.target.closest ? e.target : null;
     if (!t) return;
     if (t.closest('.aa-nav-set')) { openSettings(); return; }
+    var own = t.closest('.aa-nav-own'); if (own) { setSettings(false); location.hash = own.dataset.hash; window.scrollTo(0, 0); return; }
     if (t.closest('.rail .nav, .rail .brand')) setSettings(false);
     var st = t.closest('.mobile-stats');
     if (st) goTo('Progreso');

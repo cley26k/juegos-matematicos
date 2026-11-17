@@ -427,7 +427,7 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
       (pic ? '<img alt="" referrerpolicy="no-referrer" src="' + esc(pic) + '">' : esc(name.trim().charAt(0).toUpperCase())) +
       '</span><span class="aa-lbl">' + esc(first) + '</span><span class="aa-dot"></span></button>' +
       '<div class="aa-menu" hidden><p class="aa-cap">Conectado como</p><p class="aa-em">' + esc(email) + '</p><p class="aa-state"><span class="aa-dot"></span><span class="aa-stt"></span></p>' +
-      '<div class="aa-go"><button type="button" data-go="Progreso">Progreso</button><button type="button" data-go="Ajustes">Ajustes</button><button type="button" data-go="Evaluar">Evaluar</button><button type="button" data-go="tema">Tema</button></div>' +
+      '<div class="aa-go"><button type="button" data-go="Progreso">Progreso</button><button type="button" data-go="Ajustes">Ajustes</button><button type="button" data-go="Evaluar">Evaluar</button><button type="button" data-go="Clasificación">Clasificación</button><button type="button" data-go="Memoria">Memoria</button><button type="button" data-go="tema">Tema</button></div>' +
       '<button type="button" class="aa-exit" data-a="out">Cerrar sesión</button></div>';
     var btn = chip.firstChild, menu = chip.querySelector('.aa-menu');
     /* El botón vive dentro de la barra de navegación de la app: encima de «Tema» en el ordenador y
@@ -474,6 +474,10 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
     box.classList.add('aa-out');
     setTimeout(function () { box.remove(); }, 400);
     if (user || DEMO) mountChip(user);
+    /* Para la clasificación (retos.js): cliente, usuario y nombre de pila */
+    var md = (user && user.user_metadata) || {};
+    window.AA_CUENTA = { sb: sb, uid: uid, nombre: (md.given_name || (md.full_name || md.name || '').split(' ')[0] || '').trim(), demo: !!DEMO };
+    window.dispatchEvent(new Event('aa-cuenta'));
   }
   function enter(sess) {
     uid = sess.user.id; email = sess.user.email || email;

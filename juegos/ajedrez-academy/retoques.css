@@ -209,3 +209,12 @@ html.aa-settings .rail .nav.on:not(.aa-nav-set) .nav-ico { background: transpare
 .lbar.lbar-warn .lbar-ico { background: var(--yellow); color: #6b4a00; box-shadow: 0 3px 0 var(--yellow-d, #e0a800); }
 .lbar.lbar-info .lbar-ico { background: var(--blue); color: #fff; box-shadow: 0 3px 0 var(--blue-d); }
 .lbar-ok .lbar-txt p, .lbar-bad .lbar-txt p, .lbar-info .lbar-txt p, .lbar-warn .lbar-txt p { color: var(--ink); opacity: .85; }
+
+/* ── Accesos a Clasificación y Memoria ── */
+.aa-nav-lb { --uc: #f2a900; --ucd: #c98a00; --ucs: #fff6db; }
+.aa-nav-mm { --uc: #a560e8; --ucd: #7d3fc0; --ucs: #f4e9ff; }
+@media (max-width: 899px) { .rail li.aa-own-li { display: none; } }
+
+/* Botón de apoyo (apoyo.js, fuera de esta carpeta): en el ordenador, a la esquina derecha
+   para no tapar la barra lateral, que ahora es más larga */
+@media (min-width: 900px) { div[data-apoyo="kofi"] { left: auto !important; right: 14px !important; bottom: 14px !important; } }
