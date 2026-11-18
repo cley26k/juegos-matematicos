@@ -17,7 +17,7 @@
 
   /* ───────── 1. Correcciones de contenido (auditoría con Stockfish) ───────── */
   var FIX_FEN = { '6k1/6pp/8/3q4/8/1P6/8/4KB2 w - - 0 1': '6k1/6pp/8/3q4/8/1P6/6PP/4KB2 w - - 0 1' }; // clavada: tras Axd5 el final de peones ya no se pierde
-  var FIX_ALT = { '4k3/8/q7/8/8/8/4B3/4R1K1 w - - 0 1': ['Bc4+', 'Bf1+'] };                       // descubierta: también ganan la dama
+  var FIX_ALT = { '4k3/8/q7/8/8/8/4B3/4R1K1 w - - 0 1': ['Bc4+', 'Bf1+'], '4k3/8/8/8/7b/8/8/2KQ4 w - - 0 1': ['Qh5+'] };                       // descubierta: también ganan la dama
   var EV = { // evaluaciones que no coincidían con el motor (cp desde las blancas)
     '2kr4/ppp2p1p/2N1ppr1/8/2P5/6Pq/P1P1BP1P/R2Q1RK1 b - - 0 16': 290,
     'rnb1k2r/pp3pQp/4p3/qP1p4/4n3/P1N5/1BP1PbPP/R2K1BNR b kq - 1 10': -160,
@@ -27,7 +27,7 @@
   function evWhy(cp) { var a = Math.abs(cp), w = cp > 0 ? 'Las blancas' : 'Las negras';
     return a >= 150 ? w + ' están claramente mejor: hay algo concreto (material o un golpe táctico) que pesa más que el equilibrio general.'
       : w + ' están algo mejor, pero el otro bando conserva recursos.'; }
-  var DROP_GUESS = { 'grau-2-16413:39': 1, 'grau-4-8556:16': 1, 'ms-johner:80': 1 }; // la jugada de la partida no era buena: confundía
+  var DROP_GUESS = { 'grau-2-16413:39': 1, 'grau-4-8556:16': 1, 'ms-johner:80': 1, 'grau-3-1232:35': 1, 'grau-4-8556:22': 1 }; // la jugada de la partida no era buena: confundía
 
   /* ───────── 2. Actividades nuevas por lección ───────── */
   var X = function (t, extra) { return Object.assign({ t: t }, extra || {}); };
@@ -96,6 +96,8 @@
 
   window.AA_LESSONS_FIX = function (lessons) {
     lessons.forEach(function (l) {
+      // partidas nuevas por tomo (partidas-tomoN.js): sustituyen a las famosas que se repetían
+      if (window.AA_REPLACE && window.AA_REPLACE[l.id]) l.steps = window.AA_REPLACE[l.id](l.steps);
       l.steps = l.steps.filter(function (s) { return !(s.t === 'guess' && DROP_GUESS[s.game + ':' + s.ply]); }).map(function (s) {
         if (s.fen && FIX_FEN[s.fen]) s = Object.assign({}, s, { fen: FIX_FEN[s.fen] });
         if (s.t === 'task' && FIX_ALT[s.fen]) s = Object.assign({}, s, { alt: (s.alt || []).concat(FIX_ALT[s.fen]) });
