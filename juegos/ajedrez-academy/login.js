@@ -105,6 +105,7 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
   #aa-login .aa-main{place-items:start center;padding:28px 18px 36px}
 }
 @media (prefers-reduced-motion:reduce){#aa-login *,#aa-login{animation:none!important;transition:none!important}}
+#aa-login .aa-hint{margin:10px 0 0;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,#1cb0f6 13%,var(--a-sf));color:var(--a-ink);font:700 .86rem/1.4 Nunito,system-ui,sans-serif}
 #aa-chip{position:relative;z-index:30;width:100%;margin-top:auto;font:800 .92rem/1.2 Nunito,system-ui,sans-serif}
 .rail #aa-chip + .theme-btn{margin-top:10px}
 #aa-chip .aa-go{display:none;gap:8px;margin:0 0 10px}
@@ -185,7 +186,7 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
           '<h1 id="aa-t">Entra a tu club</h1>' +
           '<p class="aa-sub">Inicia sesión para guardar tu progreso y seguir donde lo dejaste.</p>' +
           '<button type="button" class="aa-btn" data-a="google">' + G + '<span>Continuar con Google</span></button>' +
-          '<p class="aa-err" role="alert" data-e="google"></p>' +
+          '<p class="aa-err" role="alert" data-e="google"></p><p class="aa-hint" data-e="hint" hidden></p>' +
           '<p class="aa-note">' + ICO.mail + '<span>Después te enviaremos un código de ' + LEN + ' dígitos a tu correo de Google para confirmar que eres tú.</span></p>' +
         '</section>' +
         '<section data-v="code" hidden>' +
@@ -195,7 +196,7 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
           '<p class="aa-err" role="alert" data-e="code"></p>' +
           '<button type="submit" class="aa-btn pri" data-a="verifybtn"><span>Verificar y entrar</span></button></form>' +
           '<div class="aa-row"><button type="button" class="aa-link" data-a="resend">Reenviar código</button><button type="button" class="aa-link mut" data-a="other">Usar otra cuenta</button></div>' +
-          '<p class="aa-note">' + ICO.mail + '<span>También puedes pulsar el enlace del correo en este mismo navegador. ¿No llega? Mira en «Spam» o «Promociones»; caduca en 10 minutos.</span></p>' +
+          '<p class="aa-note">' + ICO.mail + '<span>También puedes pulsar el enlace del correo en este mismo navegador. ¿No llega? Mira en «Spam» o «Promociones». Si tu Gmail está lleno, libera espacio y pulsa «Reenviar código». Caduca en 10 minutos.</span></p>' +
         '</section>' +
         '<section data-v="done" class="aa-done" hidden><i>' + ICO.check + '</i><h1>¡Listo!</h1><p class="aa-sub" style="margin:0">Cargando tu progreso…</p></section>' +
         '<p class="aa-legal">Solo usamos tu nombre y correo para tu cuenta y tu progreso. <a href="privacidad.html" style="color:inherit">Privacidad y condiciones</a></p>' +
@@ -296,7 +297,15 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
     });
   }
 
+  function googleMsg(e) {
+    e = String(e || '').toLowerCase();
+    if (/admin_policy|org_internal|disallowed|policy/.test(e)) return 'Esa cuenta de Google no permite entrar en apps externas (suele pasar con cuentas de colegio o trabajo). Prueba con una cuenta personal de Gmail.';
+    if (/access_denied|cancel/.test(e)) return 'Cancelaste el acceso con Google. Cuando quieras, pulsa de nuevo «Continuar con Google».';
+    if (/state|expired|flow/.test(e)) return 'El acceso con Google caducó. Pulsa otra vez «Continuar con Google» y elige tu cuenta.';
+    return 'Google no completó el inicio de sesión. Inténtalo otra vez.';
+  }
   function startGoogle() {
+    hint('');
     var b = $('[data-a="google"]');
     err('google');
     busy(b, true, 'Abriendo Google…');
@@ -365,9 +374,15 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
       enter(r.data.session);
     }).catch(function () { busy(b, false); err('code', 'Sin conexión. Inténtalo otra vez.'); });
   }
+  function clearAuthLeftovers() {
+    try { Object.keys(localStorage).forEach(function (k) { if (k.indexOf('aa-auth') === 0) localStorage.removeItem(k); }); } catch (e) {}
+    try { Object.keys(sessionStorage).forEach(function (k) { if (k.indexOf('aa-otp') === 0) sessionStorage.removeItem(k); }); } catch (e) {}
+  }
+  function hint(t) { var h = $('[data-e="hint"]'); if (!h) return; h.textContent = t || ''; h.hidden = !t; }
   function otherAccount() {
-    if (DEMO) { view('google'); return; }
-    sb.auth.signOut().finally(function () { view('google'); });
+    var done = function () { clearAuthLeftovers(); email = ''; view('google'); hint('Pulsa «Continuar con Google» y elige la otra cuenta en la ventana de Google.'); };
+    if (DEMO) { done(); return; }
+    sb.auth.signOut({ scope: 'local' }).catch(function () {}).finally(done);
   }
 
   /* ── Progreso en la nube ─────────────────────────────────────────────── */
@@ -515,14 +530,15 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
       sb = lib.createClient(CFG.url, CFG.anonKey, { auth: { flowType: 'pkce', persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: 'aa-auth' } });
       return sb.auth.getSession();
     }).then(function (r) {
-      var u = new URL(location.href);
+      var u = new URL(location.href), hadCode = u.searchParams.has('code');
       if (u.searchParams.has('code') || u.searchParams.has('error')) {
-        var e = u.searchParams.get('error_description');
+        var e = u.searchParams.get('error_description') || u.searchParams.get('error');
         ['code', 'error', 'error_code', 'error_description', 'state'].forEach(function (k) { u.searchParams.delete(k); });
         history.replaceState(null, '', u.pathname + u.search + u.hash);
-        if (e) { view('google'); err('google', 'Google no completó el inicio de sesión. Inténtalo otra vez.'); return; }
+        if (e) { view('google'); err('google', googleMsg(e)); return; }
       }
       var s = r.data && r.data.session;
+      if (!s && hadCode) { clearAuthLeftovers(); view('google'); err('google', 'El acceso con Google caducó o se abrió en otra ventana. Pulsa otra vez «Continuar con Google».'); return; }
       if (s && hasGoogle(s) && codeOk(s)) return enter(s);
       if (s && hasGoogle(s)) { email = s.user.email; view('code'); sendCode(false); return; }
       if (s) sb.auth.signOut();
