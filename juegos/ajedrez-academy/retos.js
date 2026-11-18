@@ -66,13 +66,15 @@
       if (f >= 0 && f < 8 && r >= 0 && r < 8) props.onSquare(FILES[f] + (r + 1)); }
     // Coordenadas: letras en la fila 1 y números en la columna a, con el color contrario a la casilla
     var co = [];
-    for (var k = 0; k < 8; k++) {
+    for (var k = 0; k < 8 && props.coords !== false; k++) {
       co.push(h('text', { key: 'f' + k, x: k * 100 + 90, y: 790, textAnchor: 'end', className: 'mm-co ' + (k % 2 ? 'on-l' : 'on-d') }, FILES[k]));
       co.push(h('text', { key: 'r' + k, x: 8, y: k * 100 + 26, className: 'mm-co ' + (k % 2 ? 'on-d' : 'on-l') }, String(8 - k)));
     }
     return h('div', { className: 'cb mm-board' + (props.onSquare ? ' mm-edit' : '') + (props.cls ? ' ' + props.cls : '') },
       h('svg', { viewBox: '0 0 800 800', className: 'cb-svg', onClick: click, role: 'img', 'aria-label': props.label || 'Tablero' }, UI.defs, sq, co, pcs));
   }
+
+  window.AA_TAPBOARD = Board; // tablero de casillas tocables, también para las actividades de las lecciones
 
   function Hearts(props) {
     var h = window.AA_UI.React.createElement, out = [];

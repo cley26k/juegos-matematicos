@@ -265,3 +265,17 @@
 @media (prefers-reduced-motion: reduce) {
   .page-retos *, .page-retos::before, .memoria.hurry::before { animation: none !important; transition: none !important; }
 }
+
+/* ── Actividades de las lecciones ── */
+.mm-pick { stroke: #7c3aed; stroke-width: 8; }
+.ls-big { font: 800 1.6rem/1 var(--fd, inherit); color: #7c3aed; margin: 0 2px; }
+.ls-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); display: grid; gap: 8px; }
+.ls-duel .quiz-opt { display: flex; align-items: center; gap: 10px; font: 800 1.1rem/1 var(--fd, inherit); }
+.ls-dot { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+.ls-b .ls-dot { background: #1cb0f6; } .ls-y .ls-dot { background: #ffc83d; }
+.ls-order { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.ls-move { min-width: 74px; padding: 12px 16px; border-radius: 14px; border: 1.5px solid var(--line-d, #ccc); border-bottom-width: 4px; background: var(--surface); color: var(--ink);
+  font: 800 1.1rem/1 var(--fd, inherit); cursor: pointer; transition: transform .1s; }
+.ls-move:hover:not(:disabled) { transform: translateY(-2px); border-color: #7c3aed; }
+.ls-move.used { background: color-mix(in srgb, #2fb344 14%, var(--surface)); border-color: #2fb344; color: var(--ink-2); }
+.ls-move b { color: #2fb344; margin-right: 4px; }
