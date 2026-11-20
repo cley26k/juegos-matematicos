@@ -504,6 +504,27 @@ html.aa-lock body>*:not(#aa-login){visibility:hidden!important}
     var md = (user && user.user_metadata) || {};
     window.AA_CUENTA = { sb: sb, uid: uid, nombre: (md.given_name || (md.full_name || md.name || '').split(' ')[0] || '').trim(), demo: !!DEMO };
     window.dispatchEvent(new Event('aa-cuenta'));
+    if (sb && uid && !DEMO) heartbeat();
+  }
+  /* Actividad para el panel de administración: hora, sección y tipo de dispositivo (sin IP) */
+  function device() {
+    var ua = navigator.userAgent || '', os = /Android/i.test(ua) ? 'Android' : /iPhone|iPad|iPod/i.test(ua) ? 'iOS' : /Windows/i.test(ua) ? 'Windows' : /Mac OS X/i.test(ua) ? 'Mac' : /CrOS/i.test(ua) ? 'ChromeOS' : /Linux/i.test(ua) ? 'Linux' : 'Otro';
+    var br = /Edg\//.test(ua) ? 'Edge' : /OPR\/|Opera/.test(ua) ? 'Opera' : /Firefox\//.test(ua) ? 'Firefox' : /SamsungBrowser/.test(ua) ? 'Samsung' : /Chrome\//.test(ua) ? (navigator.brave ? 'Brave' : 'Chrome') : /Safari\//.test(ua) ? 'Safari' : 'Otro';
+    var app = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) ? ' · app instalada' : '';
+    return (os + ' · ' + br + app).slice(0, 80);
+  }
+  var lastBeat = 0;
+  function beat(force) {
+    if (!sb || !uid || document.hidden) return;
+    if (!force && Date.now() - lastBeat < 15e3) return;
+    lastBeat = Date.now();
+    sb.from('actividad').upsert({ user_id: uid, last_seen: new Date().toISOString(), pagina: (location.hash || '#inicio').slice(0, 80), dispositivo: device() }).then(function () {}, function () {});
+  }
+  function heartbeat() {
+    beat(true);
+    setInterval(function () { beat(true); }, 60e3);
+    addEventListener('hashchange', function () { beat(false); });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) beat(true); });
   }
   function enter(sess) {
     uid = sess.user.id; email = sess.user.email || email;
