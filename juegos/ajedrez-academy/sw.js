@@ -1,4 +1,11 @@
-const C='ca-mwjlog0w-admin';
-self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png'])).then(()=>self.skipWaiting()))});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==location.origin||/ads-config.js|ads.txt/.test(u.pathname))return;e.respondWith(caches.match(e.request).then(hit=>{const net=fetch(e.request).then(r=>{if(r.ok||r.type==='opaque'){const cl=r.clone();caches.open(C).then(c=>c.put(e.request,cl))}return r}).catch(()=>hit);return hit||net}))});
+// Ajedrez Academy se ha mudado a https://ajedrez-academy.github.io/
+// Este service worker sustituye al antiguo: borra su caché, se da de baja y recarga las pestañas abiertas.
+self.addEventListener('install', function () { self.skipWaiting(); });
+self.addEventListener('activate', function (e) {
+  e.waitUntil(
+    caches.keys().then(function (ks) { return Promise.all(ks.map(function (k) { return caches.delete(k); })); })
+      .then(function () { return self.registration.unregister(); })
+      .then(function () { return self.clients.matchAll({ type: 'window' }); })
+      .then(function (cs) { cs.forEach(function (c) { c.navigate(c.url); }); })
+  );
+});
