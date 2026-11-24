@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Valle de las Oportunidades</title>
+<meta name="description" content="Videojuego educativo de simulación rural sobre inecuaciones lineales, intervalos e interés simple.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="game" aria-label="Mundo del juego"></canvas>
+
+<div id="title" class="hidden">
+  <div class="logo">
+    <div class="logo1">Valle de las</div>
+    <div class="logo2">Oportunidades</div>
+    <div class="logo3">Un juego de granja, comercio y buenas cuentas</div>
+  </div>
+  <div id="titleMenu" class="titlemenu"></div>
+</div>
+
+<div id="hud" class="hidden">
+  <div class="hud-tl">
+    <div class="clock wood-s">
+      <div class="row"><span id="hWIcon" class="wicon sol"></span><b id="hDay">Día 1</b><span id="hTime">06:30</span></div>
+      <div id="hWeather" class="small"></div>
+    </div>
+    <div id="hGoal" class="goal paper-s"></div>
+    <div id="hAula" class="aula hidden"></div>
+  </div>
+  <div class="hud-tr">
+    <div class="money wood-s"><span class="coin"></span><b id="hMoney">0</b></div>
+    <div id="hEnergy" class="energy wood-s" title="Energía"><div class="ebar"><div id="hEnergyFill"></div></div><span>E</span></div>
+  </div>
+  <div class="hud-btns">
+    <button id="bInv" class="hbtn" title="Inventario (I)">Inventario</button>
+    <button id="bMap" class="hbtn" title="Mapa (M)">Mapa</button>
+    <button id="bJournal" class="hbtn" title="Diario (J)">Diario</button>
+    <button id="bNote" class="hbtn" title="Libreta (N)">Libreta</button>
+    <button id="bStats" class="hbtn" title="Estadísticas">Cuentas</button>
+    <button id="bMenu" class="hbtn" title="Pausa (Esc)">Menú</button>
+  </div>
+  <div class="hud-bottom">
+    <div id="hSel" class="selname"></div>
+    <div id="hotbar" class="hotbar wood-s"></div>
+  </div>
+  <div id="touch" class="touchctl">
+    <div id="joy" class="joy"><div id="knob" class="knob"></div></div>
+    <div class="tbtns"><button id="btnTalk" class="tbtn">Hablar</button><button id="btnUse" class="tbtn use">Usar</button></div>
+  </div>
+</div>
+
+<div id="dialog" class="dialog hidden" role="dialog" aria-live="polite"></div>
+<div id="toasts" class="toasts"></div>
+<div id="ui"></div>
+<div id="fade" class="fade"></div>
+
+<script src="js/util.js"></script>
+<script src="js/math.js"></script>
+<script src="js/missions.js"></script>
+<script src="js/art.js"></script>
+<script src="js/art2.js"></script>
+<script src="js/art3.js"></script>
+<script src="js/buildings.js"></script>
+<script src="js/crops.js"></script>
+<script src="js/trees.js"></script>
+<script src="js/hd.js"></script>
+<script src="js/data.js"></script>
+<script src="js/world.js"></script>
+<script src="js/interiors.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/input.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/notebook.js"></script>
+<script src="js/events.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/miniquests.js"></script>
+<script src="js/config.js"></script>
+<script src="js/db.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/teacher.js"></script>
+<script src="js/main.js"></script>
+<script src="js/title.js"></script>
+</body>
+</html>
