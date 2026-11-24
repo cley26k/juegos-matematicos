@@ -216,12 +216,12 @@ var VO = globalThis.VO = globalThis.VO || {};
   function conexion(main) {
     const c = D.cfg(); const status = el('div', { class: 'tstatus ' + (D.status.ok ? 'ok' : D.status.ok === false ? 'bad' : '') }, D.configured() ? (D.status.ok ? 'Conectado' : D.status.msg) : 'Sin conectar: los datos se guardan solo en este equipo.');
     const url = el('input', { type: 'url', class: 'qty wide', placeholder: 'https://tu-proyecto.supabase.co', value: c.url });
-    const key = el('input', { type: 'text', class: 'qty wide', placeholder: 'Clave pública (anon public)', value: c.key });
+    const key = el('input', { type: 'text', class: 'qty wide', placeholder: 'Clave pública (sb_publishable_… o anon public)', value: c.key });
     main.append(card('Conecta tu clase a internet (opcional)', help('Así ves los resultados de todos tus estudiantes en un solo lugar y ellos pueden continuar su partida en cualquier computadora. Si no lo conectas, el juego funciona igual guardando todo en cada equipo.'), status,
       el('ol', { class: 'tguide' },
         el('li', {}, 'Crea una cuenta gratuita en ', el('b', {}, 'supabase.com'), ' y un proyecto nuevo.'),
         el('li', {}, 'En tu proyecto abre ', el('b', {}, 'SQL Editor'), ', pega el contenido del archivo ', el('code', {}, 'supabase/setup.sql'), ' (está en la carpeta del juego) y pulsa ', el('b', {}, 'Run'), '.'),
-        el('li', {}, 'En ', el('b', {}, 'Project Settings → API'), ' copia la ', el('b', {}, 'Project URL'), ' y la clave ', el('b', {}, 'anon public'), ' y pégalas aquí:'),
+        el('li', {}, 'En ', el('b', {}, 'Project Settings → API Keys'), ' copia la ', el('b', {}, 'Project URL'), ' y la clave ', el('b', {}, 'Publishable key'), ' (o la «anon public» en proyectos antiguos)', ' y pégalas aquí:'),
         el('li', { class: 'nolist' }, url, key, el('div', { class: 'row' }, el('button', { class: 'btn ok', onclick: async () => { D.setLocal({ url: url.value.trim(), key: key.value.trim() }); status.textContent = 'Probando…'; const r = await D.test(); status.className = 'tstatus ' + (r.ok ? 'ok' : 'bad'); status.textContent = r.ok ? 'Conectado correctamente' : r.msg; if (r.ok) { main.innerHTML = ''; conexion(main); VO.UI.toast('Conexión lista. Ahora crea tu clase.', 'ok'); } } }, 'Guardar y probar conexión'))),
         el('li', {}, 'Crea tu clase (abajo) y comparte el código con tus estudiantes.'))));
     const code = el('input', { type: 'text', class: 'qty', placeholder: 'MATE3B', value: c.clase, maxlength: 12 });

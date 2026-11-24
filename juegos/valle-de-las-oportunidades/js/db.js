@@ -25,7 +25,7 @@ var VO = globalThis.VO = globalThis.VO || {};
   D.rpc = async function (fn, args, cfg) {
     const c = cfg || D.cfg();
     if (!c.url || !c.key) throw new Error('Base de datos no configurada');
-    const r = await fetch(c.url + '/rest/v1/rpc/' + fn, { method: 'POST', headers: { apikey: c.key, Authorization: 'Bearer ' + c.key, 'Content-Type': 'application/json' }, body: JSON.stringify(args || {}) });
+    const r = await fetch(c.url + '/rest/v1/rpc/' + fn, { method: 'POST', headers: Object.assign({ apikey: c.key, 'Content-Type': 'application/json' }, c.key.startsWith('eyJ') ? { Authorization: 'Bearer ' + c.key } : {}), body: JSON.stringify(args || {}) });
     const text = await r.text(); let body = null; try { body = text ? JSON.parse(text) : null; } catch (e) { body = text; }
     if (!r.ok) { const m = (body && (body.message || body.hint)) || ('Error ' + r.status); throw new Error(m); }
     return body;

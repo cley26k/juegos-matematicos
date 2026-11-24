@@ -16,7 +16,7 @@ Sin conexión, todo se guarda en el navegador de cada equipo. Con Supabase (grat
 
 1. Crea una cuenta y un proyecto en supabase.com.
 2. En **SQL Editor**, pega el contenido de `supabase/setup.sql` y pulsa **Run**.
-3. En **Project Settings → API**, copia la **Project URL** y la clave **anon public**.
+3. En **Project Settings → API Keys**, copia la **Publishable key** (o la **anon public** en proyectos antiguos). La **Project URL** aparece en la página principal del proyecto.
 4. En el juego: **Panel docente → Conexión**, pega ambos datos, pulsa **Guardar y probar conexión** y crea tu clase (código + clave docente).
 5. Para que todos los equipos queden conectados sin configurarlos uno por uno, pega la URL y la clave en `js/config.js` y publica el juego en GitHub Pages. El enlace `…/?clase=TUCODIGO` abre el juego ya unido a tu clase.
 

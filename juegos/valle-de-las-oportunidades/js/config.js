@@ -5,7 +5,7 @@
 // También puedes dejarlo vacío y configurarlo desde el Panel docente en cada equipo.
 var VO = globalThis.VO = globalThis.VO || {};
 VO.CONFIG = {
-  supabaseUrl: '',      // ejemplo: 'https://abcdxyz.supabase.co'
-  supabaseAnonKey: '',  // clave "anon public" de Project Settings → API
+  supabaseUrl: 'https://xbzxneazntawnxlohgmp.supabase.co',
+  supabaseAnonKey: 'sb_publishable_Q4c4LqWtHKqmKwkzm2W6mg_yh47_WMw', // clave pública (publishable): segura en páginas web
   claseCodigo: '',      // opcional: código de clase por defecto, por ejemplo 'MATE3B'
 };
